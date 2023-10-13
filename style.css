@@ -20,7 +20,6 @@
   font-family: 'EB Garamond', serif;
   font-size:48px;
   height:90px;
-  //background-color:#808080;  
   background-color:#1c6e94;  
   margin:4px;
   padding:2px;
@@ -106,11 +105,14 @@
 
 .post-container{
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   text-align: left;
   margin: 0px auto 0px auto;
   background-color: #fffafa;
   opacity:0.8;
+  border:1px solid black;
+  border-radius:5px;
+  margin:10px;
 }
 
 .post-container .date{
@@ -133,17 +135,22 @@ h1{
 
 .post-container div.post-content{
   width: 90%;
-  font-family: 'Open Sans', sans-serif;
+  height:100%;
+  font-family: 'Young Serif', serif;
   font-weight: normal;
 }
 
 /* Fim do main blog */
 
-
-
 .item2{
   grid-area: item2;
+  border-radius:5px;
+  height:auto;
 }
+
+/* 
+  ------ Itens do display grid não usados. ----------
+
 .item3{
   grid-area: item3;
 }
@@ -179,14 +186,22 @@ h1{
   grid-area: item13;
 }
 
+*/
+
 .footer-content{
+  font-family: 'EB Garamond', serif;
+  font-size:20px;
   height:80px;
   background-color:#808080;
-
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
+
+.footer-content > div > p > span{
+  text-decoration: underline
+}
+
 
 /* Iniciando responsividade do projeto */
 
@@ -435,9 +450,17 @@ h1{
     color: white;
     width:100%;
     margin:1px;  
+  } 
+  
+  .footer-content{
+    font-family: 'EB Garamond', serif;
+    font-size:16px;
+    height:80px;
+    background-color:#808080;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
   }
-    
     /* Finalizando responsividade do projeto */
-
-
 }
