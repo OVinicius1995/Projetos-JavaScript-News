@@ -12,3 +12,33 @@ const horaAtual = ` ${hora} : ${minu} `;
 
 document.getElementById('dataHora').innerHTML = dataAtual + ' ' + horaAtual;
 
+/* Carregando as informações dinamicamente */
+
+document.addEventListener('DOMContentLoaded', function() {
+  //var div = document.createElement('div');
+  var divPostContainer = document.createElement('div');
+  divPostContainer.className = 'post-container';
+
+  var divPost = document.createElement('div');
+  divPost.className = 'post';
+
+  var dateP = document.createElement('p');
+  dateP.className = 'date';
+
+  document.createElement('br');
+
+  var tituloPost = document.createElement('h1');
+  tituloPost.innerHTML = 'Título';
+
+  var contentPost = document.createElement('div');
+  contentPost.className = 'post-content';
+  
+  document.createElement('br');
+  document.createElement('p');
+
+  contentPost.innerHTML = 'Hi there I should be here';
+  //div.id = 'container';
+ //div.innerHTML = 'Hi there!';
+  
+  document.getElementById('itenPost').appendChild(contentPost);
+}, false);
