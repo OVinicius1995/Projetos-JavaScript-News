@@ -414,6 +414,11 @@ h1{
     height: 82px;
   }
 
+  .imgItem1{
+    width: 0%;
+    height:0px;
+  }
+
   .header-content{
     display:flex;
     align-items:center;
