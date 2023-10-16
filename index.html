@@ -1,99 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-Br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
   <title>Lista de indicações</title>
 </head>
-  <script type="text/javascript">
-      window.onscroll = scroll;
-      function scroll () {
-      var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;if(nVScroll > 100 ){
-      document.getElementById("item1").classList.add('menuFixo');}else
-    {document.getElementById("item1").classList.remove('menuFixo');}}
-  </script>
+<script type="text/javascript">
+  window.onscroll = scroll;
+  function scroll() {
+    var nVScroll = document.documentElement.scrollTop || document.body.scrollTop; if (nVScroll > 100) {
+      document.getElementById("item1").classList.add('menuFixo');
+    } else { document.getElementById("item1").classList.remove('menuFixo'); }
+  }
+</script>
 
 
 <body>
 
-    <section class="container">
+  <section class="container">
 
-      <header class="header-content">
+    <header class="header-content">
 
-        <div><img class="imgHeader" src="./Assets/LogoMeet-New.png" alt="" srcset=""></div>
-        <div><h1>Meet <span>News</span>🗞️</h1></div>
-        <div><span id="dataHora"></span></div>
+      <div><img class="imgHeader" src="./Assets/LogoMeet-New.png" alt="" srcset=""></div>
+      <div>
+        <h1>Meet <span>News</span>🗞️</h1>
+      </div>
+      <div><span id="dataHora"></span></div>
 
-      </header>
+    </header>
 
-      <main class="main-content">
+    <main class="main-content">
 
-        <!--<h3>Corpinho</h3>!-->
-        <div id="item1" class="item1">
+      <!--<h3>Corpinho</h3>!-->
+      <div id="item1" class="item1">
 
-         <div class="buttons"><button class="btn btnPortaria">Portaria</button></div>
-         <div class="buttons"><button class="btn btnIndicacoes">Indicações</button></div>
-         <div class="buttons"><button class="btn btnAssembleias">Assembleias</button></div>
-         <div class="buttons"><button class="btn btnPaterns">Paterns</button></div>          
+        <div class="buttons"><button class="btn btnPortaria">Portaria</button></div>
+        <div class="buttons"><button class="btn btnIndicacoes">Indicações</button></div>
+        <div class="buttons"><button class="btn btnAssembleias">Assembleias</button></div>
+        <div class="buttons"><button class="btn btnPaterns">Paterns</button></div>
 
-        </div>
+      </div>
 
 
-        <div id="itenPost" class="itens item2">
-<!--
-          <div class="post-container">
-            <div id="itens-post"  class="post">
-              <p class="date">21 DE DEZEMBRO DE 2022</p><p>
-                <br>
-              </p><h1>Primeira Publicação do Blog</h1>
-              <div class="post-content">
-                <br>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!
-                </p> 
-              </div>
-            </h1></div>
-            <hr />            
-          </div>   
-        -->
-        </div>
-      <!-- <div class="itens item4">item 4</div>
-        <div class="itens item5">item 5</div>
-        <div class="itens item6">item 6</div>
-        <div class="itens item7">item 7</div>
-        <div class="itens item8">item 8</div>
-        <div class="itens item9">item 9</div>
-        <div class="itens item10">item 10</div>
-        <div class="itens item11">item 11</div>
-        <div class="itens item12">item 12</div>
-        <div class="itens item13">item 13</div>
-       -->
-      </main>
-      
-      <footer class="footer-content">
+      <div class="itens item2">
+        <div id="contentPost" class="post-container"></div>
 
-        <div><p>Criado <span>voluntariamente</span> para reunir as informações em um mesmo local.</p></div>
-        <div>Criado por Vinícius Oliveira ®.</div>
+      </div>
 
-      </footer>
+    </main>
 
-    </section>
-    <script src="./funcoes.js"></script>
+    <footer class="footer-content">
+
+      <div>
+        <p>Criado <span>voluntariamente</span> para reunir as informações em um mesmo local.</p>
+      </div>
+      <div>Criado por Vinícius Oliveira ®.</div>
+
+    </footer>
+
+  </section>
+  <script src="./funcoes.js"></script>
 </body>
+
 </html>
-
-
-
-
-
-
