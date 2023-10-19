@@ -148,6 +148,11 @@ h1{
   height:auto;
 }
 
+.addBtn{
+  background-color:transparent;
+  border:none;
+}
+
 .modalContent{  
   width: 50vw;
   position: fixed;

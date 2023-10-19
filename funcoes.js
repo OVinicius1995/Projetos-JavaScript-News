@@ -30,7 +30,7 @@ const horaAtual = ` ${hora} : ${minu} `;
 
 const dataExtenso = new Date();
 
-let mounth = String(dataExtenso.getMonth() + 1).padStart(2, '0');;
+let mounth = String(dataExtenso.getMonth() + 1).padStart(2, '0');
 let mounthEx;
 switch (mounth) {
   case mounth = "01":
