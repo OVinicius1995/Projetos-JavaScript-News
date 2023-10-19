@@ -77,3 +77,8 @@ document.getElementById('dataHora').innerHTML = dataAtual + ' ' + horaAtual;
 /* [Fim] */
 
 
+const openModal = document.getElementById('showModal');
+
+function openModalNew(){
+  openModal.classList.toggle('active');
+}
