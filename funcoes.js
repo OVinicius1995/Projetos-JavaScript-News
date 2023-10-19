@@ -1,3 +1,17 @@
+(function (){
+  const firebaseConfig = {
+    apiKey: "AIzaSyBxnFt-BFIPOzLBHGIKCO2OZgNCpx0Ufbo",
+    authDomain: "meetnews-1c4bf.firebaseapp.com",
+    projectId: "meetnews-1c4bf",
+    storageBucket: "meetnews-1c4bf.appspot.com",
+    messagingSenderId: "623938736140",
+    appId: "1:623938736140:web:5cd1c5529f81c793e15e29"
+  };
+  const app = initializeApp(firebaseConfig);
+  console.log(app);
+})
+
+
 const dataHora = new Date();
 
 /* Montando os objetos data atual e hora atual [Inicio] */
@@ -63,56 +77,3 @@ document.getElementById('dataHora').innerHTML = dataAtual + ' ' + horaAtual;
 /* [Fim] */
 
 
-/* Criando as informações da página dinamicamente [Inicio]*/
-
-document.addEventListener('DOMContentLoaded', function () {
-
-  let dados = {
-    "data": mes + " " + " " + "de" + " " + mounthEx + " " + "de " + " " + ano,
-    "titulo": 'Primeira publicação no blog',
-    "conteudo": 'Joao ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!'
-  }
-
-  let count = 10;
-  for (let i = 0; i < count; i++) {
-
-    /* Criando divs, tags, e associando as classes dinamicamente [Inicio]*/
-    var divPostContainer = document.createElement('div');
-    divPostContainer.className = 'post-container';
-
-    var divPost = document.createElement('div');
-    divPost.className = 'post';
-
-
-    var dateP = document.createElement('p');
-    dateP.className = 'date';
-    dateP.innerHTML = dados.data;
-
-    var postBr = document.createElement('br');
-    var tituloPost = document.createElement('h1');
-    tituloPost.innerHTML = dados.titulo;
-
-    var contentPost = document.createElement('div');
-    contentPost.className = 'post-content';
-
-    var conteudoSaltaLinha = document.createElement('br');
-    var conteudoParagrafo = document.createElement('p');
-    var conteudoUnderLine = document.createElement('hr');
-
-    conteudoParagrafo.innerHTML = dados.conteudo;
-    /* Criando divs, tags, e associando as classes dinamicamente [Fim]*/
-
-    /* Montando na página a estrutura criada [Inicio] */
-    document.getElementById('contentPost').appendChild(divPost);
-    divPost.appendChild(dateP);
-    divPost.appendChild(postBr);
-    divPost.appendChild(tituloPost);
-    divPost.appendChild(contentPost);
-    contentPost.appendChild(conteudoSaltaLinha);
-    contentPost.appendChild(conteudoParagrafo);
-    contentPost.appendChild(conteudoUnderLine);
-    /* Montando na página a estrutura criada [Fim] */
-  }
-
-}, false);
-/* Criando as informações da página dinamicamente [Fim]*/

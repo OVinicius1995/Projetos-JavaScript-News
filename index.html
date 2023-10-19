@@ -33,10 +33,11 @@
 
     <main class="main-content">
 
-      <!--<h3>Corpinho</h3>!-->
+
       <div id="item1" class="item1">
-        
-        <div class="buttons"><img class="imgItem1" src="./Assets/LogoMeet-New.png" width="40" height="40" alt="" srcset=""></div>
+
+        <div class="buttons"><img class="imgItem1" src="./Assets/LogoMeet-New.png" width="40" height="40" alt=""
+            srcset=""></div>
         <div class="buttons"><button class="btn btnPortaria">Portaria</button></div>
         <div class="buttons"><button class="btn btnIndicacoes">Indicações</button></div>
         <div class="buttons"><button class="btn btnAssembleias">Assembleias</button></div>
@@ -46,6 +47,14 @@
 
 
       <div class="itens item2">
+        <div>
+
+          <label id="nome">Nome</label>
+          <input type="text" id="nome">
+          <button id="AddBtn">Adiciona</button>
+          <button id="Retorna">Retorna</button>
+
+        </div>
         <div id="contentPost" class="post-container"></div>
 
       </div>
@@ -63,6 +72,140 @@
 
   </section>
   <script src="./funcoes.js"></script>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    import {query, getDatabase, ref, child, get, set, update, remove, orderByKey, orderByChild} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+    import {limitToLast, equalTo,startAt} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBxnFt-BFIPOzLBHGIKCO2OZgNCpx0Ufbo",
+      authDomain: "meetnews-1c4bf.firebaseapp.com",
+      projectId: "meetnews-1c4bf",
+      storageBucket: "meetnews-1c4bf.appspot.com",
+      messagingSenderId: "623938736140",
+      appId: "1:623938736140:web:5cd1c5529f81c793e15e29"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const db = getDatabase();
+
+
+    let Lname = document.getElementById('nome');
+    let btn = document.getElementById('AddBtn');
+    let btnRet = document.getElementById('Retorna');
+    let id = crypto.randomUUID();
+
+    function addData() {
+      set(ref(db, 'Postagens/' + id), {
+        nome: {
+          data: '18/10/2023',
+          titulo: 'AAAA',
+          conteudo: 'AAAAA'
+        }
+      }).then(() => {
+        alert("Data added succssefuly");
+      }).catch(() => {
+        alert("Não gravou!");
+      })
+    }
+
+    function RetData() {
+
+      let id_teste = '068a6083-ee2d-4e87-9608-ecb08e7a58c5';
+      const dbRef =  ref(db);
+      const recentPostsRef = query(ref(db, 'Postagens/'));
+
+      get(recentPostsRef).then((snapshot) => {
+        snapshot.forEach(function (childSnapshot) {
+          var teste = childSnapshot.val();
+
+          console.log(teste);
+
+        });
+        
+      
+      });
+
+      get(child(dbRef, 'Postagens/')).then((snapshot) => {
+
+        snapshot.forEach(function (childSnapshot) {
+          // key will be "ada" the first time and "alan" the second time
+          var key = childSnapshot.key;
+          // childData will be the actual contents of the child
+          var childData = childSnapshot.val();
+        //  console.log(childData.nome.data);
+        //  console.log(childData.nome.titulo);
+        //  console.log(childData.nome.conteudo);
+          
+          
+              /* Criando divs, tags, e associando as classes dinamicamente [Inicio]*/
+    var divPostContainer = document.createElement('div');
+    divPostContainer.className = 'post-container';
+
+    var divPost = document.createElement('div');
+    divPost.className = 'post';
+
+
+    var dateP = document.createElement('p');
+    dateP.className = 'date';
+    dateP.innerHTML = childData.nome.data;
+
+    var postBr = document.createElement('br');
+    var tituloPost = document.createElement('h1');
+    tituloPost.innerHTML = childData.nome.titulo;
+
+    var contentPost = document.createElement('div');
+    contentPost.className = 'post-content';
+
+    var conteudoSaltaLinha = document.createElement('br');
+    var conteudoParagrafo = document.createElement('p');
+    var conteudoUnderLine = document.createElement('hr');
+
+    conteudoParagrafo.innerHTML = childData.nome.conteudo;
+    /* Criando divs, tags, e associando as classes dinamicamente [Fim]*/
+
+    /* Montando na página a estrutura criada [Inicio] */
+    document.getElementById('contentPost').appendChild(divPost);
+    divPost.appendChild(dateP);
+    divPost.appendChild(postBr);
+    divPost.appendChild(tituloPost);
+    divPost.appendChild(contentPost);
+    contentPost.appendChild(conteudoSaltaLinha);
+    contentPost.appendChild(conteudoParagrafo);
+    contentPost.appendChild(conteudoUnderLine);
+    /* Montando na página a estrutura criada [Fim] */
+
+
+
+        });
+      });
+
+  /*    get(child(dbRef, 'Postagens/' + id_teste)).then((snapshot) => {
+        if (snapshot.exists()) {
+          nome.value = snapshot.val().nome.data;
+          alert(snapshot.val().nome.data);
+
+        } else {
+          alert("Employee does not exists");
+        }
+      }).catch((error) => {
+        alert("Sem sucesso!");
+        console.log(error);
+      })
+      */
+    }
+    
+
+    btn.addEventListener('click', addData);
+    btnRet.addEventListener('click', RetData);
+
+
+  </script>
 </body>
 
 </html>
