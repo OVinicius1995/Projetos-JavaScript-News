@@ -5,15 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
+  <link rel="shortcut icon" href="./Assets/M.ico" type="image/x-icon">
   <title>Lista de indicações</title>
 </head>
+<!-- Script que fixa os botões no topo da pagina ao rolar a página.[Inicio] -->
 <script type="text/javascript">
   window.onscroll = scroll;
   function scroll() {
     var nVScroll = document.documentElement.scrollTop || document.body.scrollTop; if (nVScroll > 100) {
       document.getElementById("item1").classList.add('menuFixo');
     } else { document.getElementById("item1").classList.remove('menuFixo'); }
+    
   }
+
+  /* Script que fixa os botões no topo da pagina ao rolar a página.[Fim] */
+
 </script>
 
 
@@ -48,24 +54,27 @@
 
       <div class="itens item2">
         <button class="addBtn" onclick="openModalNew()"><img src="./Assets/btnAdd32.png" alt="" srcset=""></button>
+        <!-- Modal para adicionar as noticias na tela [Inicio] -->
         <div class="modalContent" id="showModal">
           <div class="modal">
-          <label for="data">Data</label>
-          <input type="text" name="data" id="data">
+            <label for="data">Data</label>
+            <input type="text" name="data" id="data">
 
-          <label id="nome">Título</label>
-          <input type="text" id="nome">
+            <label id="nome">Título</label>
+            <input type="text" id="nome">
 
-          <label for="data">Conteúdo</label>
-          <input type="text" name="data" id="data">
+            <label for="data">Conteúdo</label>
+            <input type="text" name="data" id="data">
 
-          <button id="AddBtn">Adiciona</button>
-          <button id="AddBtn">Deleta</button>
-          <button id="AddBtn">Corrige</button>
-          <button id="Retorna">Retorna</button>
-         </div>
+            <button id="AddBtn">Adiciona</button>
+            <button id="AddBtn">Deleta</button>
+            <button id="AddBtn">Corrige</button>
+            <button id="Retorna">Retorna</button>
+          </div>
         </div>
+        <!-- Modal para adicionar as noticias na tela [Fim] -->
 
+        <!-- Área do conteúdo da página -->
         <div id="contentPost" class="post-container"></div>
 
       </div>
@@ -85,12 +94,12 @@
   <script src="./funcoes.js"></script>
 
   <script type="module">
-    // Import the functions you need from the SDKs you need
+    // Importação de componentes do banco de dados
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-    import {query, getDatabase, ref, child, get, set, update, remove, orderByKey, orderByChild} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
-    import {orderByValue, limitToLast,limitToFirst, equalTo,startAt} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
-   
-    // Your web app's Firebase configuration
+    import { query, getDatabase, ref, child, get, set, update, remove, orderByKey, orderByChild } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+    import { orderByValue, limitToLast, limitToFirst, equalTo, startAt } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+
+    // Configurações da conexão do banco de dados
     const firebaseConfig = {
       apiKey: "AIzaSyBxnFt-BFIPOzLBHGIKCO2OZgNCpx0Ufbo",
       authDomain: "meetnews-1c4bf.firebaseapp.com",
@@ -100,206 +109,152 @@
       appId: "1:623938736140:web:5cd1c5529f81c793e15e29"
     };
 
-    // Initialize Firebase
+    // Realiza a conexão com o banco
     const app = initializeApp(firebaseConfig);
+    const db  = getDatabase();
 
-    const db = getDatabase();
-
-
-    let Lname = document.getElementById('nome');
-    let btn = document.getElementById('AddBtn');
+    // Carrega as os compenentes nas variáveis
+    let Lname  = document.getElementById('nome');
+    let btn    = document.getElementById('AddBtn');
     let btnRet = document.getElementById('Retorna');
-    let id = crypto.randomUUID();
+    let id     = crypto.randomUUID();
 
+    //Função que grava os dados no banco.
     function addData() {
       set(ref(db, 'Postagens/' + id), {
-        
-          data: '21/10/2023',
-          titulo: 'Noticia mais que fresquinha!',
-          conteudo: 'Mama mia quê isso hein!! amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat pariatur rem qui nam veniam numquam maiores tempore quas vero, rerum vel? Nemo repellat sapiente nulla eos impedit veniam, natus dolores!'
-        
+
+        data: '21/03/2023',
+        titulo: 'Breaking news',
+        conteudo: '<p>Sed sunt quam quo suscipit accusantiumest voluptatum ex commodi libero est sunt enim. Qui quae autem <em>Et repellat aut quidem sequi aut facere porro sit laboriosam quia</em> a nulla consequatur eos amet sunt? Qui pariatur nihil sed commodi nisiest tempore. Ut repellendus galisum et excepturi ametEum maiores quo aliquam consequuntur et ipsa doloremque ut dicta illum a dolores explicabo. Ea ipsum voluptatemEst quia ab voluptatem tempore ut perferendis doloribus aut debitis officiis. Sed quia provident est molestiae vitaeSit blanditiis. 33 saepe beatae ut laboriosam doloremrem blanditiis. Eum praesentium similique id mollitia quissit quia quo nihil dolorum. Ut provident quiaEum fuga et deserunt praesentium id aperiam nostrum qui tenetur nulla aut aliquam voluptatum ut corporis voluptatum. Ea libero quidem <a href="https://www.loremipzum.com" target="_blank">Ut quia aut internos temporibus est Quis esse</a> in quia rerum sit maxime quia. Sed deleniti earumA pariatur sed cumque quas. </p><p>Ea architecto ducimusUt consequatur et blanditiis atque. Qui possimus modiA excepturi et iure voluptas qui quaerat expedita ut corporis blanditiis. Ut illum voluptatibusEos exercitationem id veritatis debitis ea necessitatibus quia ex nesciunt ducimus. Quo quis accusantium qui error tempore <strong>Vel repellendus aut veniam dolores a tempore dolorem vel sequi iste</strong>. Eos voluptas eius eos provident dolorum <a href="https://www.loremipzum.com" target="_blank">Qui soluta et nobis quis</a> eum aliquam provident sit sapiente quaerat a molestias laborum. In dicta quae qui enim dolorEt voluptas ut omnis alias ea nobis internos ut dolores unde in obcaecati exercitationem. Vel architecto ipsamQuo libero et quasi suscipit id omnis adipisci. In similique nobis non voluptates quiaab recusandae non magnam tempore id magnam magni. </p><dl><dt><dfn>At deserunt temporibus! </dfn></dt><dd>Et provident dolorem aut labore dolores ut omnis quia eum repudiandae voluptas. </dd><dt><dfn>Aut quos Quis eos illo voluptas. </dfn></dt><dd>Aut quos modi eum sunt accusantium. </dd></dl><blockquote cite="https://www.loremipzum.com">Aut molestiae illum ut recusandae necessitatibus in totam quia et perspiciatis galisum et dolores veritatis. </blockquote><p>Ex porro animi <a href="https://www.loremipzum.com" target="_blank">Vel laboriosam et expedita fuga ut totam facere</a>. Qui Quis quod aut nihil reprehenderitet eligendi ut distinctio rerum. Eum repellendus dolorumEos sunt sed ratione consequatur in assumenda libero. Est quidem impedit et dolores iste <strong>Nam internos qui voluptate rerum ut odit voluptatem ea voluptate deserunt</strong> qui cupiditate doloremque. Ab tempora cumque ab molestiae sapienteQui maiores ut asperiores impedit At temporibus inventore et soluta officiis aut rerum aliquid? Aut aspernatur voluptatibusAut sint et accusantium harum non perspiciatis natus ad velit unde eos quibusdam quae ex tempora ipsum. Eos quia doloresEa Quis in aspernatur Quis At voluptas sapiente aut nesciunt dolores. Et culpa ipsa ex ratione omnisid odit ut autem laudantium. Sed consequatur eligendi id cupiditate dictaea dolorem. Et nihil assumendaRem voluptate sed officia harum ab similique repellendus est voluptates quod ut nulla dolorum sit nemo voluptatem? Aut voluptas dolorum aut dolorem Quis33 fugiat non ipsam laborum. </p><ol><li>Ut optio quos non laudantium debitis sed explicabo repudiandae. </li><li>At autem placeat id quam dolor ut nihil quia. </li></ol><ul><li>Ut adipisci distinctio ab numquam alias. </li><li>Et corporis minima in explicabo fuga! </li><li>Et quos inventore eum voluptate voluptatum. </li></ul><pre><code>&lt;!-- Qui maiores provident est error rerum. --&gt;<br>&lt;voluptatibus&gt;Quo accusantium vitae eum assumenda animi eum aliquam perferendis.&lt;/voluptatibus&gt;<br>&lt;qui&gt;Aut galisum eveniet ea iste doloremque!&lt;/qui&gt;<br>&lt;internos&gt;Quo explicabo nemo non rerum accusantium qui dolore tempore.&lt;/internos&gt;<br>&lt;neque&gt;Et omnis explicabo.&lt;/neque&gt;<br></code></pre>'
+
       }).then(() => {
-        alert("Data added succssefuly");
+        alert("Gravado com sucesso!");
+        window.location.reload(true);
       }).catch(() => {
-        alert("Não gravou!");
+        alert("Não gravou! Verifique.");
       })
     }
 
+    //Função que obtem os dados do banco.
+    document.addEventListener('DOMContentLoaded', function RetData() {
 
-    function RetData() {
-
-      let id_teste = '068a6083-ee2d-4e87-9608-ecb08e7a58c5';
+      //Constantes que recebem o banco de dados.
       const dbRef = ref(db);
       const recentPostsRef = query(ref(db, 'Postagens'));
 
+      //Varre os dados do banco.
       get(recentPostsRef)
-      .then((snapshot)=>{
+        .then((snapshot) => {
 
-        var valores =[];
-
-          snapshot.forEach(childSnapshot =>{
-          valores.push(childSnapshot.val());
-        });
-        console.log(valores.length);
-        console.log(valores);
-       // RecebeIntens(valores);
-          valores.reverse();
-        valores.forEach(element =>{
-           console.log(element.titulo,element.conteudo);
-
-                         /* Criando divs, tags, e associando as classes dinamicamente [Inicio]*/
-    var divPostContainer = document.createElement('div');
-    divPostContainer.className = 'post-container';
-
-    var divPost = document.createElement('div');
-    divPost.className = 'post';
-
-    /* Tratando data */
-    let dataExt = element.data;
-
-    let dia = dataExt.slice(0,2);
-    let mounthNumber = dataExt.substr(3,2);
-    let year = dataExt.substr(6,4);
-    let mounthEx;
-
-    
-    switch (mounthNumber) {
-  case mounthNumber = "01":
-    mounthEx = 'Janeiro';
-    break;
-  case mounthNumber = "02":
-    mounthEx = 'Fevereiro';
-    break;
-  case mounthNumber = "03":
-    mounthEx = 'Março';
-    break;
-  case mounthNumber = "04":
-    mounthEx = 'Abril';
-    break;
-  case mounthNumber = "05":
-    mounthEx = 'Maio';
-    break;
-  case mounthNumber = "06":
-    mounthEx = 'Junho';
-    break;
-  case mounthNumber = "07":
-    mounthEx = 'Julho';
-    break;
-  case mounthNumber = "08":
-    mounthEx = 'Agosto';
-    break;
-  case mounthNumber = "09":
-    mounthEx = 'Setembro';
-    break;
-  case mounthNumber = "10":
-    mounthEx = 'Outubro';
-    break;
-  case mounthNumber = "11":
-    mounthEx = 'Novembro';
-    break;
-  case mounthNumber = "12":
-    mounthEx = 'Dezembro';
-    break;
-    }
-
-    let dataTratada = dia + ' ' + 'de' + ' ' + mounthEx + ' ' + 'de' + ' ' + year;  
-
-    /* Fim tratando data */
-
-    var dateP = document.createElement('p');
-    dateP.className = 'date';
-    dateP.innerHTML = dataTratada;
-
-    var postBr = document.createElement('br');
-    var tituloPost = document.createElement('h1');
-    tituloPost.innerHTML = element.titulo;
-
-    var contentPost = document.createElement('div');
-    contentPost.className = 'post-content';
-
-    var conteudoSaltaLinha = document.createElement('br');
-    var conteudoParagrafo = document.createElement('p');
-    var conteudoUnderLine = document.createElement('hr');
-
-    conteudoParagrafo.innerHTML = element.conteudo;
-    /* Criando divs, tags, e associando as classes dinamicamente [Fim]*/
-
-    /* Montando na página a estrutura criada [Inicio] */
-    document.getElementById('contentPost').appendChild(divPost);
-    divPost.appendChild(dateP);
-    divPost.appendChild(postBr);
-    divPost.appendChild(tituloPost);
-    divPost.appendChild(contentPost);
-    contentPost.appendChild(conteudoSaltaLinha);
-    contentPost.appendChild(conteudoParagrafo);
-    contentPost.appendChild(conteudoUnderLine);
-    /* Montando na página a estrutura criada [Fim] */
-
-
+          //Crio um array que receberá os valores recebidos do banco.
+            var noticias = [];
+          //Percorro o objeto recebido.
+            snapshot.forEach(childSnapshot => {
+          //Adiciono os dados no array.  
+              noticias.push(childSnapshot.val());
+          
           });
 
-       
-       /* snapshot.forEach(function (childSnapshot) {
-          var teste = childSnapshot.val();
-         // console.log(teste.titulo);
-          let valores = [1,2,3,3,4,5,6];
-          valores.push(teste);         
-                   
-          //console.log(valores);
-          RecebeIntens(valores);
-          
-        });*/       
-      
-      });
-/*
-      function RecebeIntens(Items){
-         // console.log(Items);
-        //  console.log(Items.length);
-          /*Items.forEach(element =>{
-            RecebeIntens(element.titulo);
+          //Nessa parte eu inverto o array como se fosse um order by desc.
+            //noticias.reverse();
+            noticias.forEach(element => {         
+
+
+            /* Tratando data [Inicio]. */
+            let dataExt = element.data;
+            //Extraindo o dia da data  
+            let dia = dataExt.slice(0, 2);
+            let mes = dataExt.substr(3, 2);
+            let ano = dataExt.substr(6, 4);
+            let mesExtenso;
+
+            //Percorro pelo mês e o apresento pelo nome do mês.
+            switch (mes) {
+              case mes     = "01":
+                mesExtenso = 'Janeiro';
+                break;
+              case mes     = "02":
+                mesExtenso = 'Fevereiro';
+                break;
+              case mes     = "03":
+                mesExtenso = 'Março';
+                break;
+              case mes     = "04":
+                mesExtenso = 'Abril';
+                break;
+              case mes     = "05":
+                mesExtenso = 'Maio';
+                break;
+              case mes     = "06":
+                mesExtenso = 'Junho';
+                break;
+              case mes     = "07":
+                mesExtenso = 'Julho';
+                break;
+              case mes     = "08":
+                mesExtenso = 'Agosto';
+                break;
+              case mes     = "09":
+                mesExtenso = 'Setembro';
+                break;
+              case mes     = "10":
+                mesExtenso = 'Outubro';
+                break;
+              case mes     = "11":
+                mesExtenso = 'Novembro';
+                break;
+              case mes     = "12":
+                mesExtenso = 'Dezembro';
+                break;
+            }
+
+            //Coloco a data tratada em uma variável
+            let dataTratada = dia + ' ' + 'de' + ' ' + mesExtenso + ' ' + 'de' + ' ' + ano;
+
+            /* Fim tratando data */
+
+            /* Criando arquitetura de exibição dos dados. [Inicio]*/
+            var divPostContainer = document.createElement('div');
+            divPostContainer.className = 'post-container';
+
+            var divPost = document.createElement('div');
+            divPost.className = 'post';
+
+            var dateP = document.createElement('p');
+            dateP.className = 'date';
+            dateP.innerHTML = dataTratada;
+
+            var postBr = document.createElement('br');
+            var tituloPost = document.createElement('h1');
+            tituloPost.innerHTML = element.titulo;
+
+            var contentPost = document.createElement('div');
+            contentPost.className = 'post-content';
+
+            var conteudoSaltaLinha = document.createElement('br');
+            var conteudoParagrafo = document.createElement('p');
+            var conteudoUnderLine = document.createElement('hr');
+
+            conteudoParagrafo.innerHTML = element.conteudo;
+            /* Criando arquitetura de exibição dos dados. [Fim]*/
+
+            /* Montando no DOM a estrutura criada [Inicio] */
+            document.getElementById('contentPost').appendChild(divPost);
+            divPost.appendChild(dateP);
+            divPost.appendChild(postBr);
+            divPost.appendChild(tituloPost);
+            divPost.appendChild(contentPost);
+            contentPost.appendChild(conteudoSaltaLinha);
+            contentPost.appendChild(conteudoParagrafo);
+            contentPost.appendChild(conteudoUnderLine);
+            /* Montando no DOM a estrutura criada [Fim] */
+
           });
-        }
-
-      /* FIM */
-
-
-      /*--------------------------------------------------------------------------*/
-   /*   
-      get(child(dbRef, 'Postagens/')).then((snapshot) => {
-
-        snapshot.forEach(function (childSnapshot) {
-          alert('aaa');
-          // key will be "ada" the first time and "alan" the second time
-          var key = childSnapshot.key;
-          // childData will be the actual contents of the child
-          var childData = childSnapshot.val();
-        //  console.log(childData.nome.data);
-        //  console.log(childData.nome.titulo);
-        //  console.log(childData.nome.conteudo);    
-          
-        });
-      });
-      */
-
-  /*    get(child(dbRef, 'Postagens/' + id_teste)).then((snapshot) => {
-        if (snapshot.exists()) {
-          nome.value = snapshot.val().nome.data;
-          alert(snapshot.val().nome.data);
-
-        } else {
-          alert("Employee does not exists");
-        }
-      }).catch((error) => {
-        alert("Sem sucesso!");
-        console.log(error);
-      })
-      */
-    }
-    
+       });
+    },false);
 
     btn.addEventListener('click', addData);
-    btnRet.addEventListener('click', RetData);
-
+   // btnRet.addEventListener('click', RetData());
 
   </script>
 </body>
