@@ -113,11 +113,11 @@
 
     function addData() {
       set(ref(db, 'Postagens/' + id), {
-        nome: {
+
           data: '18/10/2023',
           titulo: 'AAAA',
           conteudo: 'AAAAA'
-        }
+        
       }).then(() => {
         alert("Data added succssefuly");
       }).catch(() => {
@@ -162,7 +162,7 @@
     divPost.className = 'post';
 
     /* Tratando data */
-    let dataExt = childData.nome.data;
+    let dataExt = childData.data;
 
     let dia = dataExt.slice(0,2);
     let mounthNumber = dataExt.substr(3,2);
@@ -219,7 +219,7 @@
 
     var postBr = document.createElement('br');
     var tituloPost = document.createElement('h1');
-    tituloPost.innerHTML = childData.nome.titulo;
+    tituloPost.innerHTML = childData.titulo;
 
     var contentPost = document.createElement('div');
     contentPost.className = 'post-content';
@@ -228,7 +228,7 @@
     var conteudoParagrafo = document.createElement('p');
     var conteudoUnderLine = document.createElement('hr');
 
-    conteudoParagrafo.innerHTML = childData.nome.conteudo;
+    conteudoParagrafo.innerHTML = childData.conteudo;
     /* Criando divs, tags, e associando as classes dinamicamente [Fim]*/
 
     /* Montando na página a estrutura criada [Inicio] */
