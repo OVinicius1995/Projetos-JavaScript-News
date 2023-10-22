@@ -232,8 +232,14 @@
             contentPost.className = 'post-content';
 
             var conteudoSaltaLinha = document.createElement('br');
-            var conteudoParagrafo = document.createElement('p');
-            var conteudoUnderLine = document.createElement('hr');
+            var conteudoParagrafo  = document.createElement('p');
+            var conteudoUnderLine  = document.createElement('hr');
+            var btnAtualiza        = document.createElement('btn');
+            var btnDeleta          = document.createElement('btn');
+
+            var contentAcoes = document.createElement('div');
+            btnAtualiza.innerHTML = 'Teste';
+            btnDeleta.innerHTML   = 'Teste';
 
             conteudoParagrafo.innerHTML = element.conteudo;
             /* Criando arquitetura de exibição dos dados. [Fim]*/
@@ -242,6 +248,8 @@
             document.getElementById('contentPost').appendChild(divPost);
             divPost.appendChild(dateP);
             divPost.appendChild(postBr);
+            divPost.appendChild(btnAtualiza);
+            divPost.appendChild(btnDeleta);
             divPost.appendChild(tituloPost);
             divPost.appendChild(contentPost);
             contentPost.appendChild(conteudoSaltaLinha);
