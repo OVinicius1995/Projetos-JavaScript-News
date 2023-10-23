@@ -122,8 +122,8 @@
     //Função que grava os dados no banco.
     function addData() {
       set(ref(db, 'Postagens/' + id), {
-
-        data: '21/03/2023',
+        id: id,
+        data: '21/02/2023',
         titulo: 'Breaking news',
         conteudo: '<p>Sed sunt quam quo suscipit accusantiumest voluptatum ex commodi libero est sunt enim. Qui quae autem <em>Et repellat aut quidem sequi aut facere porro sit laboriosam quia</em> a nulla consequatur eos amet sunt? Qui pariatur nihil sed commodi nisiest tempore. Ut repellendus galisum et excepturi ametEum maiores quo aliquam consequuntur et ipsa doloremque ut dicta illum a dolores explicabo. Ea ipsum voluptatemEst quia ab voluptatem tempore ut perferendis doloribus aut debitis officiis. Sed quia provident est molestiae vitaeSit blanditiis. 33 saepe beatae ut laboriosam doloremrem blanditiis. Eum praesentium similique id mollitia quissit quia quo nihil dolorum. Ut provident quiaEum fuga et deserunt praesentium id aperiam nostrum qui tenetur nulla aut aliquam voluptatum ut corporis voluptatum. Ea libero quidem <a href="https://www.loremipzum.com" target="_blank">Ut quia aut internos temporibus est Quis esse</a> in quia rerum sit maxime quia. Sed deleniti earumA pariatur sed cumque quas. </p><p>Ea architecto ducimusUt consequatur et blanditiis atque. Qui possimus modiA excepturi et iure voluptas qui quaerat expedita ut corporis blanditiis. Ut illum voluptatibusEos exercitationem id veritatis debitis ea necessitatibus quia ex nesciunt ducimus. Quo quis accusantium qui error tempore <strong>Vel repellendus aut veniam dolores a tempore dolorem vel sequi iste</strong>. Eos voluptas eius eos provident dolorum <a href="https://www.loremipzum.com" target="_blank">Qui soluta et nobis quis</a> eum aliquam provident sit sapiente quaerat a molestias laborum. In dicta quae qui enim dolorEt voluptas ut omnis alias ea nobis internos ut dolores unde in obcaecati exercitationem. Vel architecto ipsamQuo libero et quasi suscipit id omnis adipisci. In similique nobis non voluptates quiaab recusandae non magnam tempore id magnam magni. </p><dl><dt><dfn>At deserunt temporibus! </dfn></dt><dd>Et provident dolorem aut labore dolores ut omnis quia eum repudiandae voluptas. </dd><dt><dfn>Aut quos Quis eos illo voluptas. </dfn></dt><dd>Aut quos modi eum sunt accusantium. </dd></dl><blockquote cite="https://www.loremipzum.com">Aut molestiae illum ut recusandae necessitatibus in totam quia et perspiciatis galisum et dolores veritatis. </blockquote><p>Ex porro animi <a href="https://www.loremipzum.com" target="_blank">Vel laboriosam et expedita fuga ut totam facere</a>. Qui Quis quod aut nihil reprehenderitet eligendi ut distinctio rerum. Eum repellendus dolorumEos sunt sed ratione consequatur in assumenda libero. Est quidem impedit et dolores iste <strong>Nam internos qui voluptate rerum ut odit voluptatem ea voluptate deserunt</strong> qui cupiditate doloremque. Ab tempora cumque ab molestiae sapienteQui maiores ut asperiores impedit At temporibus inventore et soluta officiis aut rerum aliquid? Aut aspernatur voluptatibusAut sint et accusantium harum non perspiciatis natus ad velit unde eos quibusdam quae ex tempora ipsum. Eos quia doloresEa Quis in aspernatur Quis At voluptas sapiente aut nesciunt dolores. Et culpa ipsa ex ratione omnisid odit ut autem laudantium. Sed consequatur eligendi id cupiditate dictaea dolorem. Et nihil assumendaRem voluptate sed officia harum ab similique repellendus est voluptates quod ut nulla dolorum sit nemo voluptatem? Aut voluptas dolorum aut dolorem Quis33 fugiat non ipsam laborum. </p><ol><li>Ut optio quos non laudantium debitis sed explicabo repudiandae. </li><li>At autem placeat id quam dolor ut nihil quia. </li></ol><ul><li>Ut adipisci distinctio ab numquam alias. </li><li>Et corporis minima in explicabo fuga! </li><li>Et quos inventore eum voluptate voluptatum. </li></ul><pre><code>&lt;!-- Qui maiores provident est error rerum. --&gt;<br>&lt;voluptatibus&gt;Quo accusantium vitae eum assumenda animi eum aliquam perferendis.&lt;/voluptatibus&gt;<br>&lt;qui&gt;Aut galisum eveniet ea iste doloremque!&lt;/qui&gt;<br>&lt;internos&gt;Quo explicabo nemo non rerum accusantium qui dolore tempore.&lt;/internos&gt;<br>&lt;neque&gt;Et omnis explicabo.&lt;/neque&gt;<br></code></pre>'
 
@@ -140,7 +140,7 @@
 
       //Constantes que recebem o banco de dados.
       const dbRef = ref(db);
-      const recentPostsRef = query(ref(db, 'Postagens'));
+      const recentPostsRef = query(ref(db, 'Postagens/'));
 
       //Varre os dados do banco.
       get(recentPostsRef)
@@ -148,17 +148,19 @@
 
           //Crio um array que receberá os valores recebidos do banco.
             var noticias = [];
+            var ids = [];
+            
           //Percorro o objeto recebido.
             snapshot.forEach(childSnapshot => {
-          //Adiciono os dados no array.  
+                //Adiciono os dados no array.  
               noticias.push(childSnapshot.val());
-          
+              ids.push();
           });
 
           //Nessa parte eu inverto o array como se fosse um order by desc.
             //noticias.reverse();
             noticias.forEach(element => {         
-
+             
 
             /* Tratando data [Inicio]. */
             let dataExt = element.data;
@@ -236,10 +238,22 @@
             var conteudoUnderLine  = document.createElement('hr');
             var btnAtualiza        = document.createElement('btn');
             var btnDeleta          = document.createElement('btn');
-
+           
+            //DIV de ações [Inicio]
             var contentAcoes = document.createElement('div');
-            btnAtualiza.innerHTML = 'Teste';
-            btnDeleta.innerHTML   = 'Teste';
+            contentAcoes.className = 'Acoes';
+            btnAtualiza.className  = 'btnAcoesAtualiza';
+
+            btnAtualiza.addEventListener('click', function atualizar(){
+              alert('OI do click ATUALIZAR' + ' _ ' + element.id);
+            });
+
+            btnDeleta.className  = 'btnAcoesDeleta';
+            btnDeleta.addEventListener('click', function atualizar(){
+              alert('OI do click DELETE' + ' _ ' + element.id);
+            });
+
+            //DIV de ações [Inicio]
 
             conteudoParagrafo.innerHTML = element.conteudo;
             /* Criando arquitetura de exibição dos dados. [Fim]*/
@@ -248,8 +262,9 @@
             document.getElementById('contentPost').appendChild(divPost);
             divPost.appendChild(dateP);
             divPost.appendChild(postBr);
-            divPost.appendChild(btnAtualiza);
-            divPost.appendChild(btnDeleta);
+            divPost.appendChild(contentAcoes);
+            contentAcoes.appendChild(btnAtualiza);
+            contentAcoes.appendChild(btnDeleta);
             divPost.appendChild(tituloPost);
             divPost.appendChild(contentPost);
             contentPost.appendChild(conteudoSaltaLinha);

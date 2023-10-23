@@ -100,10 +100,27 @@
   transition: 0.1s ease-in-out;
 }
 
+.post > .Acoes{
+  display:flex;
+  flex-direction:row;
+  justify-self: center;
+  justify-content: end;
+  gap:5px;
+}
+
 .Acoes{
-  background-color:black;
+
   height:30px;
-  width:100%;
+  width:99%;
+}
+
+.btnAcoesAtualiza{
+  background-image: url("./Assets/Atualizar.bmp");
+  width: 20px;
+  height: 20px;
+  cursor:pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .btnAcoesDeleta{
@@ -111,7 +128,15 @@
   width: 20px;
   height: 20px;
   cursor:pointer;
+  background-repeat: no-repeat; 
+  background-size: cover;
 }
+
+.Acoes > btn:hover{
+  border-bottom: 1px inset black;
+  transition: 0.1s ease-in-out;
+}
+
 /* Main blog */
 
 .post-container{
@@ -450,6 +475,10 @@ h1{
     width:100%;
     margin:5px;  
   }
+  .Acoes{
+    height:30px;
+    width:97%;
+  }
 }
 
 @media (min-width:280px) and (max-width:400px) {
@@ -516,6 +545,11 @@ h1{
     flex-wrap:wrap;
     margin:4px;
     padding:2px;
+  }
+
+  .Acoes{
+    height:30px;
+    width:96%;
   }
     /* Finalizando responsividade do projeto */
 }
