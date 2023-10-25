@@ -53,26 +53,44 @@
 
 
       <div class="itens item2">
-        <button class="addBtn" onclick="openModalNew()"><img src="./Assets/btnAdd32.png" alt="" srcset=""></button>
+        <button class="addBtn" onclick="openModalNew(),closeModalUpdate()"><img src="./Assets/btnAdd32.png" alt="" srcset=""></button>
         <!-- Modal para adicionar as noticias na tela [Inicio] -->
         <div class="modalContent" id="showModal">
-          <div class="modal">
-            <label for="data">Data</label>
-            <input type="text" name="data" id="data">
+          <div class="modalAddNews">
+           
+          <h1>Inserir noticias</h1>
 
-            <label id="nome">Título</label>
-            <input type="text" id="nome">
+            <input id="data" type="date" name="data" placeholder="Informe a data">
 
-            <label for="data">Conteúdo</label>
-            <input type="text" name="data" id="data">
+            <input id="titulo" type="text" placeholder="Informe o título">
 
-            <button id="AddBtn">Adiciona</button>
-            <button id="AddBtn">Deleta</button>
-            <button id="AddBtn">Corrige</button>
-            <button id="Retorna">Retorna</button>
+            <textarea id="conteudo" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
+          
+            <div class="adicionar">
+            <button id="AddBtn" class="btn">Adicionar</button>
+          </div>
           </div>
         </div>
-        <!-- Modal para adicionar as noticias na tela [Fim] -->
+        <!-- Modal para corrigir as noticias na tela [Fim] -->
+
+                <!-- Modal para adicionar as noticias na tela [Inicio] -->
+                <div class="modalContent" id="showModalCorrigir">
+                  <div class="modalAddNews">
+                   
+                  <h1>Atualizar noticias</h1>
+        
+                    <input id="data" type="date" name="data" placeholder="Informe a data">
+        
+                    <input id="titulo" type="text" placeholder="Informe o título">
+        
+                    <textarea id="conteudo" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
+                  
+                    <div class="adicionar">
+                    <button id="AddBtn" class="btn">Adicionar</button>
+                  </div>
+                  </div>
+                </div>
+                <!-- Modal para corrigir as noticias na tela [Fim] -->
 
         <!-- Área do conteúdo da página -->
         <div id="contentPost" class="post-container"></div>
@@ -114,18 +132,24 @@
     const db  = getDatabase();
 
     // Carrega as os compenentes nas variáveis
-    let Lname  = document.getElementById('nome');
-    let btn    = document.getElementById('AddBtn');
-    let btnRet = document.getElementById('Retorna');
-    let id     = crypto.randomUUID();
+    let data      = document.getElementById("data");
+    let titulo    = document.getElementById('titulo');
+    let conteudo  = document.getElementById('conteudo');
+    let btn       = document.getElementById('AddBtn');
+    let btnRet    = document.getElementById('Retorna');
+    let id        = crypto.randomUUID();
+
 
     //Função que grava os dados no banco.
     function addData() {
-      set(ref(db, 'Postagens/' + id), {
+
+      let dataFormatada = (new Date(data.value)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split('-').reverse().join('/');
+      console.log(dataFormatada+ ' ' + titulo.value + ' ' + conteudo.value)
+    /*  set(ref(db, 'Postagens/' + id), {
         id: id,
-        data: '21/02/2023',
-        titulo: 'Breaking news',
-        conteudo: '<p>Sed sunt quam quo suscipit accusantiumest voluptatum ex commodi libero est sunt enim. Qui quae autem <em>Et repellat aut quidem sequi aut facere porro sit laboriosam quia</em> a nulla consequatur eos amet sunt? Qui pariatur nihil sed commodi nisiest tempore. Ut repellendus galisum et excepturi ametEum maiores quo aliquam consequuntur et ipsa doloremque ut dicta illum a dolores explicabo. Ea ipsum voluptatemEst quia ab voluptatem tempore ut perferendis doloribus aut debitis officiis. Sed quia provident est molestiae vitaeSit blanditiis. 33 saepe beatae ut laboriosam doloremrem blanditiis. Eum praesentium similique id mollitia quissit quia quo nihil dolorum. Ut provident quiaEum fuga et deserunt praesentium id aperiam nostrum qui tenetur nulla aut aliquam voluptatum ut corporis voluptatum. Ea libero quidem <a href="https://www.loremipzum.com" target="_blank">Ut quia aut internos temporibus est Quis esse</a> in quia rerum sit maxime quia. Sed deleniti earumA pariatur sed cumque quas. </p><p>Ea architecto ducimusUt consequatur et blanditiis atque. Qui possimus modiA excepturi et iure voluptas qui quaerat expedita ut corporis blanditiis. Ut illum voluptatibusEos exercitationem id veritatis debitis ea necessitatibus quia ex nesciunt ducimus. Quo quis accusantium qui error tempore <strong>Vel repellendus aut veniam dolores a tempore dolorem vel sequi iste</strong>. Eos voluptas eius eos provident dolorum <a href="https://www.loremipzum.com" target="_blank">Qui soluta et nobis quis</a> eum aliquam provident sit sapiente quaerat a molestias laborum. In dicta quae qui enim dolorEt voluptas ut omnis alias ea nobis internos ut dolores unde in obcaecati exercitationem. Vel architecto ipsamQuo libero et quasi suscipit id omnis adipisci. In similique nobis non voluptates quiaab recusandae non magnam tempore id magnam magni. </p><dl><dt><dfn>At deserunt temporibus! </dfn></dt><dd>Et provident dolorem aut labore dolores ut omnis quia eum repudiandae voluptas. </dd><dt><dfn>Aut quos Quis eos illo voluptas. </dfn></dt><dd>Aut quos modi eum sunt accusantium. </dd></dl><blockquote cite="https://www.loremipzum.com">Aut molestiae illum ut recusandae necessitatibus in totam quia et perspiciatis galisum et dolores veritatis. </blockquote><p>Ex porro animi <a href="https://www.loremipzum.com" target="_blank">Vel laboriosam et expedita fuga ut totam facere</a>. Qui Quis quod aut nihil reprehenderitet eligendi ut distinctio rerum. Eum repellendus dolorumEos sunt sed ratione consequatur in assumenda libero. Est quidem impedit et dolores iste <strong>Nam internos qui voluptate rerum ut odit voluptatem ea voluptate deserunt</strong> qui cupiditate doloremque. Ab tempora cumque ab molestiae sapienteQui maiores ut asperiores impedit At temporibus inventore et soluta officiis aut rerum aliquid? Aut aspernatur voluptatibusAut sint et accusantium harum non perspiciatis natus ad velit unde eos quibusdam quae ex tempora ipsum. Eos quia doloresEa Quis in aspernatur Quis At voluptas sapiente aut nesciunt dolores. Et culpa ipsa ex ratione omnisid odit ut autem laudantium. Sed consequatur eligendi id cupiditate dictaea dolorem. Et nihil assumendaRem voluptate sed officia harum ab similique repellendus est voluptates quod ut nulla dolorum sit nemo voluptatem? Aut voluptas dolorum aut dolorem Quis33 fugiat non ipsam laborum. </p><ol><li>Ut optio quos non laudantium debitis sed explicabo repudiandae. </li><li>At autem placeat id quam dolor ut nihil quia. </li></ol><ul><li>Ut adipisci distinctio ab numquam alias. </li><li>Et corporis minima in explicabo fuga! </li><li>Et quos inventore eum voluptate voluptatum. </li></ul><pre><code>&lt;!-- Qui maiores provident est error rerum. --&gt;<br>&lt;voluptatibus&gt;Quo accusantium vitae eum assumenda animi eum aliquam perferendis.&lt;/voluptatibus&gt;<br>&lt;qui&gt;Aut galisum eveniet ea iste doloremque!&lt;/qui&gt;<br>&lt;internos&gt;Quo explicabo nemo non rerum accusantium qui dolore tempore.&lt;/internos&gt;<br>&lt;neque&gt;Et omnis explicabo.&lt;/neque&gt;<br></code></pre>'
+        data: dataFormatada,
+        titulo: titulo.value,
+        conteudo: conteudo.value
 
       }).then(() => {
         alert("Gravado com sucesso!");
@@ -133,6 +157,7 @@
       }).catch(() => {
         alert("Não gravou! Verifique.");
       })
+      */
     }
 
     //Função que obtem os dados do banco.
@@ -244,8 +269,23 @@
             contentAcoes.className = 'Acoes';
             btnAtualiza.className  = 'btnAcoesAtualiza';
 
+            
             btnAtualiza.addEventListener('click', function atualizar(){
-              alert('OI do click ATUALIZAR' + ' _ ' + element.id);
+              closeModalNew();
+              openModalUpdate();
+              alert(element.id);
+              get(child(dbRef, 'Postagens/' + element.id)).then((snapshot) => {
+                    if (snapshot.exists()) {
+                     // nome.value = snapshot.val().nome.data;
+                      console.log(snapshot.val());
+
+                    } else {
+                      alert("Employee does not exists");
+                    }
+                  }).catch((error) => {
+                    alert("Sem sucesso!");
+                    console.log(error);
+                  })              
             });
 
             btnDeleta.className  = 'btnAcoesDeleta';
