@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,800&family=Inter:wght@100;500&family=Lumanosimo&family=Orbitron:wght@900&family=Righteous&family=Young+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&family=Inter:wght@100;500&family=Lato:wght@300&family=Lumanosimo&family=Orbitron:wght@900&family=Righteous&family=Young+Serif&display=swap');
 
 *{
   padding:0px;
@@ -74,7 +74,7 @@
   justify-content:space-around;
   height:80px;
   width:99%;
-  flex-wrap:wrap;
+  flex-wrap:wrap;  
 }
 
 .menuFixo{
@@ -100,10 +100,27 @@
   transition: 0.1s ease-in-out;
 }
 
+.post > .Acoes{
+  display:flex;
+  flex-direction:row;
+  justify-self: center;
+  justify-content: end;
+  gap:5px;
+}
+
 .Acoes{
-  background-color:black;
+
   height:30px;
-  width:100%;
+  width:99%;
+}
+
+.btnAcoesAtualiza{
+  background-image: url("./Assets/Atualizar.bmp");
+  width: 20px;
+  height: 20px;
+  cursor:pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .btnAcoesDeleta{
@@ -111,7 +128,15 @@
   width: 20px;
   height: 20px;
   cursor:pointer;
+  background-repeat: no-repeat; 
+  background-size: cover;
 }
+
+.Acoes > btn:hover{
+  border-bottom: 1px inset black;
+  transition: 0.1s ease-in-out;
+}
+
 /* Main blog */
 
 .post-container{
@@ -164,35 +189,85 @@ h1{
   border:none;
 }
 
-.modalContent{  
+.modalContent{ 
   width: 50vw;
   position: fixed;
-  top: 29%;
-  margin-left:25%;
+  top: 20%;
+  margin-left:10%;
   display : none;
   z-index: 999;
   align-items:center;
-  justify-content: center;}
+  justify-content: center;
+}
 
-.modal{
+.modalAddNews{
   display: flex;
   flex-direction: column;
-  gap:10px;
+  justify-content: space-between;
+  gap:20px;
   padding: 30px;
-  background-color: black;
+  background-color: gray;
   opacity:0.9;
   border-radius: 10px;
   border:1px gray inset;
-  width: 50%;
-  color:white;
+  width: 80%;
+  min-height:390px;
+  color:white;  
+}
+
+.modalAddNews > input{
+  height:40px;
+  border-radius: 5px;
+  color: black;
+  opacity:1;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: left;
+  background-color: #fff;
+  padding:10px;
+}
+
+.modalAddNews > textarea{
+  border-radius: 4px;
+  color: black !important;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  resize: none;
+  border:1px gray inset;
+  opacity:1;
+}
+
+textarea:focus, input:focus {
+  //box-shadow: 0px 2px 0px 0px #fff;
+  outline: 1px solid white;  
+}
+
+.adicionar{
+  position:bottom;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: flex-end;
 }
 
 .active {
   display: flex;
 }
 
-.active .modal {
-  animation: modalLog .4s;
+.active .modalAddNews {
+  animation: moadalAnimation .6s;
+}
+
+@keyframes moadalAnimation {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -60px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 /* 
   ------ Itens do display grid não usados. ----------
@@ -450,6 +525,46 @@ h1{
     width:100%;
     margin:5px;  
   }
+  .Acoes{
+    height:30px;
+    width:97%;
+  }
+
+    /* Responsividade dos modais [Inicio] */
+
+    .modalContent{ 
+      width: 40vw;
+      top: -10%;
+      bottom: 15%;
+      margin-left:10%;
+      z-index: 999;
+      align-items:center;
+      justify-content: center;
+    }
+  
+    .modalAddNews > h1{
+      font-size:12px;
+      text-align:center;
+    }
+    
+    .modalAddNews{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap:10px;
+      padding: 10px;
+      background-color: #808080;
+      opacity:0.9;
+      border-radius: 10px;
+      border:1px gray inset;
+      width: 120%;
+      min-height:290px;
+      height:80px;
+      color:white;  
+    }
+  
+    
+    /* Responsividade dos modais [Fim] */
 }
 
 @media (min-width:280px) and (max-width:400px) {
@@ -490,9 +605,10 @@ h1{
     align-items:center;
     justify-content:space-around;
     height:80px;
-    width:99%;
+    width:96%;
     
   }
+
   .btn{
     border:1px solid transparent;
     border-radius:5px;
@@ -517,5 +633,46 @@ h1{
     margin:4px;
     padding:2px;
   }
+
+  .Acoes{
+    height:30px;
+    width:96%;
+  }
+
+  /* Responsividade dos modais [Inicio] */
+
+  .modalContent{ 
+    width: 44vw;
+    top: 40%;
+    bottom: 15%;
+    margin-left:-2%;
+    z-index: 999;
+    align-items:center;
+    justify-content: center;
+  }
+
+  .modalAddNews > h1{
+    font-size:12px;
+    text-align:center;
+  }
+  
+  .modalAddNews{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap:10px;
+    padding: 10px;
+    background-color: #808080;
+    opacity:0.9;
+    border-radius: 10px;
+    border:1px gray inset;
+    width: 120%;
+    min-height:390px;
+    color:white;  
+    height:80px;
+  }
+
+  
+  /* Responsividade dos modais [Fim] */
     /* Finalizando responsividade do projeto */
 }
