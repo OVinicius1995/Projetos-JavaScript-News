@@ -74,7 +74,7 @@
   justify-content:space-around;
   height:80px;
   width:99%;
-  flex-wrap:wrap;
+  flex-wrap:wrap;  
 }
 
 .menuFixo{
@@ -239,9 +239,8 @@ h1{
 }
 
 textarea:focus, input:focus {
-  box-shadow: 0px 2px 5px 0px #fff;
-  outline: 1px solid white;
-  
+  //box-shadow: 0px 2px 0px 0px #fff;
+  outline: 1px solid white;  
 }
 
 .adicionar{
@@ -530,6 +529,42 @@ textarea:focus, input:focus {
     height:30px;
     width:97%;
   }
+
+    /* Responsividade dos modais [Inicio] */
+
+    .modalContent{ 
+      width: 40vw;
+      top: -10%;
+      bottom: 15%;
+      margin-left:10%;
+      z-index: 999;
+      align-items:center;
+      justify-content: center;
+    }
+  
+    .modalAddNews > h1{
+      font-size:12px;
+      text-align:center;
+    }
+    
+    .modalAddNews{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap:10px;
+      padding: 10px;
+      background-color: #808080;
+      opacity:0.9;
+      border-radius: 10px;
+      border:1px gray inset;
+      width: 120%;
+      min-height:290px;
+      height:80px;
+      color:white;  
+    }
+  
+    
+    /* Responsividade dos modais [Fim] */
 }
 
 @media (min-width:280px) and (max-width:400px) {
@@ -570,9 +605,10 @@ textarea:focus, input:focus {
     align-items:center;
     justify-content:space-around;
     height:80px;
-    width:99%;
+    width:96%;
     
   }
+
   .btn{
     border:1px solid transparent;
     border-radius:5px;
@@ -606,10 +642,10 @@ textarea:focus, input:focus {
   /* Responsividade dos modais [Inicio] */
 
   .modalContent{ 
-    width: 50vw;
+    width: 44vw;
     top: 40%;
     bottom: 15%;
-    margin-left:10%;
+    margin-left:-2%;
     z-index: 999;
     align-items:center;
     justify-content: center;
