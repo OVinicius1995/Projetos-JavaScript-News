@@ -277,7 +277,9 @@
               get(child(dbRef, 'Postagens/' + element.id)).then((snapshot) => {
                     if (snapshot.exists()) {
                      // nome.value = snapshot.val().nome.data;
-                      console.log(snapshot.val());
+                      console.log(snapshot.val().titulo);
+                      console.log(snapshot.val().data);
+                      console.log(snapshot.val().conteudo);
 
                     } else {
                       alert("Employee does not exists");
