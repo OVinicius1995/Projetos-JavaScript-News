@@ -292,6 +292,8 @@
 
             btnDeleta.className  = 'btnAcoesDeleta';
             btnDeleta.addEventListener('click', function atualizar(){
+              closeModalNew();
+              closeModalUpdate();
               alert('OI do click DELETE' + ' _ ' + element.id);
             });
 
