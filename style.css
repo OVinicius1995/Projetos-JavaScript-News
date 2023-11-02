@@ -328,7 +328,7 @@ textarea:focus, input:focus {
 
 /* Iniciando responsividade do projeto */
 
-@media (min-width:1201px) and (max-width:1400px){
+@media only screen and (min-width:1201px) and (max-width:1400px){
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -417,7 +417,7 @@ textarea:focus, input:focus {
     /* Responsividade dos modais [Fim] */
 }
 
-@media (min-width:1001px) and (max-width:1200px){
+@media only screen and (min-width:1001px) and (max-width:1200px){
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -507,7 +507,7 @@ textarea:focus, input:focus {
 }
 
 
-@media (min-width:901px) and (max-width:1000px){
+@media only screen and (min-width:901px) and (max-width:1000px){
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -596,7 +596,7 @@ textarea:focus, input:focus {
     /* Responsividade dos modais [Fim] */
 }
 
-@media (min-width:841px) and (max-width:900px) and (min-height:380px) and (max-height:420px){
+@media only screen and (min-width:841px) and (max-width:900px) and (min-height:380px) and (max-height:420px){
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -693,7 +693,7 @@ textarea:focus, input:focus {
     /* Responsividade dos modais [Fim] */
 }
 
-@media (min-width:820px) and (max-width:840px) {
+@media only screen and (min-width:820px) and (max-width:840px) {
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -772,8 +772,7 @@ textarea:focus, input:focus {
       justify-content: space-between;
       gap:5px;
       padding: 5px;
-     // background-color: #808080;
-      background-color: gray;
+      background-color: #808080;
       opacity:0.9;
       border-radius: 10px;
       border:1px gray inset;
@@ -786,7 +785,7 @@ textarea:focus, input:focus {
     /* Responsividade dos modais [Fim] */
 }
 
-@media (min-width:761px) and (max-width:819px) {
+@media only screen and (min-width:761px) and (max-width:819px) {
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -846,7 +845,7 @@ textarea:focus, input:focus {
 
     .modalContent{ 
       width: 40vw;
-      top: -40vh;
+      top: 30vh;
       bottom: 15%;
       margin-left:10%;
       z-index: 999;
@@ -865,7 +864,8 @@ textarea:focus, input:focus {
       justify-content: space-between;
       gap:5px;
       padding: 5px;
-      background-color: #808080;
+     // background-color: #808080;
+      background-color: blue;
       opacity:0.9;
       border-radius: 10px;
       border:1px gray inset;
@@ -878,7 +878,7 @@ textarea:focus, input:focus {
     /* Responsividade dos modais [Fim] */
 }
 
-@media (min-width:701px) and (max-width:760px) {
+@media only screen and (min-width:701px) and (max-width:760px) {
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -970,7 +970,7 @@ textarea:focus, input:focus {
     /* Responsividade dos modais [Fim] */
 }
 
-@media (min-width:631px) and (max-width:700px) and (min-height:270px) and (max-height:1000px){
+@media only screen and (min-width:631px) and (max-width:700px) and (min-height:270px) and (max-height:1000px){
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -1046,10 +1046,9 @@ textarea:focus, input:focus {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap:1px;
-          gap:10px;
-    padding: 10px;
-      background-color: orange;
+      gap:1px;      
+      padding: 10px;
+      background-color: #808080;
       opacity:0.9;
       border-radius: 10px;
       border:1px gray inset;
@@ -1077,7 +1076,7 @@ textarea:focus, input:focus {
 
 }
 
-@media (min-width:541px) and (max-width:630px) {
+@media only screen and (min-width:541px) and (max-width:630px) {
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -1181,7 +1180,7 @@ textarea:focus, input:focus {
 
 }
 
-@media (min-width:401px) and (max-width:541px) and (min-height:400px) and (max-height:1000px){
+@media only screen and (min-width:401px) and (max-width:541px) and (min-height:400px) and (max-height:1000px){
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -1255,7 +1254,8 @@ textarea:focus, input:focus {
       justify-content: space-between;
       gap:10px;
       padding: 10px;
-      background-color: #808080;
+      //background-color: #808080;
+      background-color: pink;
       opacity:0.9;
       border-radius: 10px;
       border:1px gray inset;
@@ -1269,7 +1269,7 @@ textarea:focus, input:focus {
     /* Responsividade dos modais [Fim] */
 }
 
-@media (min-width:280px) and (max-width:400px) and (min-height:280px) and (max-height:1000px){
+@media only screen and (min-width:280px) and (max-width:400px) and (min-height:280px) and (max-height:1000px){
   
   .imgHeader{
     margin-top:20px;
@@ -1370,7 +1370,7 @@ textarea:focus, input:focus {
     justify-content: space-between;
     gap:10px;
     padding: 10px;
-    background-color: green;
+    background-color: #808080;
     opacity:0.9;
     border-radius: 10px;
     border:1px gray inset;
@@ -1396,7 +1396,7 @@ textarea:focus, input:focus {
     /* Finalizando responsividade do projeto */
 }
 
-@media (min-width:901px) and (max-width:1000px) and (min-height:1001px) and (max-height:1400px){
+@media only screen and (min-width:901px) and (max-width:1000px) and (min-height:1001px) and (max-height:1400px){
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -1472,7 +1472,7 @@ textarea:focus, input:focus {
       justify-content: space-between;
       gap:5px;
       padding: 5px;
-      background-color: yellow;
+      background-color: #808080;
       opacity:0.9;
       border-radius: 10px;
       border:1px gray inset;
@@ -1485,7 +1485,7 @@ textarea:focus, input:focus {
     /* Responsividade dos modais [Fim] */
 }
 
-@media (min-width:701px) and (max-width:910px) and (min-height:1114px){
+@media only screen and (min-width:701px) and (max-width:910px) and (min-height:1114px){
   .imgHeader{
     margin-top:20px;
     width: 80%;
@@ -1561,7 +1561,7 @@ textarea:focus, input:focus {
       justify-content: space-between;
       gap:5px;
       padding: 5px;
-      background-color: gray;
+      background-color: #808080;
       opacity:0.9;
       border-radius: 10px;
       border:1px gray inset;
