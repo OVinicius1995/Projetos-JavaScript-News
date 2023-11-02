@@ -864,8 +864,7 @@ textarea:focus, input:focus {
       justify-content: space-between;
       gap:5px;
       padding: 5px;
-     // background-color: #808080;
-      background-color: blue;
+      background-color: #808080;
       opacity:0.9;
       border-radius: 10px;
       border:1px gray inset;
@@ -1183,8 +1182,8 @@ textarea:focus, input:focus {
 @media only screen and (min-width:401px) and (max-width:541px) and (min-height:400px) and (max-height:1000px){
   .imgHeader{
     margin-top:20px;
-    width: 80%;
-    height: 82px;
+    width: 76%;
+    height: 76px;
   }
 
   .header-content{
@@ -1192,7 +1191,7 @@ textarea:focus, input:focus {
     align-items:center;
     justify-content:space-around;
     font-family: 'EB Garamond', serif;
-    font-size:18px;
+    font-size:16px;
     height:90px;
     background-color:#1c6e94;  
     margin:4px;
@@ -1200,7 +1199,7 @@ textarea:focus, input:focus {
   }
 
   #dataHora{
-    font-size:14px;
+    font-size:12px;
   }
   .item1{
     border-top: 1px inset #4141e1;
@@ -1211,8 +1210,8 @@ textarea:focus, input:focus {
     display:flex;
     align-items:center;
     justify-content:space-around;
-    height:80px;
-    width:99%;
+    height:76px;
+    width:98%;
     
   }
   .btn{
@@ -1254,8 +1253,7 @@ textarea:focus, input:focus {
       justify-content: space-between;
       gap:10px;
       padding: 10px;
-      //background-color: #808080;
-      background-color: pink;
+      background-color: #808080;
       opacity:0.9;
       border-radius: 10px;
       border:1px gray inset;
