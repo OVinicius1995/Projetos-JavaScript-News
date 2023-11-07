@@ -53,12 +53,13 @@
 }
 
 .itens{
-  border:1px solid gray;
+  border:none;
   height:99%;
-  width:99%;
+  max-width:99%;
   display:flex;
   align-items:flex-start;
   justify-content:center;
+  word-break: break-all;
 }
 
 .item1{
@@ -873,6 +874,8 @@ textarea:focus, input:focus {
       height:80px;
       color:white;  
     }  
+
+    
     
     /* Responsividade dos modais [Fim] */
 }
