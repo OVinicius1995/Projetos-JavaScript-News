@@ -3,10 +3,13 @@
 
 <head>
   <meta charset="UTF-8">
- <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="./style.css">
   <link rel="shortcut icon" href="./Assets/M.ico" type="image/x-icon">
+
+  </script>
+
   <title>Lista de indicações</title>
 </head>
 <!-- Script que fixa os botões no topo da pagina ao rolar a página.[Inicio] -->
@@ -16,7 +19,7 @@
     var nVScroll = document.documentElement.scrollTop || document.body.scrollTop; if (nVScroll > 100) {
       document.getElementById("item1").classList.add('menuFixo');
     } else { document.getElementById("item1").classList.remove('menuFixo'); }
-    
+
   }
 
   /* Script que fixa os botões no topo da pagina ao rolar a página.[Fim] */
@@ -54,44 +57,47 @@
 
 
       <div class="itens item2">
-        <button class="addBtn" onclick="openModalNew(),closeModalUpdate()"><img src="./Assets/btnAdd32.png" alt="" srcset=""></button>
+        <button class="addBtn" onclick="openModalNew(),closeModalUpdate()"><img src="./Assets/btnAdd32.png" alt=""
+            srcset=""></button>
         <!-- Modal para adicionar as noticias na tela [Inicio] -->
         <div class="modalContent" id="showModal">
           <div class="modalAddNews">
-           
-          <h1>Inserir noticias</h1>
+
+            <h1>Inserir noticias</h1>
 
             <input id="data" type="date" name="data" placeholder="Informe a data">
 
             <input id="titulo" type="text" placeholder="Informe o título">
 
             <textarea id="conteudo" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
-          
+
             <div class="adicionar">
-            <button id="AddBtn" class="btn">Adicionar</button>
-          </div>
+              <button id="AddBtn" class="btn">Adicionar</button>
+            </div>
           </div>
         </div>
         <!-- Modal para corrigir as noticias na tela [Fim] -->
 
-                <!-- Modal para adicionar as noticias na tela [Inicio] -->
-                <div class="modalContent" id="showModalCorrigir">
-                  <div class="modalAddNews">
-                   
-                  <h1>Atualizar noticias</h1>
-        
-                    <input id="data" type="date" name="data" placeholder="Informe a data">
-        
-                    <input id="titulo" type="text" placeholder="Informe o título">
-        
-                    <textarea id="conteudo" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
-                  
-                    <div class="adicionar">
-                    <button id="AddBtn" class="btn">Adicionar</button>
-                  </div>
-                  </div>
-                </div>
-                <!-- Modal para corrigir as noticias na tela [Fim] -->
+        <!-- Modal para corrigir as noticias na tela [Inicio] -->
+        <div class="modalContent" id="showModalCorrigir">
+          <div class="modalAddNews">
+
+            <h1>Atualizar noticias</h1>
+
+            <input id="dataUpd" type="date">
+
+            <input id="tituloUpd" type="text" placeholder="Informe o título">
+
+            <textarea id="conteudoUpd" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
+
+            
+            <div class="adicionar">
+              <button id="UpdateBtn" class="btn">Atualizar noticias</button>
+
+            </div>
+          </div>
+        </div>
+        <!-- Modal para corrigir as noticias na tela [Fim] -->
 
         <!-- Área do conteúdo da página -->
         <div id="contentPost" class="post-container"></div>
@@ -130,38 +136,81 @@
 
     // Realiza a conexão com o banco
     const app = initializeApp(firebaseConfig);
-    const db  = getDatabase();
+    const db = getDatabase();
 
     // Carrega as os compenentes nas variáveis
-    let data      = document.getElementById("data");
-    let titulo    = document.getElementById('titulo');
-    let conteudo  = document.getElementById('conteudo');
-    let btn       = document.getElementById('AddBtn');
-    let btnRet    = document.getElementById('Retorna');
-    let id        = crypto.randomUUID();
+    let data        = document.getElementById("data");
+    let titulo      = document.getElementById('titulo');
+    let conteudo    = document.getElementById('conteudo');
+    let tituloUpd   = document.getElementById('tituloUpd');
+    let conteudoUpd = document.getElementById('conteudoUpd');
+    let dataUpd = document.getElementById('dataUpd');
+    let btn         = document.getElementById('AddBtn');
+    let btnUpd      = document.getElementById('UpdateBtn');
+    let id = crypto.randomUUID();
+    var idNoticiasUpd;
+    var idNoticiasDel;
+    var lastId = 0;
 
 
     //Função que grava os dados no banco.
     function addData() {
+      let incrementedId =  parseInt(lastId) + parseInt(1);
+  
+      if(data.value === "" || titulo.value === "" || conteudo.value === ""){
+      alert("Alguns dados não foram preenchidos, todos eles são obrigatórios verifique!");
+     } else {
 
       let dataFormatada = (new Date(data.value)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split('-').reverse().join('/');
-      console.log(dataFormatada+ ' ' + titulo.value + ' ' + conteudo.value)
-    /*  set(ref(db, 'Postagens/' + id), {
-        id: id,
+
+      set(ref(db, 'Postagens/' + incrementedId), {
+        id: incrementedId,
         data: dataFormatada,
         titulo: titulo.value,
         conteudo: conteudo.value
 
       }).then(() => {
-        alert("Gravado com sucesso!");
+        alert("Noticia gravada com sucesso!");
         window.location.reload(true);
       }).catch(() => {
         alert("Não gravou! Verifique.");
       })
-      */
+     }
+    }
+    //Função que atualiza os dados no banco.
+    function atualizarDados() {
+      
+      if (tituloUpd.value === "" || conteudoUpd.value === ""){
+        alert("Vazio espertinho(a)!");
+      }
+     else{
+      update(ref(db, 'Postagens/' + idNoticiasUpd), {
+       
+        titulo: tituloUpd.value,
+        conteudo: conteudoUpd.value
+
+      }).then(() => {
+        alert("Noticia atualizada com sucesso!");
+        window.location.reload(true);
+      }).catch(() => {
+        alert("Não gravou! Verifique.");
+      })
+      }
+    }
+    //Função que deleta os dados no banco.
+    function deletarDados() {
+
+      remove(ref(db, 'Postagens/' + idNoticiasDel))
+      .then(() => {
+       alert("Noticia deletada com sucesso!");
+       window.location.reload(true);
+     }).catch(() => {
+       alert("Não deletou! Verifique.");
+     })
+
     }
 
-    //Função que obtem os dados do banco.
+    //Função que obtem os dados do banco e carrega na tela.
     document.addEventListener('DOMContentLoaded', function RetData() {
 
       //Constantes que recebem o banco de dados.
@@ -173,21 +222,25 @@
         .then((snapshot) => {
 
           //Crio um array que receberá os valores recebidos do banco.
-            var noticias = [];
-            var ids = [];
-            
+          var noticias = [];
+          var ids = [];
+
           //Percorro o objeto recebido.
-            snapshot.forEach(childSnapshot => {
-                //Adiciono os dados no array.  
-              noticias.push(childSnapshot.val());
-              ids.push();
+          snapshot.forEach(childSnapshot => {
+            //Adiciono os dados no array.  
+            noticias.push(childSnapshot.val());
+            ids.push(childSnapshot.val());
           });
+          
+
+          noticias.forEach(recebeId => {
+            lastId = recebeId.id;
+          })
 
           //Nessa parte eu inverto o array como se fosse um order by desc.
-            //noticias.reverse();
-            noticias.forEach(element => {         
-             
-
+          noticias.reverse();
+          noticias.forEach(element => {
+            
             /* Tratando data [Inicio]. */
             let dataExt = element.data;
             //Extraindo o dia da data  
@@ -198,40 +251,40 @@
 
             //Percorro pelo mês e o apresento pelo nome do mês.
             switch (mes) {
-              case mes     = "01":
+              case mes = "01":
                 mesExtenso = 'Janeiro';
                 break;
-              case mes     = "02":
+              case mes = "02":
                 mesExtenso = 'Fevereiro';
                 break;
-              case mes     = "03":
+              case mes = "03":
                 mesExtenso = 'Março';
                 break;
-              case mes     = "04":
+              case mes = "04":
                 mesExtenso = 'Abril';
                 break;
-              case mes     = "05":
+              case mes = "05":
                 mesExtenso = 'Maio';
                 break;
-              case mes     = "06":
+              case mes = "06":
                 mesExtenso = 'Junho';
                 break;
-              case mes     = "07":
+              case mes = "07":
                 mesExtenso = 'Julho';
                 break;
-              case mes     = "08":
+              case mes = "08":
                 mesExtenso = 'Agosto';
                 break;
-              case mes     = "09":
+              case mes = "09":
                 mesExtenso = 'Setembro';
                 break;
-              case mes     = "10":
+              case mes = "10":
                 mesExtenso = 'Outubro';
                 break;
-              case mes     = "11":
+              case mes = "11":
                 mesExtenso = 'Novembro';
                 break;
-              case mes     = "12":
+              case mes = "12":
                 mesExtenso = 'Dezembro';
                 break;
             }
@@ -260,42 +313,59 @@
             contentPost.className = 'post-content';
 
             var conteudoSaltaLinha = document.createElement('br');
-            var conteudoParagrafo  = document.createElement('p');
-            var conteudoUnderLine  = document.createElement('hr');
-            var btnAtualiza        = document.createElement('btn');
-            var btnDeleta          = document.createElement('btn');
-           
+            var conteudoParagrafo = document.createElement('p');
+            var conteudoUnderLine = document.createElement('hr');
+            var btnAtualiza = document.createElement('btn');
+            var btnDeleta = document.createElement('btn');
+
             //DIV de ações [Inicio]
             var contentAcoes = document.createElement('div');
             contentAcoes.className = 'Acoes';
-            btnAtualiza.className  = 'btnAcoesAtualiza';
+            btnAtualiza.className = 'btnAcoesAtualiza';
 
-            
-            btnAtualiza.addEventListener('click', function atualizar(){
+
+            btnAtualiza.addEventListener('click', function atualizar() {
               closeModalNew();
               openModalUpdate();
-              alert(element.id);
-              get(child(dbRef, 'Postagens/' + element.id)).then((snapshot) => {
-                    if (snapshot.exists()) {
-                     // nome.value = snapshot.val().nome.data;
-                      console.log(snapshot.val().titulo);
-                      console.log(snapshot.val().data);
-                      console.log(snapshot.val().conteudo);
 
-                    } else {
-                      alert("Employee does not exists");
-                    }
-                  }).catch((error) => {
-                    alert("Sem sucesso!");
-                    console.log(error);
-                  })              
+              let dataExtTeste = element.data;
+            //Extraindo o dia da data  
+            let dia = dataExtTeste.slice(0, 2);
+            let mes = dataExtTeste.substr(3, 2);
+            let ano = dataExtTeste.substr(6, 4);
+            
+            console.log(dia);
+            console.log(mes);
+            console.log(ano);
+            
+              idNoticiasUpd = element.id;
+
+              get(child(dbRef, 'Postagens/' + element.id)).then((snapshot) => {
+                if (snapshot.exists()) {
+                //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
+
+                    document.getElementById('dataUpd').value     = ano + "-" + mes + "-" + dia //snapshot.val().data;
+                    document.getElementById('tituloUpd').value   = snapshot.val().titulo;
+                    document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
+
+
+                } else {
+                  alert("Employee does not exists");
+                }
+              }).catch((error) => {
+                alert("Sem sucesso!");
+                console.log(error);
+              })
             });
 
-            btnDeleta.className  = 'btnAcoesDeleta';
-            btnDeleta.addEventListener('click', function atualizar(){
+            btnDeleta.className = 'btnAcoesDeleta';
+            btnDeleta.addEventListener('click', function atualizar() {
               closeModalNew();
               closeModalUpdate();
-              alert('OI do click DELETE' + ' _ ' + element.id);
+
+              idNoticiasDel = element.id;
+
+              deletarDados();
             });
 
             //DIV de ações [Inicio]
@@ -318,11 +388,13 @@
             /* Montando no DOM a estrutura criada [Fim] */
 
           });
-       });
-    },false);
+        });
+    }, false);
 
     btn.addEventListener('click', addData);
-   // btnRet.addEventListener('click', RetData());
+    btnUpd.addEventListener('click', atualizarDados);
+
+    // btnRet.addEventListener('click', RetData());
 
   </script>
 </body>
