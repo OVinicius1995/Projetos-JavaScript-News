@@ -31,18 +31,68 @@
       <div class="buttons"><button class="btn btnAssembleias">Assembleias</button></div>
       <div class="buttons"><button class="btn btnPaterns">Paterns</button></div>
       </div>
-      
+
       <div class="itens item2">Itens 2</div>
-      <div class="itens item3">Itens 3</div>
-      <div class="itens item4">Itens 4</div>
+      <div class="itens item3">
+        
+        <div class="search-content">
+
+          <input class="inptSearch" type="search" name="search" id="search" placeholder="Pesquisar...">
+          <a class="search-btn">
+            <img class="loupe-blue" src="./Assets/loupe-blue.svg" alt="" width="25px" height="25px">
+            <img class="loupe-white" src="./Assets/loupe-white.svg" alt="" width="25px" height="25px">
+          </a>
+
+        </div>
+
+      </div>
+      <div class="itens item4">
+        <button class="addBtn" onclick="openModalNew(),closeModalUpdate()"><img src="./Assets/btnAdd32.png" alt=""
+          srcset=""></button>
+
+                  <!-- Modal para adicionar as noticias na tela [Inicio] -->
+        <div class="modalContent" id="showModal">
+          <div class="modalAddNews">
+
+            <h1>Inserir noticias</h1>
+
+            <input id="data" type="date" name="data" placeholder="Informe a data">
+
+            <input id="titulo" type="text" placeholder="Informe o título">
+
+            <textarea id="conteudo" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
+
+            <div class="adicionar">
+              <button id="AddBtn" class="btn">Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <!-- Modal para adicionar as noticias na tela [Fim] -->
+
+        <!-- Modal para corrigir as noticias na tela [Inicio] -->
+        <div class="modalContent" id="showModalCorrigir">
+          <div class="modalAddNews">
+
+            <h1>Atualizar noticias</h1>
+
+            <input id="dataUpd" type="date">
+
+            <input id="tituloUpd" type="text" placeholder="Informe o título">
+
+            <textarea id="conteudoUpd" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
+
+            
+            <div class="adicionar">
+              <button id="UpdateBtn" class="btn">Atualizar noticias</button>
+
+            </div>
+          </div>
+        </div>
+        <!-- Modal para corrigir as noticias na tela [Fim] -->
+        
+      </div>
       <div class="itens item5">Itens 5</div>
-      <div class="itens item6">Itens 6</div>
-      <div class="itens item7">Itens 7</div>
-      <div class="itens item8">Itens 8</div>
-      <div class="itens item9">Itens 9</div>
-      <div class="itens item10">Itens 10</div>
-      <div class="itens item11">Itens 11</div>
-      <div class="itens item12">Itens 12</div>
+
       
     </main>
 

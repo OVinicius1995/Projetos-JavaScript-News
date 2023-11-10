@@ -76,7 +76,7 @@
             </div>
           </div>
         </div>
-        <!-- Modal para corrigir as noticias na tela [Fim] -->
+        <!-- Modal para adicionar as noticias na tela [Fim] -->
 
         <!-- Modal para corrigir as noticias na tela [Inicio] -->
         <div class="modalContent" id="showModalCorrigir">
@@ -147,7 +147,7 @@
     let dataUpd = document.getElementById('dataUpd');
     let btn         = document.getElementById('AddBtn');
     let btnUpd      = document.getElementById('UpdateBtn');
-    let id = crypto.randomUUID();
+   // let id = crypto.randomUUID();
     var idNoticiasUpd;
     var idNoticiasDel;
     var lastId = 0;
@@ -243,56 +243,29 @@
             
             /* Tratando data [Inicio]. */
             let dataExt = element.data;
-            //Extraindo o dia da data  
+            //Extraindo dia mês e ano da data  
             let dia = dataExt.slice(0, 2);
             let mes = dataExt.substr(3, 2);
             let ano = dataExt.substr(6, 4);
             let mesExtenso;
 
-            //Percorro pelo mês e o apresento pelo nome do mês.
-            switch (mes) {
-              case mes = "01":
-                mesExtenso = 'Janeiro';
-                break;
-              case mes = "02":
-                mesExtenso = 'Fevereiro';
-                break;
-              case mes = "03":
-                mesExtenso = 'Março';
-                break;
-              case mes = "04":
-                mesExtenso = 'Abril';
-                break;
-              case mes = "05":
-                mesExtenso = 'Maio';
-                break;
-              case mes = "06":
-                mesExtenso = 'Junho';
-                break;
-              case mes = "07":
-                mesExtenso = 'Julho';
-                break;
-              case mes = "08":
-                mesExtenso = 'Agosto';
-                break;
-              case mes = "09":
-                mesExtenso = 'Setembro';
-                break;
-              case mes = "10":
-                mesExtenso = 'Outubro';
-                break;
-              case mes = "11":
-                mesExtenso = 'Novembro';
-                break;
-              case mes = "12":
-                mesExtenso = 'Dezembro';
-                break;
-            }
-
-            //Coloco a data tratada em uma variável
+            //Passando os meses para extenso [Inicio]
+            if(mes === "01"){mesExtenso = "Jan"}
+            if(mes === "02"){mesExtenso = "Fev"}
+            if(mes === "03"){mesExtenso = "Março"}
+            if(mes === "04"){mesExtenso = "Abril"}
+            if(mes === "05"){mesExtenso = "Maio"}
+            if(mes === "06"){mesExtenso = "Junho"}
+            if(mes === "07"){mesExtenso = "Julho"}
+            if(mes === "08"){mesExtenso = "Agosto"}
+            if(mes === "09"){mesExtenso = "Setembro"}
+            if(mes === "10"){mesExtenso = "Outubro"}
+            if(mes === "11"){mesExtenso = "Novembro"}
+            if(mes === "12"){mesExtenso = "Dezembro"}
+                       
             let dataTratada = dia + ' ' + 'de' + ' ' + mesExtenso + ' ' + 'de' + ' ' + ano;
-alert(dataTratada + "," + mes);
-            /* Fim tratando data */
+
+            //Trata os meses [Fim]
 
             /* Criando arquitetura de exibição dos dados. [Inicio]*/
             var divPostContainer = document.createElement('div');
@@ -323,7 +296,7 @@ alert(dataTratada + "," + mes);
             contentAcoes.className = 'Acoes';
             btnAtualiza.className = 'btnAcoesAtualiza';
 
-
+            //Associa o evento de click ao botão de atualização
             btnAtualiza.addEventListener('click', function atualizar() {
               closeModalNew();
               openModalUpdate();
@@ -358,6 +331,7 @@ alert(dataTratada + "," + mes);
               })
             });
 
+            //Associa o evento de click ao botão de deleção
             btnDeleta.className = 'btnAcoesDeleta';
             btnDeleta.addEventListener('click', function atualizar() {
               closeModalNew();
@@ -368,7 +342,7 @@ alert(dataTratada + "," + mes);
               deletarDados();
             });
 
-            //DIV de ações [Inicio]
+            //DIV de ações [Fim]
 
             conteudoParagrafo.innerHTML = element.conteudo;
             /* Criando arquitetura de exibição dos dados. [Fim]*/
