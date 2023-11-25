@@ -16,7 +16,13 @@
   function scroll() {
     var nVScroll = document.documentElement.scrollTop || document.body.scrollTop; if (nVScroll > 100) {
       document.getElementById("item1").classList.add('menuFixo');
-    } else { document.getElementById("item1").classList.remove('menuFixo'); }
+      document.getElementById("searchBar").classList.add('searchBarfix')
+    } else {
+      
+      document.getElementById("item1").classList.remove('menuFixo');
+      document.getElementById("searchBar").classList.remove('searchBarfix');
+    
+    }
 
   }
 
@@ -99,6 +105,12 @@
 
             <textarea id="conteudoUpd" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
 
+            <select name="categoria" id="categoriasUpd">
+              <option value="Costureira">Costureira</option>
+              <option value="Pedreiro">Pedreiro</option>
+              <option value="Pintor">Pintor</option>
+              <option value="Marceneiro">Marceneiro</option>
+            </select>
             
             <div class="adicionar">
               <button id="UpdateBtn" class="btn">Atualizar noticias</button>
@@ -114,7 +126,7 @@
 
       </div>
 
-      <div class="itens item3">
+      <div class="itens item3" id="searchBar">
         <div class="search-content">
 
           <input class="inptSearch" type="search" name="search" id="search" placeholder="Pesquisar...">
@@ -362,10 +374,6 @@
             let mes = dataExtTeste.substr(3, 2);
             let ano = dataExtTeste.substr(6, 4);
             
-            console.log(dia);
-            console.log(mes);
-            console.log(ano);
-            
               idNoticiasUpd = element.id;
 
               get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
@@ -373,8 +381,9 @@
                 //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
 
                     document.getElementById('dataUpd').value     = ano + "-" + mes + "-" + dia //snapshot.val().data;
-                    document.getElementById('tituloUpd').value   = snapshot.val().titulo;
+                    document.getElementById('tituloUpd').value   = snapshot.val().nomeIndica;
                     document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
+                    document.getElementById('categoriasUpd').value = snapshot.val().categoria;
 
 
                 } else {

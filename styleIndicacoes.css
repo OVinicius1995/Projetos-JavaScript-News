@@ -109,6 +109,12 @@
   z-index: 99;
 }
 
+.searchBarfix{
+  position:fixed;
+  top:85px;
+  z-index: 99;
+}
+
 .btn{
   border:1px solid transparent;
   border-radius:5px;
@@ -314,7 +320,14 @@ textarea:focus, input:focus {
 }
 
 .item3{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items:flex-end;
+  width:100vh;
+  height:40px;
   grid-area: item3;
+  background-color:black;  
 }
 /*Inicio estilização barra de pesquisa*/
 
