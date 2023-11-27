@@ -37,10 +37,14 @@
 
     <header class="header-content">
 
-      <div><img class="imgHeader" src="./Assets/LogoMeet-New.png" alt="" srcset=""></div>
       <div>
+        <img class="imgHeader" src="./Assets/LogoMeet-New.png" alt="" srcset="">
+      </div>
+      
+      <div class="title">
         <h1>Meet <span>News</span>🗞️</h1>
       </div>
+      
       <div><span id="dataHora"></span></div>
 
     </header>
@@ -81,7 +85,7 @@
             <textarea id="conteudo" name="story" rows="20" cols="40"
               placeholder="Informe uma breve descrição, os contatos, etc..."></textarea>
 
-            <select name="categoria" id="categorias">
+            <select name="categoria" id="categorias" class="categoriasCmb">
 
               <option value="Escolha" selected>Escolha um opção:</option>
 
@@ -115,9 +119,10 @@
 
             <textarea id="conteudoUpd" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
 
-            <select name="categoria" id="categoriasUpd">
+            <select name="categoria" id="categoriasUpd" class="categoriasCmb">
               <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
+              <option value="Diaristas">Diaristas</option>
               <option value="Festas">Festas</option>
               <option value="Pedreiro">Pedreiro</option>
               <option value="Pintor">Pintor</option>
