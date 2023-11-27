@@ -31,8 +31,10 @@
 
     <header class="header-content">
 
-      <div><img class="imgHeader" src="./Assets/LogoMeet-New.png" alt="" srcset=""></div>
-      <div>
+      <div><img class="imgHeader" src="./Assets/LogoMeet-New.png" alt="" srcset="">
+      </div>
+      
+      <div class="title">
         <h1>Meet <span>News</span>🗞️</h1>
       </div>
       <div><span id="dataHora"></span></div>
@@ -46,10 +48,10 @@
 
         <div class="buttons"><img class="imgItem1" src="./Assets/LogoMeet-New.png" width="40" height="40" alt=""
             srcset=""></div>
-        <div class="buttons"><button class="btn btnPortaria">Portaria</button></div>
+       <!-- <div class="buttons"><button class="btn btnPortaria">Portaria</button></div> -->
         <div class="buttons"><button class="btn btnIndicacoes"><a href="./indicacoes.html"> Indicações </a></button></div>
-        <div class="buttons"><button class="btn btnAssembleias">Assembleias</button></div>
-        <div class="buttons"><button class="btn btnPaterns">Paterns</button></div>
+        <div class="buttons"><button class="btn btnAssembleias">Assembleias</button></div> 
+        <div class="buttons"><button class="btn btnPaterns">Manuais</button></div> 
 
       </div>
 
@@ -137,15 +139,16 @@
     const db = getDatabase();
 
     // Carrega as os compenentes nas variáveis
-    let data        = document.getElementById("data");
+    let data        = document.getElementById('data');
     let titulo      = document.getElementById('titulo');
     let conteudo    = document.getElementById('conteudo');
     let tituloUpd   = document.getElementById('tituloUpd');
     let conteudoUpd = document.getElementById('conteudoUpd');
-    let dataUpd = document.getElementById('dataUpd');
+    let dataUpd     = document.getElementById('dataUpd');
     let btn         = document.getElementById('AddBtn');
     let btnUpd      = document.getElementById('UpdateBtn');
-   // let id = crypto.randomUUID();
+   
+    //Declaração de variáveis globais.
     var idNoticiasUpd;
     var idNoticiasDel;
     var lastId = 0;
@@ -153,14 +156,18 @@
 
     //Função que grava os dados no banco.
     function addData() {
+      //Busca o ultimo ID e adiciona 1 nele.
       let incrementedId =  parseInt(lastId) + parseInt(1);
   
+      //Valida se os campos obrigatórios estão em branco.
       if(data.value === "" || titulo.value === "" || conteudo.value === ""){
       alert("Alguns dados não foram preenchidos, todos eles são obrigatórios verifique!");
      } else {
 
+      //Trata a data
       let dataFormatada = (new Date(data.value)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split('-').reverse().join('/');
 
+      //Insere no banco Postagens
       set(ref(db, 'Postagens/' + incrementedId), {
         id: incrementedId,
         data: dataFormatada,
@@ -231,13 +238,14 @@
             ids.push(childSnapshot.val());
           });
           
-
+          //Recebo o último ID
           noticias.forEach(recebeId => {
             lastId = recebeId.id;
           })
 
           //Nessa parte eu inverto o array como se fosse um order by desc.
           noticias.reverse();
+          //Percorro o array com os dados do banco para montar em tela.
           noticias.forEach(element => {
             
             /* Tratando data [Inicio]. */
@@ -267,32 +275,45 @@
             //Trata os meses [Fim]
 
             /* Criando arquitetura de exibição dos dados. [Inicio]*/
+
+            //Crio a div post-container
             var divPostContainer = document.createElement('div');
+            //Atribuo a classe dela
             divPostContainer.className = 'post-container';
 
+            //Crio a div post
             var divPost = document.createElement('div');
+            //Atribuo a classe
             divPost.className = 'post';
 
+            //Crio um paragrafo
             var dateP = document.createElement('p');
+            //Atribuo a classe
             dateP.className = 'date';
+            //Carrego os dados
             dateP.innerHTML = dataTratada;
 
+            //Crio uma tag <br> para pular linha
             var postBr = document.createElement('br');
+            //Crio uma tag <H1> para receber o título.
             var tituloPost = document.createElement('h1');
+            //Carrego do banco os títulos
             tituloPost.innerHTML = element.titulo;
 
+            //Crio a div 
             var contentPost = document.createElement('div');
-            contentPost.className = 'post-content';
+            //Atribuo a classe dela post-content
+            contentPost.className = 'post-content';          
+            
 
-            var conteudoSaltaLinha = document.createElement('br');
-            var conteudoParagrafo = document.createElement('p');
-            var conteudoUnderLine = document.createElement('hr');
-            var btnAtualiza = document.createElement('btn');
-            var btnDeleta = document.createElement('btn');
-
-            //DIV de ações [Inicio]
+            //DIV de ações atualizar/excluir [Inicio]            
+            //Crio a div.
             var contentAcoes = document.createElement('div');
+            //Atribuo a classe dela.
             contentAcoes.className = 'Acoes';
+            //Crio o botão de atualizar.
+            var btnAtualiza = document.createElement('btn');
+            //Associo a classe dele
             btnAtualiza.className = 'btnAcoesAtualiza';
 
             //Associa o evento de click ao botão de atualização
@@ -326,33 +347,53 @@
               })
             });
 
-            //Associa o evento de click ao botão de deleção
+            //Crio o botão de deletar.
+            var btnDeleta = document.createElement('btn');
+            //Associa a classe do botão deletar
             btnDeleta.className = 'btnAcoesDeleta';
+            //Associa o evento de click ao botão de deleção
             btnDeleta.addEventListener('click', function atualizar() {
+
+              //Fecho o modal de inserção de dados.
               closeModalNew();
+              //Fecho o modal de atualização de dados.
               closeModalUpdate();
 
               idNoticiasDel = element.id;
-
+              //Chamo a função para deleção dos dados.
               deletarDados();
             });
 
-            //DIV de ações [Fim]
+            //DIV de ações atualizar/excluir [Fim]
 
+            //Crio mais uma tag <br>
+            var conteudoSaltaLinha = document.createElement('br');
+            //Crio uma tag <p>
+            var conteudoParagrafo = document.createElement('p');
+            //Crio uma tag <hr> para separar os conteúdos.
+            var conteudoUnderLine = document.createElement('hr');
+
+            //Carrego do banco os valores do conteúdo
             conteudoParagrafo.innerHTML = element.conteudo;
             /* Criando arquitetura de exibição dos dados. [Fim]*/
 
             /* Montando no DOM a estrutura criada [Inicio] */
+            //Pego a div pai pelo ID e atribuo a ela a divPost
             document.getElementById('contentPost').appendChild(divPost);
+            //Atribuo os filhos(itens pertecentes) da divPost.
             divPost.appendChild(dateP);
             divPost.appendChild(postBr);
             divPost.appendChild(contentAcoes);
-            contentAcoes.appendChild(btnAtualiza);
-            contentAcoes.appendChild(btnDeleta);
             divPost.appendChild(tituloPost);
             divPost.appendChild(contentPost);
+            //Após criada a div contentAcoes atribuo os filhos dela, botões de atualizar e deletar.
+            contentAcoes.appendChild(btnAtualiza);
+            contentAcoes.appendChild(btnDeleta);
+            //Adiciono um salto de linha entre o título e o conteúdo.
             contentPost.appendChild(conteudoSaltaLinha);
+            //Adiciono o conteúdo.
             contentPost.appendChild(conteudoParagrafo);
+            //Adiciono uma underline.
             contentPost.appendChild(conteudoUnderLine);
             /* Montando no DOM a estrutura criada [Fim] */
 
