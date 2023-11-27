@@ -80,7 +80,7 @@
 
             <input id="data" type="date" name="data" placeholder="Informe a data">
 
-            <input id="titulo" type="text" placeholder="Informe o nome da indicação">
+            <input id="nome" type="text" placeholder="Informe o nome da indicação">
 
             <textarea id="conteudo" name="story" rows="20" cols="40"
               placeholder="Informe uma breve descrição, os contatos, etc..."></textarea>
@@ -107,15 +107,15 @@
         </div>
         <!-- Modal para adicionar as noticias na tela [Fim] -->
 
-        <!-- Modal para corrigir as noticias na tela [Inicio] -->
+        <!-- Modal para corrigir as indicações [Inicio] -->
         <div class="modalContent" id="showModalCorrigir">
           <div class="modalAddNews">
 
-            <h1>Atualizar noticias</h1>
+            <h1>Atualizar indicações</h1>
 
             <input id="dataUpd" type="date">
 
-            <input id="tituloUpd" type="text" placeholder="Informe o título">
+            <input id="nomeUpd" type="text" placeholder="Informe o título">
 
             <textarea id="conteudoUpd" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
 
@@ -201,9 +201,9 @@
 
     // Carrega as os compenentes nas variáveis
     let data = document.getElementById("data");
-    let titulo = document.getElementById('titulo');
+    let nome = document.getElementById('nome');
     let conteudo = document.getElementById('conteudo');
-    let tituloUpd = document.getElementById('tituloUpd');
+    let nomeUpd = document.getElementById('nomeUpd');
     let conteudoUpd = document.getElementById('conteudoUpd');
     let dataUpd = document.getElementById('dataUpd');
     let btn = document.getElementById('AddBtn');
@@ -213,7 +213,7 @@
 
     // let id = crypto.randomUUID();
     var idNoticiasUpd;
-    var idNoticiasDel;
+    var idInidicacoesDel;
     var nomeAtual;
     var conteudoAtual;
     var categoriaAtual;
@@ -226,7 +226,7 @@
 
       let incrementedId = parseInt(lastId) + parseInt(1);
 
-      if (data.value === "" || titulo.value === "" || conteudo.value === "" || categorias.value === "Escolha") {
+      if (data.value === "" || nome.value === "" || conteudo.value === "" || categorias.value === "Escolha") {
         alert("Alguns dados não foram preenchidos, ou foram preenchido de forma errada, todos eles são obrigatórios verifique!");
       } else {
 
@@ -235,7 +235,7 @@
         set(ref(db, 'Indicacoes/' + incrementedId), {
           id: incrementedId,
           data: dataFormatada,
-          nomeIndica: titulo.value,
+          nomeIndica: nome.value,
           conteudo: conteudo.value,
           categoria: categorias.value
 
@@ -252,14 +252,14 @@
 
       let dataFormatada = (new Date(dataUpd.value)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split('-').reverse().join('/');
 
-      if (tituloUpd.value === "" || conteudoUpd.value === "") {
+      if (nomeUpd.value === "" || conteudoUpd.value === "") {
         alert("Vazio espertinho(a)!");
       }
       else {
         update(ref(db, 'Indicacoes/' + idNoticiasUpd), {
 
           data: dataFormatada,
-          nomeIndica: tituloUpd.value,
+          nomeIndica: nomeUpd.value,
           conteudo: conteudoUpd.value,
           categoria: categoriasUpd.value
 
@@ -269,7 +269,7 @@
             alert("Data atualizada com sucesso!");
           }
 
-          if (nomeAtual != tituloUpd.value) {
+          if (nomeAtual != nomeUpd.value) {
             alert("Nome atualizado com sucesso!");
           }
 
@@ -290,7 +290,7 @@
     //Função que deleta os dados no banco.
     function deletarDados() {
 
-      remove(ref(db, 'Indicacoes/' + idNoticiasDel))
+      remove(ref(db, 'Indicacoes/' + idInidicacoesDel))
         .then(() => {
           alert("Noticia deletada com sucesso!");
           window.location.reload(true);
@@ -425,7 +425,7 @@
                   if (snapshot.exists()) {
                     //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
                     document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
-                    document.getElementById('tituloUpd').value = snapshot.val().nomeIndica;
+                    document.getElementById('nomeUpd').value = snapshot.val().nomeIndica;
                     document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
                     document.getElementById('categoriasUpd').value = snapshot.val().categoria;
                     dataAtual = ano + "-" + mes + "-" + dia;
@@ -448,7 +448,7 @@
                 closeModalNew();
                 closeModalUpdate();
 
-                idNoticiasDel = element.id;
+                idInidicacoesDel = element.id;
 
                 deletarDados();
               });
@@ -594,7 +594,7 @@
                     if (snapshot.exists()) {
                       //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
                       document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
-                      document.getElementById('tituloUpd').value = snapshot.val().nomeIndica;
+                      document.getElementById('nomeUpd').value = snapshot.val().nomeIndica;
                       document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
                       document.getElementById('categoriasUpd').value = snapshot.val().categoria;
                       dataAtual = ano + "-" + mes + "-" + dia;
@@ -617,7 +617,7 @@
                   closeModalNew();
                   closeModalUpdate();
 
-                  idNoticiasDel = element.id;
+                  idIndicacoesDel = element.id;
 
                   deletarDados();
                 });
@@ -783,7 +783,7 @@
                 if (snapshot.exists()) {
                   //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
                   document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
-                  document.getElementById('tituloUpd').value = snapshot.val().nomeIndica;
+                  document.getElementById('nomeUpd').value = snapshot.val().nomeIndica;
                   document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
                   document.getElementById('categoriasUpd').value = snapshot.val().categoria;
                   dataAtual = ano + "-" + mes + "-" + dia;
@@ -806,7 +806,7 @@
               closeModalNew();
               closeModalUpdate();
 
-              idNoticiasDel = element.id;
+              idIndicacoesDel = element.id;
 
               deletarDados();
             });
