@@ -298,45 +298,6 @@ textarea:focus, input:focus {
     transform: translate3d(0, 0, 0);
   }
 }
-/* 
-  ------ Itens do display grid não usados. ----------
-
-.item3{
-  grid-area: item3;
-}
-.item4{
-  grid-area: item4;
-}
-.item5{
-  grid-area: item5;
-}
-.item6{
-  grid-area: item6;
-}
-.item7{
-  grid-area: item7;
-}
-.item8{
-  grid-area: item8;
-}
-.item9{
-  grid-area: item9;
-}
-
-.item10{
-  grid-area: item10;
-}
-.item11{
-  grid-area: item11;
-}
-.item12{
-  grid-area: item12;
-}
-.item13{
-  grid-area: item13;
-}
-
-*/
 
 .footer-content{
   font-family: 'EB Garamond', serif;
@@ -1210,11 +1171,12 @@ textarea:focus, input:focus {
 
 }
 
-@media only screen and (min-width:401px) and (max-width:541px) and (min-height:400px) and (max-height:1000px){
+/* Tamanho Iphone 11*/
+@media only screen and (min-width:401px) and (max-width:541px) and (min-height:100px) and (max-height:1000px){
   .imgHeader{
-    margin-top:20px;
-    width: 76%;
-    height: 76px;
+    margin-top:10px;
+    width: 46%;
+    height: 46px;
   }
 
   .post-container .post{
@@ -1265,13 +1227,17 @@ textarea:focus, input:focus {
     width:97%;
   }
 
-
+  .title{
+    width:180px;
+    margin-right:60px;
+    font-size:14px;
+  }
 
     /* Responsividade dos modais [Inicio] */
 
     .modalContent{ 
       width: 40vw;
-      top:-10vh;
+      top:10vh;
       bottom: 15%;
       margin-left:10%;
       z-index: 999;
