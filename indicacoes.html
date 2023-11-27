@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="/styleIndicacoes.css">
+  <link rel="stylesheet" href="./styleIndicacoes.css">
   <link rel="shortcut icon" href="./Assets/M.ico" type="image/x-icon">
 
   <title>Lista de indicações</title>
@@ -14,7 +14,7 @@
 <script type="text/javascript">
   window.onscroll = scroll;
   function scroll() {
-    var nVScroll = document.documentElement.scrollTop || document.body.scrollTop; if (nVScroll > 100) {
+    var nVScroll = document.documentElement.scrollTop || document.body.scrollTop; if (nVScroll > 70) {
       document.getElementById("item1").classList.add('menuFixo');
       document.getElementById("searchBar").classList.add('searchBarfix')
     } else {
@@ -52,7 +52,7 @@
 
         <div class="buttons"><img class="imgItem1" src="./Assets/LogoMeet-New.png" width="40" height="40" alt=""
             srcset=""></div>
-        <div class="buttons"><button class="btn btnPortaria">Portaria</button></div>
+        <div class="buttons"><button class="btn btnPortaria"><a href="./index.html">Noticias</a></button></div>
         <div class="buttons"><button class="btn btnIndicacoes"><a href="./indicacoes.html" target="_blank"> Indicações
             </a></button></div>
         <div class="buttons"><button class="btn btnAssembleias">Assembleias</button></div>
@@ -82,10 +82,18 @@
               placeholder="Informe uma breve descrição, os contatos, etc..."></textarea>
 
             <select name="categoria" id="categorias">
+
+              <option value="Escolha" selected>Escolha um opção:</option>
+
+              <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
-              <option value="Pedreiro" selected>Pedreiro</option>
+              <option value="Diaristas">Diaristas</option>
+              <option value="Festas">Festas</option>
+              <option value="Pedreiro">Pedreiro</option>
               <option value="Pintor">Pintor</option>
               <option value="Marceneiro">Marceneiro</option>
+              <option value="Manicure">Manicure</option>
+              <option value="Vidraceiro">Vidraceiro</option>
             </select>
 
             <div class="adicionar">
@@ -108,10 +116,14 @@
             <textarea id="conteudoUpd" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
 
             <select name="categoria" id="categoriasUpd">
+              <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
+              <option value="Festas">Festas</option>
               <option value="Pedreiro">Pedreiro</option>
               <option value="Pintor">Pintor</option>
               <option value="Marceneiro">Marceneiro</option>
+              <option value="Manicure">Manicure</option>
+              <option value="Vidraceiro">Vidraceiro</option>
             </select>
 
             <div class="adicionar">
@@ -131,13 +143,17 @@
       <div class="itens item3" id="searchBar">
         <div class="search-content">
 
-          <input class="inptSearch" type="search" name="search" id="search" placeholder="Pesquisar...">
+          <input class="inptSearch" type="search" name="search" id="search" placeholder="Pesquisar por categorias...">
 
           <a class="search-btn">
             <img class="loupe-blue" src="./Assets/loupe-blue.svg" alt="" width="15px" height="15px">
             <img id="searchBtn" class="loupe-white" src="./Assets/loupe-white.svg" alt="" width="15px" height="15px">
+
           </a>
 
+        </div>
+        <div>
+          <p id="limpar" class="limpar">Limpar pesquisa.</p>
         </div>
       </div>
 
@@ -188,6 +204,8 @@
     let btn = document.getElementById('AddBtn');
     let btnUpd = document.getElementById('UpdateBtn');
     let btnSeacrh = document.getElementById('searchBtn');
+    let btnLimpar = document.getElementById('limpar');
+
     // let id = crypto.randomUUID();
     var idNoticiasUpd;
     var idNoticiasDel;
@@ -203,8 +221,8 @@
 
       let incrementedId = parseInt(lastId) + parseInt(1);
 
-      if (data.value === "" || titulo.value === "" || conteudo.value === "") {
-        alert("Alguns dados não foram preenchidos, todos eles são obrigatórios verifique!");
+      if (data.value === "" || titulo.value === "" || conteudo.value === "" || categorias.value === "Escolha") {
+        alert("Alguns dados não foram preenchidos, ou foram preenchido de forma errada, todos eles são obrigatórios verifique!");
       } else {
 
         let dataFormatada = (new Date(data.value)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split('-').reverse().join('/');
@@ -277,11 +295,22 @@
 
     }
 
+    //Habilitar pesquisa com a tecla enter
+    const pesquisaComEnter = document.getElementById('search');
+    pesquisaComEnter.addEventListener('keyup', function (e) {
+      var key = e.which || e.keyCode;
+      if (key == 13) { // codigo da tecla enter        
+        pesquisarFiltro();
+      }
+    });
+
     function pesquisarFiltro() {
       let inptSearch;
       inptSearch = document.getElementById('search').value;
 
       if (inptSearch === "") {
+
+        alert("Não foi informada nenhuma categoria, verifique!");
 
         //Constantes que recebem o banco de dados.
         const dbRef = ref(db);
@@ -293,6 +322,7 @@
             while (limpaConteudo.firstChild) {
               limpaConteudo.removeChild(limpaConteudo.firstChild);
             }
+
             //Crio um array que receberá os valores recebidos do banco.
             var indicacoes = [];
             var ids = [];
@@ -322,8 +352,8 @@
               let mesExtenso;
 
               //Passando os meses para extenso [Inicio]
-              if (mes === "01") { mesExtenso = "Jan" }
-              if (mes === "02") { mesExtenso = "Fev" }
+              if (mes === "01") { mesExtenso = "Janeiro" }
+              if (mes === "02") { mesExtenso = "Fevereiro" }
               if (mes === "03") { mesExtenso = "Março" }
               if (mes === "04") { mesExtenso = "Abril" }
               if (mes === "05") { mesExtenso = "Maio" }
@@ -356,6 +386,11 @@
 
               var contentPost = document.createElement('div');
               contentPost.className = 'post-content';
+
+              var categoria = document.createElement('div');
+              categoria.className = 'categorias';
+              var nomeCategoria = document.createElement('p');
+              nomeCategoria.innerHTML = element.categoria;
 
               var conteudoSaltaLinha = document.createElement('br');
               var conteudoParagrafo = document.createElement('p');
@@ -429,332 +464,379 @@
               divPost.appendChild(contentPost);
               contentPost.appendChild(conteudoSaltaLinha);
               contentPost.appendChild(conteudoParagrafo);
+              contentPost.appendChild(conteudoSaltaLinha);
+              contentPost.appendChild(categoria);
+              categoria.appendChild(nomeCategoria);
               contentPost.appendChild(conteudoUnderLine);
               /* Montando no DOM a estrutura criada [Fim] */
 
             });
           });
-      }
-
-      else {
+      } else {
 
         var limpaConteudo = document.getElementById('contentPost');
         while (limpaConteudo.firstChild) {
           limpaConteudo.removeChild(limpaConteudo.firstChild);
         }
+
+
+        btnLimpar.classList.add("limparText");
+
+        let primeiraLetraMiusculo = inptSearch[0].toUpperCase() + inptSearch.substring(1);
+
         //Constantes que recebem o banco de dados.
         const dbRef = ref(db);
-        const searchPostsRef = query(ref(db, 'Indicacoes/'), orderByChild("categoria"), equalTo(inptSearch));
+        const searchPostsRef = query(ref(db, 'Indicacoes/'), orderByChild("categoria"), equalTo(primeiraLetraMiusculo));
         get(searchPostsRef)
           .then((snapshot) => {
 
+            if (snapshot.exists()) {
 
-            //Crio um array que receberá os valores recebidos do banco.
-            var indicacoes = [];
-            var ids = [];
+              //Crio um array que receberá os valores recebidos do banco.
+              var indicacoes = [];
+              var ids = [];
 
-            //Percorro o objeto recebido.
-            snapshot.forEach(childSnapshot => {
-              //Adiciono os dados no array.  
-              indicacoes.push(childSnapshot.val());
-              ids.push(childSnapshot.val());
-            });
-
-
-            indicacoes.forEach(recebeId => {
-              lastId = recebeId.id;
-            })
-
-            //Nessa parte eu inverto o array como se fosse um order by desc.
-            indicacoes.reverse();
-            indicacoes.forEach(element => {
-
-              /* Tratando data [Inicio]. */
-              let dataExt = element.data;
-              //Extraindo dia mês e ano da data  
-              let dia = dataExt.slice(0, 2);
-              let mes = dataExt.substr(3, 2);
-              let ano = dataExt.substr(6, 4);
-              let mesExtenso;
-
-              //Passando os meses para extenso [Inicio]
-              if (mes === "01") { mesExtenso = "Jan" }
-              if (mes === "02") { mesExtenso = "Fev" }
-              if (mes === "03") { mesExtenso = "Março" }
-              if (mes === "04") { mesExtenso = "Abril" }
-              if (mes === "05") { mesExtenso = "Maio" }
-              if (mes === "06") { mesExtenso = "Junho" }
-              if (mes === "07") { mesExtenso = "Julho" }
-              if (mes === "08") { mesExtenso = "Agosto" }
-              if (mes === "09") { mesExtenso = "Setembro" }
-              if (mes === "10") { mesExtenso = "Outubro" }
-              if (mes === "11") { mesExtenso = "Novembro" }
-              if (mes === "12") { mesExtenso = "Dezembro" }
-
-              console.log(indicacoes)
-              let dataTratada = dia + ' ' + 'de' + ' ' + mesExtenso + ' ' + 'de' + ' ' + ano;
-
-              //Trata os meses [Fim]
-
-              /* Criando arquitetura de exibição dos dados. [Inicio]*/
-              var divPostContainer = document.createElement('div');
-              divPostContainer.className = 'post-container';
-
-              var divPost = document.createElement('div');
-              divPost.className = 'post';
-
-              var dateP = document.createElement('p');
-              dateP.className = 'date';
-              dateP.innerHTML = dataTratada;
-
-              var postBr = document.createElement('br');
-              var tituloPost = document.createElement('h1');
-              tituloPost.innerHTML = element.nomeIndica;
-
-              var contentPost = document.createElement('div');
-              contentPost.className = 'post-content';
-
-              var conteudoSaltaLinha = document.createElement('br');
-              var conteudoParagrafo = document.createElement('p');
-              var conteudoUnderLine = document.createElement('hr');
-              var btnAtualiza = document.createElement('btn');
-              var btnDeleta = document.createElement('btn');
-
-              //DIV de ações [Inicio]
-              var contentAcoes = document.createElement('div');
-              contentAcoes.className = 'Acoes';
-              btnAtualiza.className = 'btnAcoesAtualiza';
-
-              //Associa o evento de click ao botão de atualização
-              btnAtualiza.addEventListener('click', function atualizar() {
-                closeModalNew();
-                openModalUpdate();
-
-                let dataExtTeste = element.data;
-                //Extraindo o dia da data  
-                let dia = dataExtTeste.slice(0, 2);
-                let mes = dataExtTeste.substr(3, 2);
-                let ano = dataExtTeste.substr(6, 4);
-
-                idNoticiasUpd = element.id;
-
-                get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
-                  if (snapshot.exists()) {
-                    //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
-                    document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
-                    document.getElementById('tituloUpd').value = snapshot.val().nomeIndica;
-                    document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
-                    document.getElementById('categoriasUpd').value = snapshot.val().categoria;
-                    dataAtual = ano + "-" + mes + "-" + dia;
-                    nomeAtual = snapshot.val().nomeIndica;
-                    conteudoAtual = snapshot.val().conteudo;
-                    categoriaAtual = snapshot.val().categoria;
-
-                  } else {
-                    alert("Employee does not exists");
-                  }
-                }).catch((error) => {
-                  alert("Sem sucesso!");
-                  console.log(error);
-                })
+              //Percorro o objeto recebido.
+              snapshot.forEach(childSnapshot => {
+                //Adiciono os dados no array.  
+                indicacoes.push(childSnapshot.val());
+                ids.push(childSnapshot.val());
               });
 
-              //Associa o evento de click ao botão de deleção
-              btnDeleta.className = 'btnAcoesDeleta';
-              btnDeleta.addEventListener('click', function deletar() {
-                closeModalNew();
-                closeModalUpdate();
 
-                idNoticiasDel = element.id;
+              indicacoes.forEach(recebeId => {
+                lastId = recebeId.id;
+              })
 
-                deletarDados();
+              //Nessa parte eu inverto o array como se fosse um order by desc.
+              indicacoes.reverse();
+              indicacoes.forEach(element => {
+
+                /* Tratando data [Inicio]. */
+                let dataExt = element.data;
+                //Extraindo dia mês e ano da data  
+                let dia = dataExt.slice(0, 2);
+                let mes = dataExt.substr(3, 2);
+                let ano = dataExt.substr(6, 4);
+                let mesExtenso;
+
+                //Passando os meses para extenso [Inicio]
+                if (mes === "01") { mesExtenso = "Janeiro" }
+                if (mes === "02") { mesExtenso = "Fevereiro" }
+                if (mes === "03") { mesExtenso = "Março" }
+                if (mes === "04") { mesExtenso = "Abril" }
+                if (mes === "05") { mesExtenso = "Maio" }
+                if (mes === "06") { mesExtenso = "Junho" }
+                if (mes === "07") { mesExtenso = "Julho" }
+                if (mes === "08") { mesExtenso = "Agosto" }
+                if (mes === "09") { mesExtenso = "Setembro" }
+                if (mes === "10") { mesExtenso = "Outubro" }
+                if (mes === "11") { mesExtenso = "Novembro" }
+                if (mes === "12") { mesExtenso = "Dezembro" }
+
+                let dataTratada = dia + ' ' + 'de' + ' ' + mesExtenso + ' ' + 'de' + ' ' + ano;
+
+                //Trata os meses [Fim]
+
+                /* Criando arquitetura de exibição dos dados. [Inicio]*/
+                var divPostContainer = document.createElement('div');
+                divPostContainer.className = 'post-container';
+
+                var divPost = document.createElement('div');
+                divPost.className = 'post';
+
+                var dateP = document.createElement('p');
+                dateP.className = 'date';
+                dateP.innerHTML = dataTratada;
+
+                var postBr = document.createElement('br');
+                var tituloPost = document.createElement('h1');
+                tituloPost.innerHTML = element.nomeIndica;
+
+                var contentPost = document.createElement('div');
+                contentPost.className = 'post-content';
+
+                var categoria = document.createElement('div');
+                categoria.className = 'categorias';
+                var nomeCategoria = document.createElement('p');
+                nomeCategoria.innerHTML = element.categoria;
+
+                var conteudoSaltaLinha = document.createElement('br');
+                var conteudoParagrafo = document.createElement('p');
+                var conteudoUnderLine = document.createElement('hr');
+                var btnAtualiza = document.createElement('btn');
+                var btnDeleta = document.createElement('btn');
+
+                //DIV de ações [Inicio]
+                var contentAcoes = document.createElement('div');
+                contentAcoes.className = 'Acoes';
+                btnAtualiza.className = 'btnAcoesAtualiza';
+
+                //Associa o evento de click ao botão de atualização
+                btnAtualiza.addEventListener('click', function atualizar() {
+                  closeModalNew();
+                  openModalUpdate();
+
+                  let dataExtTeste = element.data;
+                  //Extraindo o dia da data  
+                  let dia = dataExtTeste.slice(0, 2);
+                  let mes = dataExtTeste.substr(3, 2);
+                  let ano = dataExtTeste.substr(6, 4);
+
+                  idNoticiasUpd = element.id;
+
+                  get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
+                    if (snapshot.exists()) {
+                      //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
+                      document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
+                      document.getElementById('tituloUpd').value = snapshot.val().nomeIndica;
+                      document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
+                      document.getElementById('categoriasUpd').value = snapshot.val().categoria;
+                      dataAtual = ano + "-" + mes + "-" + dia;
+                      nomeAtual = snapshot.val().nomeIndica;
+                      conteudoAtual = snapshot.val().conteudo;
+                      categoriaAtual = snapshot.val().categoria;
+
+                    } else {
+                      alert("Employee does not exists");
+                    }
+                  }).catch((error) => {
+                    alert("Sem sucesso!");
+                    console.log(error);
+                  })
+                });
+
+                //Associa o evento de click ao botão de deleção
+                btnDeleta.className = 'btnAcoesDeleta';
+                btnDeleta.addEventListener('click', function deletar() {
+                  closeModalNew();
+                  closeModalUpdate();
+
+                  idNoticiasDel = element.id;
+
+                  deletarDados();
+                });
+
+                //DIV de ações [Fim]
+
+                conteudoParagrafo.innerHTML = element.conteudo;
+                /* Criando arquitetura de exibição dos dados. [Fim]*/
+
+                /* Montando no DOM a estrutura criada [Inicio] */
+                document.getElementById('contentPost').appendChild(divPost);
+                divPost.appendChild(dateP);
+                divPost.appendChild(postBr);
+                divPost.appendChild(contentAcoes);
+                contentAcoes.appendChild(btnAtualiza);
+                contentAcoes.appendChild(btnDeleta);
+                divPost.appendChild(tituloPost);
+                divPost.appendChild(contentPost);
+                contentPost.appendChild(conteudoSaltaLinha);
+                contentPost.appendChild(conteudoParagrafo);
+                contentPost.appendChild(conteudoSaltaLinha);
+                contentPost.appendChild(categoria);
+                categoria.appendChild(nomeCategoria);
+                contentPost.appendChild(conteudoUnderLine);
+                /* Montando no DOM a estrutura criada [Fim] */
+
               });
-
-              //DIV de ações [Fim]
-
-              conteudoParagrafo.innerHTML = element.conteudo;
-              /* Criando arquitetura de exibição dos dados. [Fim]*/
-
-
-
-
-              /* Montando no DOM a estrutura criada [Inicio] */
-              document.getElementById('contentPost').appendChild(divPost);
-              divPost.appendChild(dateP);
-              divPost.appendChild(postBr);
-              divPost.appendChild(contentAcoes);
-              contentAcoes.appendChild(btnAtualiza);
-              contentAcoes.appendChild(btnDeleta);
-              divPost.appendChild(tituloPost);
-              divPost.appendChild(contentPost);
-              contentPost.appendChild(conteudoSaltaLinha);
-              contentPost.appendChild(conteudoParagrafo);
-              contentPost.appendChild(conteudoUnderLine);
-              /* Montando no DOM a estrutura criada [Fim] */
-
-            });
+            } else {
+              alert('Sua pesquisa não retornou indicações.');
+            }
+          }).catch((error) => {
+            console.log('Nada encontrado 404!');
           });
       }
     }
 
+    function limparPesquisa() {
+
+      let inptSearch;
+      inptSearch = document.getElementById('search').value;
+
+      if (inptSearch === "") {
+
+      } else {
+
+        window.location.reload(true);
+      }
+    }
     //Função que obtem os dados do banco e carrega na tela.
-    /*   document.addEventListener('DOMContentLoaded', function RetData() {
-         let inptSearch;
-         inptSearch = document.getElementById('search').value;
-         //Constantes que recebem o banco de dados.
-         const dbRef = ref(db);
-         const recentPostsRef = query(ref(db, 'Indicacoes/'));
-   
-         //Varre os dados do banco.
-         get(recentPostsRef)
-           .then((snapshot) => {
-   
-             //Crio um array que receberá os valores recebidos do banco.
-             var indicacoes = [];
-             var ids = [];
-   
-             //Percorro o objeto recebido.
-             snapshot.forEach(childSnapshot => {
-               //Adiciono os dados no array.  
-               indicacoes.push(childSnapshot.val());
-               ids.push(childSnapshot.val());
-             });
-   
-   
-             indicacoes.forEach(recebeId => {
-               lastId = recebeId.id;
-             })
-   
-             //Nessa parte eu inverto o array como se fosse um order by desc.
-             indicacoes.reverse();
-             indicacoes.forEach(element => {
-   
-               /* Tratando data [Inicio]. */
-    /*       let dataExt = element.data;
-           //Extraindo dia mês e ano da data  
-           let dia = dataExt.slice(0, 2);
-           let mes = dataExt.substr(3, 2);
-           let ano = dataExt.substr(6, 4);
-           let mesExtenso;
+    document.addEventListener('DOMContentLoaded', function RetData() {
 
-           //Passando os meses para extenso [Inicio]
-           if (mes === "01") { mesExtenso = "Jan" }
-           if (mes === "02") { mesExtenso = "Fev" }
-           if (mes === "03") { mesExtenso = "Março" }
-           if (mes === "04") { mesExtenso = "Abril" }
-           if (mes === "05") { mesExtenso = "Maio" }
-           if (mes === "06") { mesExtenso = "Junho" }
-           if (mes === "07") { mesExtenso = "Julho" }
-           if (mes === "08") { mesExtenso = "Agosto" }
-           if (mes === "09") { mesExtenso = "Setembro" }
-           if (mes === "10") { mesExtenso = "Outubro" }
-           if (mes === "11") { mesExtenso = "Novembro" }
-           if (mes === "12") { mesExtenso = "Dezembro" }
+      var limpaConteudo = document.getElementById('contentPost');
+      while (limpaConteudo.firstChild) {
+        limpaConteudo.removeChild(limpaConteudo.firstChild);
+      }
 
-           let dataTratada = dia + ' ' + 'de' + ' ' + mesExtenso + ' ' + 'de' + ' ' + ano;
+      let inptSearch;
+      inptSearch = document.getElementById('search').value;
 
-           //Trata os meses [Fim]
+      //Constantes que recebem o banco de dados.
+      const dbRef = ref(db);
+      const searchPostsRef = query(ref(db, 'Indicacoes/'));
+      get(searchPostsRef)
+        .then((snapshot) => {
 
-           /* Criando arquitetura de exibição dos dados. [Inicio]*/
-    /*       var divPostContainer = document.createElement('div');
-           divPostContainer.className = 'post-container';
 
-           var divPost = document.createElement('div');
-           divPost.className = 'post';
+          //Crio um array que receberá os valores recebidos do banco.
+          var indicacoes = [];
+          var ids = [];
 
-           var dateP = document.createElement('p');
-           dateP.className = 'date';
-           dateP.innerHTML = dataTratada;
+          //Percorro o objeto recebido.
+          snapshot.forEach(childSnapshot => {
+            //Adiciono os dados no array.  
+            indicacoes.push(childSnapshot.val());
+            ids.push(childSnapshot.val());
+          });
 
-           var postBr = document.createElement('br');
-           var tituloPost = document.createElement('h1');
-           tituloPost.innerHTML = element.nomeIndica;
 
-           var contentPost = document.createElement('div');
-           contentPost.className = 'post-content';
+          indicacoes.forEach(recebeId => {
+            lastId = recebeId.id;
+          })
 
-           var conteudoSaltaLinha = document.createElement('br');
-           var conteudoParagrafo = document.createElement('p');
-           var conteudoUnderLine = document.createElement('hr');
-           var btnAtualiza = document.createElement('btn');
-           var btnDeleta = document.createElement('btn');
+          //Nessa parte eu inverto o array como se fosse um order by desc.
+          indicacoes.reverse();
+          indicacoes.forEach(element => {
 
-           //DIV de ações [Inicio]
-           var contentAcoes = document.createElement('div');
-           contentAcoes.className = 'Acoes';
-           btnAtualiza.className = 'btnAcoesAtualiza';
+            /* Tratando data [Inicio]. */
+            let dataExt = element.data;
+            //Extraindo dia mês e ano da data  
+            let dia = dataExt.slice(0, 2);
+            let mes = dataExt.substr(3, 2);
+            let ano = dataExt.substr(6, 4);
+            let mesExtenso;
 
-           //Associa o evento de click ao botão de atualização
-           btnAtualiza.addEventListener('click', function atualizar() {
-             closeModalNew();
-             openModalUpdate();
+            //Passando os meses para extenso [Inicio]
+            if (mes === "01") { mesExtenso = "Janeiro" }
+            if (mes === "02") { mesExtenso = "Fevereiro" }
+            if (mes === "03") { mesExtenso = "Março" }
+            if (mes === "04") { mesExtenso = "Abril" }
+            if (mes === "05") { mesExtenso = "Maio" }
+            if (mes === "06") { mesExtenso = "Junho" }
+            if (mes === "07") { mesExtenso = "Julho" }
+            if (mes === "08") { mesExtenso = "Agosto" }
+            if (mes === "09") { mesExtenso = "Setembro" }
+            if (mes === "10") { mesExtenso = "Outubro" }
+            if (mes === "11") { mesExtenso = "Novembro" }
+            if (mes === "12") { mesExtenso = "Dezembro" }
 
-             let dataExtTeste = element.data;
-             //Extraindo o dia da data  
-             let dia = dataExtTeste.slice(0, 2);
-             let mes = dataExtTeste.substr(3, 2);
-             let ano = dataExtTeste.substr(6, 4);
+           
+            let dataTratada = dia + ' ' + 'de' + ' ' + mesExtenso + ' ' + 'de' + ' ' + ano;
 
-             idNoticiasUpd = element.id;
+            //Trata os meses [Fim]
 
-             get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
-               if (snapshot.exists()) {
-                 //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
-                 document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
-                 document.getElementById('tituloUpd').value = snapshot.val().nomeIndica;
-                 document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
-                 document.getElementById('categoriasUpd').value = snapshot.val().categoria;
-                 dataAtual = ano + "-" + mes + "-" + dia;
-                 nomeAtual = snapshot.val().nomeIndica;
-                 conteudoAtual = snapshot.val().conteudo;
-                 categoriaAtual = snapshot.val().categoria;
+            /* Criando arquitetura de exibição dos dados. [Inicio]*/
+            var divPostContainer = document.createElement('div');
+            divPostContainer.className = 'post-container';
 
-               } else {
-                 alert("Employee does not exists");
-               }
-             }).catch((error) => {
-               alert("Sem sucesso!");
-               console.log(error);
-             })
-           });
+            var divPost = document.createElement('div');
+            divPost.className = 'post';
 
-           //Associa o evento de click ao botão de deleção
-           btnDeleta.className = 'btnAcoesDeleta';
-           btnDeleta.addEventListener('click', function deletar() {
-             closeModalNew();
-             closeModalUpdate();
+            var dateP = document.createElement('p');
+            dateP.className = 'date';
+            dateP.innerHTML = dataTratada;
 
-             idNoticiasDel = element.id;
+            var postBr = document.createElement('br');
+            var tituloPost = document.createElement('h1');
+            tituloPost.innerHTML = element.nomeIndica;
 
-             deletarDados();
-           });
+            var contentPost = document.createElement('div');
+            contentPost.className = 'post-content';
 
-           //DIV de ações [Fim]
+            var categoria = document.createElement('div');
+            categoria.className = 'categorias';
+            var nomeCategoria = document.createElement('p');
+            nomeCategoria.innerHTML = element.categoria;
 
-           conteudoParagrafo.innerHTML = element.conteudo;
-           /* Criando arquitetura de exibição dos dados. [Fim]*/
+            var conteudoSaltaLinha = document.createElement('br');
+            var conteudoParagrafo = document.createElement('p');
+            var conteudoUnderLine = document.createElement('hr');
+            var btnAtualiza = document.createElement('btn');
+            var btnDeleta = document.createElement('btn');
 
-    /* Montando no DOM a estrutura criada [Inicio] */
-    /*       document.getElementById('contentPost').appendChild(divPost);
-           divPost.appendChild(dateP);
-           divPost.appendChild(postBr);
-           divPost.appendChild(contentAcoes);
-           contentAcoes.appendChild(btnAtualiza);
-           contentAcoes.appendChild(btnDeleta);
-           divPost.appendChild(tituloPost);
-           divPost.appendChild(contentPost);
-           contentPost.appendChild(conteudoSaltaLinha);
-           contentPost.appendChild(conteudoParagrafo);
-           contentPost.appendChild(conteudoUnderLine);
-           /* Montando no DOM a estrutura criada [Fim] */
-    /*
-              });
+
+            //DIV de ações [Inicio]
+            var contentAcoes = document.createElement('div');
+            contentAcoes.className = 'Acoes';
+            btnAtualiza.className = 'btnAcoesAtualiza';
+
+            //Associa o evento de click ao botão de atualização
+            btnAtualiza.addEventListener('click', function atualizar() {
+              closeModalNew();
+              openModalUpdate();
+
+              let dataExtTeste = element.data;
+              //Extraindo o dia da data  
+              let dia = dataExtTeste.slice(0, 2);
+              let mes = dataExtTeste.substr(3, 2);
+              let ano = dataExtTeste.substr(6, 4);
+
+              idNoticiasUpd = element.id;
+
+              get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
+                if (snapshot.exists()) {
+                  //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
+                  document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
+                  document.getElementById('tituloUpd').value = snapshot.val().nomeIndica;
+                  document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
+                  document.getElementById('categoriasUpd').value = snapshot.val().categoria;
+                  dataAtual = ano + "-" + mes + "-" + dia;
+                  nomeAtual = snapshot.val().nomeIndica;
+                  conteudoAtual = snapshot.val().conteudo;
+                  categoriaAtual = snapshot.val().categoria;
+
+                } else {
+                  alert("Employee does not exists");
+                }
+              }).catch((error) => {
+                alert("Sem sucesso!");
+                console.log(error);
+              })
             });
-        }, false);
-    */
+
+            //Associa o evento de click ao botão de deleção
+            btnDeleta.className = 'btnAcoesDeleta';
+            btnDeleta.addEventListener('click', function deletar() {
+              closeModalNew();
+              closeModalUpdate();
+
+              idNoticiasDel = element.id;
+
+              deletarDados();
+            });
+
+            //DIV de ações [Fim]
+
+            conteudoParagrafo.innerHTML = element.conteudo;
+            /* Criando arquitetura de exibição dos dados. [Fim]*/
+
+            /* Montando no DOM a estrutura criada [Inicio] */
+            document.getElementById('contentPost').appendChild(divPost);
+            divPost.appendChild(dateP);
+            divPost.appendChild(postBr);
+            divPost.appendChild(contentAcoes);
+            contentAcoes.appendChild(btnAtualiza);
+            contentAcoes.appendChild(btnDeleta);
+            divPost.appendChild(tituloPost);
+            divPost.appendChild(contentPost);
+            contentPost.appendChild(conteudoSaltaLinha);
+            contentPost.appendChild(conteudoParagrafo);
+            contentPost.appendChild(conteudoSaltaLinha);
+            contentPost.appendChild(categoria);
+            categoria.appendChild(nomeCategoria);
+            contentPost.appendChild(conteudoUnderLine);
+
+            /* Montando no DOM a estrutura criada [Fim] */
+
+          });
+        });
+    }, false);
+
     btn.addEventListener('click', addData);
     btnUpd.addEventListener('click', atualizarDados);
     btnSeacrh.addEventListener('click', pesquisarFiltro);
+    btnLimpar.addEventListener('click', limparPesquisa);
 
     // btnRet.addEventListener('click', RetData());
 

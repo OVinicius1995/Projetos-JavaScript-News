@@ -300,6 +300,20 @@ textarea:focus, input:focus {
   justify-content: flex-end;
 }
 
+.categorias{
+  font-family: 'Montserrat', sans-serif;
+  background-color:#DCDCDC;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border:1px solid #DCDCDC;
+  border-radius:10px;
+  height:45px;
+  width:90px;
+  cursor: not-allowed;
+  margin:5px;
+}
+
 .active {
   display: flex;
 }
@@ -324,10 +338,23 @@ textarea:focus, input:focus {
   flex-direction: column;
   justify-content: flex-start;
   align-items:flex-end;
-  width:100vh;
-  height:40px;
+  width:95%;
+  height:60px;
   grid-area: item3;
-  background-color:black;  
+  background-color:transparent; 
+  margin:10px;
+  gap:10px;
+}
+
+.limpar{
+  cursor:pointer;
+  font-family: 'Young Serif', serif;
+  color:#4176e1;
+  display:none;
+}
+
+.limparText{
+  display:block;
 }
 /*Inicio estilização barra de pesquisa*/
 
@@ -364,7 +391,7 @@ textarea:focus, input:focus {
 }
 
 .search-content:hover > .inptSearch{
-  width:120px;
+  width:180px;
   padding-left:10px;
 
 }
