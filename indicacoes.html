@@ -211,8 +211,7 @@
     let btnSeacrh = document.getElementById('searchBtn');
     let btnLimpar = document.getElementById('limpar');
 
-    // let id = crypto.randomUUID();
-    var idNoticiasUpd;
+    var idIndicacoesUpd;
     var idInidicacoesDel;
     var nomeAtual;
     var conteudoAtual;
@@ -256,7 +255,7 @@
         alert("Vazio espertinho(a)!");
       }
       else {
-        update(ref(db, 'Indicacoes/' + idNoticiasUpd), {
+        update(ref(db, 'Indicacoes/' + idIndicacoesUpd), {
 
           data: dataFormatada,
           nomeIndica: nomeUpd.value,
@@ -419,12 +418,12 @@
                 let mes = dataExtTeste.substr(3, 2);
                 let ano = dataExtTeste.substr(6, 4);
 
-                idNoticiasUpd = element.id;
+                idIndicacoesUpd = element.id;
 
                 get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
                   if (snapshot.exists()) {
-                    //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
-                    document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
+                    
+                    document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; 
                     document.getElementById('nomeUpd').value = snapshot.val().nomeIndica;
                     document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
                     document.getElementById('categoriasUpd').value = snapshot.val().categoria;
@@ -434,7 +433,7 @@
                     categoriaAtual = snapshot.val().categoria;
 
                   } else {
-                    alert("Employee does not exists");
+                    alert("Nenhum registro encontrado.");
                   }
                 }).catch((error) => {
                   alert("Sem sucesso!");
@@ -588,7 +587,7 @@
                   let mes = dataExtTeste.substr(3, 2);
                   let ano = dataExtTeste.substr(6, 4);
 
-                  idNoticiasUpd = element.id;
+                  idIndicacoesUpd = element.id;
 
                   get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
                     if (snapshot.exists()) {
@@ -603,7 +602,7 @@
                       categoriaAtual = snapshot.val().categoria;
 
                     } else {
-                      alert("Employee does not exists");
+                      alert("Nenhum registro encontrado.");
                     }
                   }).catch((error) => {
                     alert("Sem sucesso!");
@@ -777,7 +776,7 @@
               let mes = dataExtTeste.substr(3, 2);
               let ano = dataExtTeste.substr(6, 4);
 
-              idNoticiasUpd = element.id;
+              idIndicacoesUpd = element.id;
 
               get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
                 if (snapshot.exists()) {
@@ -792,7 +791,7 @@
                   categoriaAtual = snapshot.val().categoria;
 
                 } else {
-                  alert("Employee does not exists");
+                  alert("Nenhum registro encontrado.");
                 }
               }).catch((error) => {
                 alert("Sem sucesso!");

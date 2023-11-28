@@ -1603,6 +1603,7 @@ textarea:focus, input:focus {
 
 }
 
+/*Tamanho Iphone 11*/
 @media only screen and (min-width:401px) and (max-width:541px) and (min-height:400px) and (max-height:1000px){
   
   .item1 > .buttons > button > a:visited {
