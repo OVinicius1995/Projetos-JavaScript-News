@@ -230,10 +230,10 @@ h1{
 }
 
 .modalContent{ 
-  width: 50vw;
+  width: 32%;
   position: fixed;
   top: 20%;
-  margin-left:10%;
+  margin-left:2%;
   display : none;
   z-index: 999;
   align-items:center;
@@ -1932,18 +1932,20 @@ textarea:focus, input:focus {
   /* Responsividade dos modais [Inicio] */
 
   .modalContent{ 
-    width: 44vw;
+    width: 30vw;
     top: 32vh;
     margin-bottom: 10%;
     margin-left:-2%;
     z-index: 999;
     align-items:center;
     justify-content: center;
+    
   }
 
   .modalAddNews > h1{
     font-size:12px;
     text-align:center;
+    
   }
   
   .modalAddNews{

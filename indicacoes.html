@@ -14,7 +14,7 @@
 <script type="text/javascript">
   window.onscroll = scroll;
   function scroll() {
-    var nVScroll = document.documentElement.scrollTop || document.body.scrollTop; if (nVScroll > 70) {
+    var nVScroll = document.documentElement.scrollTop || document.body.scrollTop; if (nVScroll > 10) {
       document.getElementById("item1").classList.add('menuFixo');
       document.getElementById("searchBar").classList.add('searchBarfix')
     } else {
@@ -74,7 +74,7 @@
 
         <!-- Modal para adicionar as indicações [Inicio] -->
         <div class="modalContent" id="showModal">
-          <div class="modalAddNews">
+          <div class="modalAddNews" id="modalAddNews">
 
             <h1>Inserir Indicações</h1>
 
@@ -216,7 +216,7 @@
     let btnLimpar = document.getElementById('limpar');
 
     var idIndicacoesUpd;
-    var idInidicacoesDel;
+    var idIndicacoesDel;
     var nomeAtual;
     var conteudoAtual;
     var categoriaAtual;
@@ -293,7 +293,7 @@
     //Função que deleta os dados no banco.
     function deletarDados() {
 
-      remove(ref(db, 'Indicacoes/' + idInidicacoesDel))
+      remove(ref(db, 'Indicacoes/' + idIndicacoesDel))
         .then(() => {
           alert("Noticia deletada com sucesso!");
           window.location.reload(true);
@@ -808,7 +808,7 @@
             btnDeleta.addEventListener('click', function deletar() {
               closeModalNew();
               closeModalUpdate();
-
+              
               idIndicacoesDel = element.id;
 
               deletarDados();
