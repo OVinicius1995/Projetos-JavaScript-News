@@ -23,7 +23,7 @@ const dataHora = new Date();
 const zeroFill = n => {
   return ('0' + n).slice(-2);
 }
-
+/*
 // Cria intervalo
 const interval = setInterval(() => {
   // Pega o horário atual
@@ -35,3 +35,4 @@ const interval = setInterval(() => {
   // Exibe na tela usando a div#data-hora
   document.getElementById('dataHora').innerHTML = dataHora;
 }, 1000);
+*/
