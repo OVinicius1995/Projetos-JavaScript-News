@@ -29,7 +29,7 @@
 
   <section class="container">
 
-    <header class="header-content">
+    <header class="header-content"  id="top">
 
       <div><img class="imgHeader" src="./Assets/LogoMeet-New.png" alt="" srcset="">
       </div>
@@ -37,24 +37,16 @@
       <div class="title">
         <h1>Meet <span>News</span>🗞️</h1>
       </div>
-      <div><span id="dataHora"></span></div>
+
+      <div class="header-btn">
+        <button class="btn btnNoticias"><a href="./indicacoes.html">Indicações</a></button>
+        <button class="btn btnAssembleias">Assembleias</button>
+        <button class="btn btnPaterns">Manuais</button>
+      </div>
 
     </header>
 
     <main class="main-content">
-
-
-      <div id="item1" class="item1">
-
-        <div class="buttons"><img class="imgItem1" src="./Assets/LogoMeet-New.png" width="40" height="40" alt=""
-            srcset=""></div>
-       <!-- <div class="buttons"><button class="btn btnPortaria">Portaria</button></div> -->
-        <div class="buttons"><button class="btn btnIndicacoes"><a href="./indicacoes.html"> Indicações </a></button></div>
-        <div class="buttons"><button class="btn btnAssembleias">Assembleias</button></div> 
-        <div class="buttons"><button class="btn btnPaterns">Manuais</button></div> 
-
-      </div>
-
 
       <div class="itens item2">
         <button class="addBtn" onclick="openModalNew(),closeModalUpdate()"><img src="./Assets/btnAdd32.png" alt=""
@@ -112,6 +104,8 @@
         <p>Criado <span>voluntariamente</span> para reunir as informações em um mesmo local.</p>
       </div>
       <div>Criado por Vinícius Oliveira ®.</div>
+
+      <div><a href="#top"> Voltar ao topo <img src="./Assets/seta-para-cima.png" alt="Setinha para o topo" width="20" height="20"> </a> </div>
 
     </footer>
 
@@ -403,8 +397,6 @@
 
     btn.addEventListener('click', addData);
     btnUpd.addEventListener('click', atualizarDados);
-
-    // btnRet.addEventListener('click', RetData());
 
   </script>
 </body>
