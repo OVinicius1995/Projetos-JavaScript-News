@@ -3,13 +3,21 @@
 *{
   padding:0px;
   margin:0px;
-  box-sizing:border-box;
-  
+  box-sizing:border-box;  
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }
 
 .container{
   min-height:100vh;
-  background-color:#a0a0a0;
+  background-color:#D8DADA;
   display:flex;
   flex-direction:column;
   
@@ -32,7 +40,7 @@
   font-family: 'EB Garamond', serif;
   font-size:48px;
   height:90px;
-  background-color:#1c6e94;  
+  background-color:#43497f;  
   margin:4px;
   padding:2px;
   
@@ -49,7 +57,13 @@
 }
 
 .header-content >div > h1 > span{
-  color:#3aa7d9;
+ color:#7492af;
+}
+
+
+.header-btn{
+  display:flex;
+  gap:0 10px;
 }
 
 .main-content{
@@ -63,8 +77,7 @@
   "item3 item3 item3 item3"
   "item2 item2 item2 item2"
   "item2 item2 item2 item2"
-  "item2 item2 item2 item2";
-  
+  "item2 item2 item2 item2"; 
 }
 
 .itens{
@@ -119,16 +132,17 @@
   border:1px solid transparent;
   border-radius:5px;
   cursor:pointer;
+  padding:5px;
   font-family: 'Righteous', cursive;
   font-size:18px;
   min-height:44px;
-  background-color: #1592A0;
-  color: white;
+  background-color: transparent;
+  color: black;
   width:100%;  
 }
 
 .btn:hover{
-  border-bottom: 1px inset #f5f5f5;
+  border-bottom: 1px inset #b8b6d7;
   transition: 0.1s ease-in-out;
 }
 
@@ -141,7 +155,6 @@
 }
 
 .Acoes{
-
   height:30px;
   width:99%;
 }
@@ -246,7 +259,7 @@ h1{
   justify-content: space-between;
   gap:20px;
   padding: 30px;
-  background-color: gray;
+  background-color:#b8b6d7;
   opacity:0.9;
   border-radius: 10px;
   border:1px gray inset;
@@ -279,8 +292,7 @@ h1{
 }
 
 textarea:focus, input:focus {
-  //box-shadow: 0px 2px 0px 0px #fff;
-  outline: 1px solid white;  
+    outline: 1px solid white;  
 }
 
 .categoriasCmb{
@@ -389,9 +401,15 @@ textarea:focus, input:focus {
   align-items:center;   
 }
 
-.search-content:hover > .inptSearch{
+.search-content > .inptSearch{
   width:180px;
   padding-left:10px;
+}
+
+.search-content:hover > .inptSearch > datalist > option{
+  width:180px;
+  padding-left:10px;
+  color:green;
 }
 
 .search-content:hover > .search-btn{
@@ -410,7 +428,6 @@ textarea:focus, input:focus {
 
 .loupe-white{
   display:none;
-
 }
 
 ::-webkit-input-placeholder{
@@ -464,19 +481,17 @@ textarea:focus, input:focus {
   font-family: 'EB Garamond', serif;
   font-size:20px;
   height:80px;
-  background-color:#808080;
+  background-color:#43497f;
   display:flex;
   justify-content:space-between;
   align-items:center;
   margin:4px;
-  padding:2px;
+  padding:15px;
 }
 
 .footer-content > div > p > span{
   text-decoration: underline
 }
-
-
 
 
 /* Iniciando responsividade do projeto */
