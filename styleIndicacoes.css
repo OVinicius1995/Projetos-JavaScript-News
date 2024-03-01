@@ -12,7 +12,6 @@ html{
 
 a{
   text-decoration: none;
-  color: black;
 }
 
 .container{
@@ -103,17 +102,34 @@ a{
   justify-content:space-around;
   height:80px;
   width:99%;
-  flex-wrap:wrap;  
-  
+  flex-wrap:wrap;    
 }
 
-.item1 > .buttons > button > a{
-  text-decoration: none;
+.btn{
+  border:1px solid transparent;
+  border-radius:5px;
+  cursor:pointer;
+  padding:5px;
+  font-family: 'Righteous', cursive;
+  font-size:18px;
+  min-height:44px;
+  background-color: transparent;
+  width:100%;  
+  color: white;
 }
 
-.item1 > .buttons > button > a:visited {
+.btn:hover{
+  border-bottom: 1px inset #b8b6d7;
+  transition: 0.1s ease-in-out;
+}
+
+.btn > a{
   text-decoration: none;
   color: white;
+}
+
+.btn > a:visited {
+  text-decoration: none;
 }
 
 .menuFixo{
@@ -126,24 +142,6 @@ a{
   position:fixed;
   top:85px;
   z-index: 99;
-}
-
-.btn{
-  border:1px solid transparent;
-  border-radius:5px;
-  cursor:pointer;
-  padding:5px;
-  font-family: 'Righteous', cursive;
-  font-size:18px;
-  min-height:44px;
-  background-color: transparent;
-  color: black;
-  width:100%;  
-}
-
-.btn:hover{
-  border-bottom: 1px inset #b8b6d7;
-  transition: 0.1s ease-in-out;
 }
 
 .post > .Acoes{
@@ -510,7 +508,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -599,7 +597,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -689,7 +687,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -778,7 +776,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -877,7 +875,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -978,7 +976,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -1070,7 +1068,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -1204,7 +1202,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -1338,7 +1336,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -1486,7 +1484,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -1695,7 +1693,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:12px;
     height:80px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
     padding:0px 0px;
@@ -1845,7 +1843,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:18px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -2009,7 +2007,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
@@ -2098,7 +2096,7 @@ textarea:focus, input:focus {
     font-family: 'EB Garamond', serif;
     font-size:24px;
     height:90px;
-    background-color:#1c6e94;  
+    background-color:#43497f;  
     margin:4px;
     padding:2px;
   }
