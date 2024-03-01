@@ -709,6 +709,10 @@
 
           //Nessa parte eu inverto o array como se fosse um order by desc.
           indicacoes.reverse();
+          do {
+            alert("Carregando...");
+          } while (indicacoes.length <= '');
+          
           indicacoes.forEach(element => {
 
             /* Tratando data [Inicio]. */
