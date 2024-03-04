@@ -1,4 +1,4 @@
-const dataHora = new Date();
+//const dataHora = new Date();
 
 const zeroFill = n => {
   return ('0' + n).slice(-2);
@@ -22,6 +22,7 @@ const openModal           = document.getElementById('showModal');
 const openModalUpdateNews = document.getElementById('showModalCorrigir');
 
 function openModalNew(){
+  alert("Este?")
   openModal.classList.toggle('active');
 }
 

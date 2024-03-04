@@ -18,10 +18,33 @@ function closeModalUpdate(){
   openModalUpdateNews.classList.remove('active');
 }
 
-const dataHora = new Date();
+//const dataHora = new Date();
 
 const zeroFill = n => {
   return ('0' + n).slice(-2);
+}
+
+function loadingShow(){
+ 
+  const divLoading = document.createElement('div');
+     divLoading.classList.add("loading");
+
+  const labelLoading = document.createElement('label');
+     labelLoading.classList.add("loadingText");
+     labelLoading.innerText = "Carregando...";
+
+     document.getElementById('loading').appendChild(divLoading);
+     divLoading.appendChild(labelLoading); 
+          
+}
+
+
+function loadingHide(){
+    const loadings = document.getElementsByClassName("loading");
+   
+    if (loadings.length){
+      loadings[0].remove();
+    }
 }
 /*
 // Cria intervalo

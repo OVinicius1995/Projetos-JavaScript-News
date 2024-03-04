@@ -33,7 +33,7 @@
 
 <body>
 
-  <section class="container">
+  <section class="container" id="loading">
 
     <header class="header-content" id="top">
 
@@ -62,6 +62,9 @@
         <button class="addBtn" onclick="openModalNew(),closeModalUpdate()"><img src="./Assets/btnAdd32.png" alt=""
             srcset=""></button>
 
+            <button class="addBtn" id="addBtnTeste"><img src="./Assets/btnAdd32.png" alt=""
+            srcset=""></button>
+
         <!-- Modal para adicionar as indicações [Inicio] -->
         <div class="modalContent" id="showModal">
           <div class="modalAddNews" id="modalAddNews">
@@ -70,11 +73,27 @@
 
             <input id="data" type="date" name="data" placeholder="Informe a data">
 
-            <input id="nome" type="text" placeholder="Informe o nome da indicação">
+            <label for="nome">Informe o nome:</label>
+            <input id="nome" type="ext" placeholder="Informe o nome da indicação">
+            
+            <label for="telefone">Informe o telefone:</label>
+            <input id="telefone" type="ext" placeholder="Informe o telefone da indicação">
 
+            <label for="conteudo">Informe uma descrição para indicação:</label>
             <textarea id="conteudo" name="story" rows="20" cols="40"
               placeholder="Informe uma breve descrição, os contatos, etc..."></textarea>
 
+            <select name="classificacao" id="classificacoes" class="categoriasCmb">
+
+              <option value="Escolha" selected>Escolha um classificação:</option>
+              <option value="1">1 Estrelinha</option>
+              <option value="2">2 Estrelinhas</option>
+              <option value="3">3 Estrelinhas</option>
+              <option value="4">4 Estrelinhas</option>
+              <option value="5">5 Estrelinhas</option>
+
+            </select>
+         
             <select name="categoria" id="categorias" class="categoriasCmb">
 
               <option value="Escolha" selected>Escolha um opção:</option>
@@ -107,10 +126,26 @@
 
             <input id="dataUpd" type="date">
 
+            <label for="nomeUpd">Informe o nome:</label>            
             <input id="nomeUpd" type="text" placeholder="Informe o título">
 
+            <label for="telefoneUpd">Informe o telefone:</label>
+            <input id="telefoneUpd" type="ext" placeholder="Informe o telefone da indicação">
+
+            <label for="conteudo">Informe uma descrição para indicação:</label>
             <textarea id="conteudoUpd" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
 
+            <select name="classificacao" id="classificacoesUpd" class="categoriasCmb">
+
+              <option value="Escolha">Escolha um classificação:</option>
+              <option value="1">1 Estrelinha</option>
+              <option value="2">2 Estrelinhas</option>
+              <option value="3">3 Estrelinhas</option>
+              <option value="4">4 Estrelinhas</option>
+              <option value="5">5 Estrelinhas</option>
+
+            </select>
+         
             <select name="categoria" id="categoriasUpd" class="categoriasCmb">
               <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
@@ -208,24 +243,35 @@
     const db = getDatabase();
 
     // Carrega as os compenentes nas variáveis
-    let data = document.getElementById("data");
-    let nome = document.getElementById('nome');
-    let conteudo = document.getElementById('conteudo');
-    let nomeUpd = document.getElementById('nomeUpd');
-    let conteudoUpd = document.getElementById('conteudoUpd');
-    let dataUpd = document.getElementById('dataUpd');
-    let btn = document.getElementById('AddBtn');
-    let btnUpd = document.getElementById('UpdateBtn');
-    let btnSeacrh = document.getElementById('searchBtn');
-    let btnLimpar = document.getElementById('limpar');
+    let telefoneUpd  = document.getElementById('telefoneUpd');
+    let telefone     = document.getElementById('telefone');
+    let classific    = document.getElementById('classificacoes');
+    let classificUpd = document.getElementById('classificacoesUpd');
+    let conteudoUpd  = document.getElementById('conteudoUpd');
+    let data         = document.getElementById("data");
+    let nome         = document.getElementById('nome');
+    let conteudo     = document.getElementById('conteudo');
+    let nomeUpd      = document.getElementById('nomeUpd');
+    let dataUpd      = document.getElementById('dataUpd');
+    let btn          = document.getElementById('AddBtn');
+    let btnTeste     = document.getElementById('addBtnTeste');
+    let btnUpd       = document.getElementById('UpdateBtn');
+    let btnSeacrh    = document.getElementById('searchBtn');
+    let btnLimpar    = document.getElementById('limpar');
 
     var idIndicacoesUpd;
     var idIndicacoesDel;
     var nomeAtual;
     var conteudoAtual;
     var categoriaAtual;
+    var telefoneAtual;
+    var classificAtual;
+    var avaliacaoAtual;
     var dataAtual;
     var lastId = 0;
+    let nomeAlteraClassific;
+    let justicativaAlteracao;
+    var filterclassificacoes = [];
 
 
     //Função que grava os dados no banco.
@@ -233,7 +279,7 @@
 
       let incrementedId = parseInt(lastId) + parseInt(1);
 
-      if (data.value === "" || nome.value === "" || conteudo.value === "" || categorias.value === "Escolha") {
+      if (data.value === "" || nome.value === "" || conteudo.value === "" || categorias.value === "Escolha" || telefone ===""  ) {
         alert("Alguns dados não foram preenchidos, ou foram preenchido de forma errada, todos eles são obrigatórios verifique!");
       } else {
 
@@ -244,7 +290,9 @@
           data: dataFormatada,
           nomeIndica: nome.value,
           conteudo: conteudo.value,
-          categoria: categorias.value
+          categoria: categorias.value,
+          telefone: telefone.value,
+          classificacao: classific.value 
 
         }).then(() => {
           alert("indicação gravada com sucesso!");
@@ -259,8 +307,19 @@
 
       let dataFormatada = (new Date(dataUpd.value)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split('-').reverse().join('/');
 
-      if (nomeUpd.value === "" || conteudoUpd.value === "") {
+      if (nomeUpd.value === "" || conteudoUpd.value === "") {      
         alert("Vazio espertinho(a)!");
+      } if (classificacoesUpd.value < classificAtual) {
+
+        const confirmacao = confirm("Você escolheu um valor menor, então se faz necessário uma justicativa para a alteração.");
+        
+        if (confirmacao) {
+          nomeAlteraClassific  = prompt("Por gentiliza identifique-se, seu Nome: ");
+          justicativaAlteracao = prompt("Informe o motivo de sua alteração.");  
+        } else {
+          alert("Cancelando alteração...");
+        }
+                
       }
       else {
         update(ref(db, 'Indicacoes/' + idIndicacoesUpd), {
@@ -268,12 +327,22 @@
           data: dataFormatada,
           nomeIndica: nomeUpd.value,
           conteudo: conteudoUpd.value,
-          categoria: categoriasUpd.value
-
+          categoria: categoriasUpd.value,
+          telefone: telefoneUpd.value,
+          classificacao: classificacoesUpd.value
+          
         }).then(() => {
 
           if (dataAtual != dataUpd.value) {
             alert("Data atualizada com sucesso!");
+          }
+
+          if (telefoneAtual != telefoneUpd.value) {
+            alert("Telefone atualizado com sucesso!");
+          }
+
+          if (classificAtual != classificUpd.value) {
+            alert("Classificação atualizada com sucesso!");
           }
 
           if (nomeAtual != nomeUpd.value) {
@@ -307,6 +376,27 @@
 
     }
 
+    //Classifica do melhor avaliado para o pior avaliado.
+    function classificarIndicacoes(){
+      alert("Chamou!!!");//classificacao
+
+      
+      filterclassificacoes.sort(function (a,b) {
+        return b.classificacao - a.classificacao;
+      });
+
+      console.log(filterclassificacoes);
+
+     const reduceOfClassific = filterclassificacoes.reduce((indicacoesAcumuladas,indicacoesf)=> {
+        indicacoesAcumuladas += indicacoesf.nomeIndica 
+        indicacoesAcumuladas += indicacoesf.classificacao + ','
+
+        return indicacoesAcumuladas;
+      },'');
+
+      console.log(reduceOfClassific);
+      alert(reduceOfClassific);
+    }
     //Habilitar pesquisa com a tecla enter
     const pesquisaComEnter = document.getElementById('search');
     pesquisaComEnter.addEventListener('keyup', function (e) {
@@ -675,6 +765,7 @@
     }
     //Função que obtem os dados do banco e carrega na tela.
     document.addEventListener('DOMContentLoaded', function RetData() {
+      loadingShow();      
 
       var limpaConteudo = document.getElementById('contentPost');
       while (limpaConteudo.firstChild) {
@@ -690,18 +781,22 @@
       get(searchPostsRef)
         .then((snapshot) => {
 
-
           //Crio um array que receberá os valores recebidos do banco.
-          var indicacoes = [];
-          var ids = [];
-
+          var ids            = [];
+          var indicacoes     = [];
+          
+          
           //Percorro o objeto recebido.
           snapshot.forEach(childSnapshot => {
             //Adiciono os dados no array.  
             indicacoes.push(childSnapshot.val());
+            filterclassificacoes.push(childSnapshot.val());
             ids.push(childSnapshot.val());
           });
 
+          if (indicacoes.length > 0) {
+            loadingHide();
+          }
 
           indicacoes.forEach(recebeId => {
             lastId = recebeId.id;
@@ -709,10 +804,6 @@
 
           //Nessa parte eu inverto o array como se fosse um order by desc.
           indicacoes.reverse();
-          do {
-            alert("Carregando...");
-          } while (indicacoes.length <= '');
-          
           indicacoes.forEach(element => {
 
             /* Tratando data [Inicio]. */
@@ -746,6 +837,8 @@
             var divPostContainer = document.createElement('div');
             divPostContainer.className = 'post-container';
 
+
+            //DIV Postagem
             var divPost = document.createElement('div');
             divPost.className = 'post';
 
@@ -755,10 +848,13 @@
 
             var postBr = document.createElement('br');
             var tituloPost = document.createElement('h1');
-            tituloPost.innerHTML = element.nomeIndica;
+            tituloPost.innerHTML = element.nomeIndica + " - " + element.telefone;
 
+
+            //div conteudo
             var contentPost = document.createElement('div');
             contentPost.className = 'post-content';
+            
 
             var categoria = document.createElement('div');
             categoria.className = 'categorias';
@@ -793,15 +889,20 @@
               get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
                 if (snapshot.exists()) {
                   //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
-                  document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
-                  document.getElementById('nomeUpd').value = snapshot.val().nomeIndica;
-                  document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
-                  document.getElementById('categoriasUpd').value = snapshot.val().categoria;
-                  dataAtual = ano + "-" + mes + "-" + dia;
-                  nomeAtual = snapshot.val().nomeIndica;
-                  conteudoAtual = snapshot.val().conteudo;
+                  document.getElementById('dataUpd').value             = ano + "-" + mes + "-" + dia; //snapshot.val().data;
+                  document.getElementById('nomeUpd').value             = snapshot.val().nomeIndica;
+                  document.getElementById('telefoneUpd').value         = snapshot.val().telefone;
+                  document.getElementById('classificacoesUpd').value   = snapshot.val().classificacao;
+                  document.getElementById('conteudoUpd').value         = snapshot.val().conteudo;
+                  document.getElementById('categoriasUpd').value       = snapshot.val().categoria;
+                  
+                  dataAtual      = ano + "-" + mes + "-" + dia;
+                  nomeAtual      = snapshot.val().nomeIndica;
+                  conteudoAtual  = snapshot.val().conteudo;
                   categoriaAtual = snapshot.val().categoria;
-
+                  telefoneAtual  = snapshot.val().telefone;
+                  classificAtual = snapshot.val().classificacao;
+                  
                 } else {
                   alert("Nenhum registro encontrado.");
                 }
@@ -834,8 +935,11 @@
             divPost.appendChild(contentAcoes);
             contentAcoes.appendChild(btnAtualiza);
             contentAcoes.appendChild(btnDeleta);
+
             divPost.appendChild(tituloPost);
+            divPost.appendChild(postBr);
             divPost.appendChild(contentPost);
+            
             contentPost.appendChild(conteudoSaltaLinha);
             contentPost.appendChild(conteudoParagrafo);
             contentPost.appendChild(conteudoSaltaLinha);
@@ -846,13 +950,19 @@
             /* Montando no DOM a estrutura criada [Fim] */
 
           });
+         // console.log(indicacoes);
         });
+
+        
     }, false);
+    
 
     btn.addEventListener('click', addData);
     btnUpd.addEventListener('click', atualizarDados);
     btnSeacrh.addEventListener('click', pesquisarFiltro);
     btnLimpar.addEventListener('click', limparPesquisa);
+    btnTeste.addEventListener('click', classificarIndicacoes);
+    
 </script>
 </body>
 
