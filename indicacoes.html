@@ -59,10 +59,7 @@
 
       <div class="itens item2">
 
-        <button class="addBtn" onclick="openModalNew(),closeModalUpdate()"><img src="./Assets/btnAdd32.png" alt=""
-            srcset=""></button>
-
-            <button class="addBtn" id="addBtnTeste"><img src="./Assets/btnAdd32.png" alt=""
+        <button class="addBtn" onclick="openModalNew(),closeModalUpdate(),loadingHide()"><img src="./Assets/btnAdd32.png" alt=""
             srcset=""></button>
 
         <!-- Modal para adicionar as indicações [Inicio] -->
@@ -76,8 +73,8 @@
             <label for="nome">Informe o nome:</label>
             <input id="nome" type="ext" placeholder="Informe o nome da indicação">
             
-            <label for="telefone">Informe o telefone:</label>
-            <input id="telefone" type="ext" placeholder="Informe o telefone da indicação">
+            <label for="telefone">Informe o telefone (DD)0000-0000:</label>
+            <input id="telefone" type="tel" placeholder="Informe o telefone da indicação">
 
             <label for="conteudo">Informe uma descrição para indicação:</label>
             <textarea id="conteudo" name="story" rows="20" cols="40"
@@ -98,16 +95,26 @@
 
               <option value="Escolha" selected>Escolha um opção:</option>
 
+              <option value="Bombeiro">Bombeiro</option>
               <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
+              <option value="Consertos">Consertos em geral</option>
+              <option value="Confeiteiras">Confeiteiras</option>
               <option value="Diaristas">Diaristas</option>
+              <option value="Estofados">Estofados</option>
               <option value="Festas">Festas</option>
               <option value="Gesseiro">Gesseiro</option>
+              <option value="Jardinagem">Jardinagem</option>
               <option value="Pedreiro">Pedreiro</option>
               <option value="Pintor">Pintor</option>
               <option value="Marceneiro">Marceneiro</option>
+              <option value="Massagista">Massagista</option>
               <option value="Manicure">Manicure</option>
+              <option value="Montador">Montador de moveis</option>
               <option value="Mudança">Mudança</option>
+              <option value="Odonto">Odonto</option>
+              <option value="Reciclagem">Reciclagem</option>
+              <option value="Telas">Telas de proteção</option>
               <option value="Vidraceiro">Vidraceiro</option>
             </select>
 
@@ -129,7 +136,7 @@
             <label for="nomeUpd">Informe o nome:</label>            
             <input id="nomeUpd" type="text" placeholder="Informe o título">
 
-            <label for="telefoneUpd">Informe o telefone:</label>
+            <label for="telefoneUpd">Informe o telefone (DD)0000-0000:</label>
             <input id="telefoneUpd" type="ext" placeholder="Informe o telefone da indicação">
 
             <label for="conteudo">Informe uma descrição para indicação:</label>
@@ -147,16 +154,26 @@
             </select>
          
             <select name="categoria" id="categoriasUpd" class="categoriasCmb">
+              <option value="Bombeiro">Bombeiro</option>
               <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
+              <option value="Consertos">Consertos em geral</option>
+              <option value="Confeiteiras">Confeiteiras</option>
               <option value="Diaristas">Diaristas</option>
+              <option value="Estofados">Estofados</option>
               <option value="Festas">Festas</option>
               <option value="Gesseiro">Gesseiro</option>
+              <option value="Jardinagem">Jardinagem</option>
               <option value="Pedreiro">Pedreiro</option>
               <option value="Pintor">Pintor</option>
               <option value="Marceneiro">Marceneiro</option>
+              <option value="Massagista">Massagista</option>
               <option value="Manicure">Manicure</option>
+              <option value="Montador">Montador de moveis</option>
               <option value="Mudança">Mudança</option>
+              <option value="Odonto">Odonto</option>
+              <option value="Reciclagem">Reciclagem</option>
+              <option value="Telas">Telas de proteção</option>
               <option value="Vidraceiro">Vidraceiro</option>
             </select>
 
@@ -199,9 +216,20 @@
           </a>
 
         </div>
-        <div>
+
           <p id="limpar" class="limpar">Limpar pesquisa.</p>
         </div>
+        <div class="filter-selector">
+          
+          <input
+            type="checkbox"
+            id="switch"
+            onchange="onFilterChange()"
+            value="marcado"
+          />
+          <label for="switch" class="switch">Toggle</label>
+        </div>
+        <div>
       </div>
 
     </main>
@@ -254,7 +282,6 @@
     let nomeUpd      = document.getElementById('nomeUpd');
     let dataUpd      = document.getElementById('dataUpd');
     let btn          = document.getElementById('AddBtn');
-    let btnTeste     = document.getElementById('addBtnTeste');
     let btnUpd       = document.getElementById('UpdateBtn');
     let btnSeacrh    = document.getElementById('searchBtn');
     let btnLimpar    = document.getElementById('limpar');
@@ -272,6 +299,7 @@
     let nomeAlteraClassific;
     let justicativaAlteracao;
     var filterclassificacoes = [];
+    let choice;
 
 
     //Função que grava os dados no banco.
@@ -279,7 +307,7 @@
 
       let incrementedId = parseInt(lastId) + parseInt(1);
 
-      if (data.value === "" || nome.value === "" || conteudo.value === "" || categorias.value === "Escolha" || telefone ===""  ) {
+      if (data.value === "" || nome.value === "" || conteudo.value === "" || categorias.value === "Escolha" || classific.value === "Escolha" || telefone ===""  ) {
         alert("Alguns dados não foram preenchidos, ou foram preenchido de forma errada, todos eles são obrigatórios verifique!");
       } else {
 
@@ -292,10 +320,10 @@
           conteudo: conteudo.value,
           categoria: categorias.value,
           telefone: telefone.value,
-          classificacao: classific.value 
+          classificacao: parseInt(classific.value)
 
         }).then(() => {
-          alert("indicação gravada com sucesso!");
+          alert("Indicação gravada com sucesso!");
           window.location.reload(true);
         }).catch(() => {
           alert("Não gravou! Verifique.");
@@ -308,7 +336,7 @@
       let dataFormatada = (new Date(dataUpd.value)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split('-').reverse().join('/');
 
       if (nomeUpd.value === "" || conteudoUpd.value === "") {      
-        alert("Vazio espertinho(a)!");
+        alert("Nome a ser corrigido, ou o conteúdo ficou em branco verifique!");
       } if (classificacoesUpd.value < classificAtual) {
 
         const confirmacao = confirm("Você escolheu um valor menor, então se faz necessário uma justicativa para a alteração.");
@@ -329,7 +357,7 @@
           conteudo: conteudoUpd.value,
           categoria: categoriasUpd.value,
           telefone: telefoneUpd.value,
-          classificacao: classificacoesUpd.value
+          classificacao: parseInt(classificacoesUpd.value)
           
         }).then(() => {
 
@@ -378,33 +406,245 @@
 
     //Classifica do melhor avaliado para o pior avaliado.
     function classificarIndicacoes(){
-      alert("Chamou!!!");//classificacao
+    //  alert("Chamou!!!");//classificacao
 
-      
-      filterclassificacoes.sort(function (a,b) {
-        return b.classificacao - a.classificacao;
+    loadingShow();      
+
+      var limpaConteudo = document.getElementById('contentPost');
+      while (limpaConteudo.firstChild) {
+        limpaConteudo.removeChild(limpaConteudo.firstChild);
+      }
+
+      let inptSearch;
+      inptSearch = document.getElementById('search').value;
+
+      //Constantes que recebem o banco de dados.
+      const dbRef = ref(db);
+      const searchPostsRef = query(ref(db, 'Indicacoes/'));
+      get(searchPostsRef)
+        .then((snapshot) => {
+
+          //Crio um array que receberá os valores recebidos do banco.
+          var ids            = [];
+          var indicacoes     = [];
+          
+          
+          //Percorro o objeto recebido.
+          snapshot.forEach(childSnapshot => {
+            //Adiciono os dados no array.  
+          //  indicacoes.push(childSnapshot.val());
+            filterclassificacoes.push(childSnapshot.val());
+          //  ids.push(childSnapshot.val());
+          });
+
+                
+       filterclassificacoes.sort(function (a,b) {
+        return a.classificacao - b.classificacao;
       });
 
       console.log(filterclassificacoes);
+     // alert(reduceOfClassific);
 
-     const reduceOfClassific = filterclassificacoes.reduce((indicacoesAcumuladas,indicacoesf)=> {
-        indicacoesAcumuladas += indicacoesf.nomeIndica 
-        indicacoesAcumuladas += indicacoesf.classificacao + ','
+          if (filterclassificacoes.length > 0) {
+            loadingHide();
+          }
 
-        return indicacoesAcumuladas;
-      },'');
+          filterclassificacoes.forEach(recebeId => {
+            lastId = recebeId.id;
+          })
 
-      console.log(reduceOfClassific);
-      alert(reduceOfClassific);
+          //Nessa parte eu inverto o array como se fosse um order by desc.
+          filterclassificacoes.reverse();
+          filterclassificacoes.forEach(element => {
+
+            /* Tratando data [Inicio]. */
+            let dataExt = element.data;
+            //Extraindo dia mês e ano da data  
+            let dia = dataExt.slice(0, 2);
+            let mes = dataExt.substr(3, 2);
+            let ano = dataExt.substr(6, 4);
+            let mesExtenso;
+
+            /*Telefone tratado*/
+            let telefoneTratado = element.telefone;
+             
+
+
+            //Passando os meses para extenso [Inicio]
+            if (mes === "01") { mesExtenso = "Janeiro" }
+            if (mes === "02") { mesExtenso = "Fevereiro" }
+            if (mes === "03") { mesExtenso = "Março" }
+            if (mes === "04") { mesExtenso = "Abril" }
+            if (mes === "05") { mesExtenso = "Maio" }
+            if (mes === "06") { mesExtenso = "Junho" }
+            if (mes === "07") { mesExtenso = "Julho" }
+            if (mes === "08") { mesExtenso = "Agosto" }
+            if (mes === "09") { mesExtenso = "Setembro" }
+            if (mes === "10") { mesExtenso = "Outubro" }
+            if (mes === "11") { mesExtenso = "Novembro" }
+            if (mes === "12") { mesExtenso = "Dezembro" }
+
+           
+            let dataTratada = dia + ' ' + 'de' + ' ' + mesExtenso + ' ' + 'de' + ' ' + ano;
+
+            //Trata os meses [Fim]
+
+            /* Criando arquitetura de exibição dos dados. [Inicio]*/
+            var divPostContainer = document.createElement('div');
+            divPostContainer.className = 'post-container';
+
+
+            //DIV Postagem
+            var divPost = document.createElement('div');
+            divPost.className = 'post';
+
+            var dateP = document.createElement('p');
+            dateP.className = 'date';
+            dateP.innerHTML = dataTratada;
+
+            var postBr = document.createElement('br');
+            var tituloPost = document.createElement('h1');
+            tituloPost.innerHTML = element.nomeIndica + " - " + element.telefone;
+
+
+            //div conteudo
+            var contentPost = document.createElement('div');
+            contentPost.className = 'post-content';
+            
+
+            var categoria = document.createElement('div');
+            categoria.className = 'categorias';
+            var nomeCategoria = document.createElement('p');
+            nomeCategoria.innerHTML = element.categoria;
+
+
+            function addStars(star){
+              switch(star){
+                case 1:
+                  return "⭐"
+                break
+                case 2:
+                  return "⭐⭐"
+                break
+                case 3:
+                  return "⭐⭐⭐"
+                break
+                case 4:
+                  return "⭐⭐⭐⭐"
+                break
+                case 5:
+                  return "⭐⭐⭐⭐⭐"
+                break
+                default:
+                return "Ainda não foi avaliado."
+                break
+              }
+            }
+            
+            var classificacaoStar = document.createElement('div');
+            classificacaoStar.className = 'conteudoAval';
+            classificacaoStar.innerText = "Esse prestador recebeu a avaliação de: "
+            + addStars(element.classificacao) + "(" + element.classificacao + ")"
+
+            
+            var conteudoSaltaLinha = document.createElement('br');
+            
+            var conteudoParagrafo = document.createElement('div');      
+            var conteudoUnderLine = document.createElement('hr');
+            var btnAtualiza = document.createElement('btn');
+            var btnDeleta = document.createElement('btn');
+
+
+            //DIV de ações [Inicio]
+            var contentAcoes = document.createElement('div');
+            contentAcoes.className = 'Acoes';
+            btnAtualiza.className = 'btnAcoesAtualiza';
+
+            //Associa o evento de click ao botão de atualização
+            btnAtualiza.addEventListener('click', function atualizar() {
+              closeModalNew();
+              openModalUpdate();
+
+              let dataExtTeste = element.data;
+              //Extraindo o dia da data  
+              let dia = dataExtTeste.slice(0, 2);
+              let mes = dataExtTeste.substr(3, 2);
+              let ano = dataExtTeste.substr(6, 4);
+
+              idIndicacoesUpd = element.id;
+
+              get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
+                if (snapshot.exists()) {
+                  //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
+                  document.getElementById('dataUpd').value             = ano + "-" + mes + "-" + dia; //snapshot.val().data;
+                  document.getElementById('nomeUpd').value             = snapshot.val().nomeIndica;
+                  document.getElementById('telefoneUpd').value         = snapshot.val().telefone;
+                  document.getElementById('classificacoesUpd').value   = snapshot.val().classificacao;
+                  document.getElementById('conteudoUpd').value         = snapshot.val().conteudo;
+                  document.getElementById('categoriasUpd').value       = snapshot.val().categoria;
+                  
+                  dataAtual      = ano + "-" + mes + "-" + dia;
+                  nomeAtual      = snapshot.val().nomeIndica;
+                  conteudoAtual  = snapshot.val().conteudo;
+                  categoriaAtual = snapshot.val().categoria;
+                  telefoneAtual  = snapshot.val().telefone;
+                  classificAtual = snapshot.val().classificacao;
+                  
+                } else {
+                  alert("Nenhum registro encontrado.");
+                }
+              }).catch((error) => {
+                alert("Sem sucesso!");
+                console.log(error);
+              })
+            });
+
+            //Associa o evento de click ao botão de deleção
+            btnDeleta.className = 'btnAcoesDeleta';
+            btnDeleta.addEventListener('click', function deletar() {
+              closeModalNew();
+              closeModalUpdate();
+              
+              idIndicacoesDel = element.id;
+
+              deletarDados();
+            });
+
+            //DIV de ações [Fim]
+
+            conteudoParagrafo.innerHTML = element.conteudo;
+            /* Criando arquitetura de exibição dos dados. [Fim]*/
+
+            /* Montando no DOM a estrutura criada [Inicio] */
+            document.getElementById('contentPost').appendChild(divPost);
+            divPost.appendChild(dateP);
+            divPost.appendChild(postBr);
+            divPost.appendChild(contentAcoes);
+            contentAcoes.appendChild(btnAtualiza);
+            contentAcoes.appendChild(btnDeleta);
+
+            divPost.appendChild(tituloPost);
+            divPost.appendChild(postBr);
+            divPost.appendChild(contentPost);
+            
+           
+            contentPost.appendChild(conteudoParagrafo);
+          
+
+            contentPost.appendChild(classificacaoStar);
+
+            contentPost.appendChild(categoria);            
+            categoria.appendChild(nomeCategoria);            
+            contentPost.appendChild(conteudoUnderLine);
+
+            /* Montando no DOM a estrutura criada [Fim] */
+
+          });
+         // console.log(indicacoes);
+        });
+
     }
     //Habilitar pesquisa com a tecla enter
-    const pesquisaComEnter = document.getElementById('search');
-    pesquisaComEnter.addEventListener('keyup', function (e) {
-      var key = e.which || e.keyCode;
-      if (key == 13) { // codigo da tecla enter        
-        pesquisarFiltro();
-      }
-    });
 
     function pesquisarFiltro() {
       let inptSearch;
@@ -763,8 +1003,8 @@
         window.location.reload(true);
       }
     }
-    //Função que obtem os dados do banco e carrega na tela.
-    document.addEventListener('DOMContentLoaded', function RetData() {
+    
+    function indicacoesSemClassificar() {
       loadingShow();      
 
       var limpaConteudo = document.getElementById('contentPost');
@@ -861,6 +1101,32 @@
             var nomeCategoria = document.createElement('p');
             nomeCategoria.innerHTML = element.categoria;
 
+
+            function addStars(star){
+              switch(star){
+                case 1:
+                  return "⭐"
+                break
+                case 2:
+                  return "⭐⭐"
+                break
+                case 3:
+                  return "⭐⭐⭐"
+                break
+                case 4:
+                  return "⭐⭐⭐⭐"
+                break
+                case 5:
+                  return "⭐⭐⭐⭐⭐"
+                break
+              }
+            }
+            
+            var classificacaoStar = document.createElement('div');
+            classificacaoStar.innerText = "Esse prestador recebeu a avaliação de: "
+            + element.classificacao + " estrelas " + addStars(element.classificacao)
+
+            
             var conteudoSaltaLinha = document.createElement('br');
             var conteudoParagrafo = document.createElement('p');
             var conteudoUnderLine = document.createElement('hr');
@@ -943,8 +1209,9 @@
             contentPost.appendChild(conteudoSaltaLinha);
             contentPost.appendChild(conteudoParagrafo);
             contentPost.appendChild(conteudoSaltaLinha);
-            contentPost.appendChild(categoria);
+            contentPost.appendChild(categoria);            
             categoria.appendChild(nomeCategoria);
+            contentPost.appendChild(classificacaoStar);
             contentPost.appendChild(conteudoUnderLine);
 
             /* Montando no DOM a estrutura criada [Fim] */
@@ -952,16 +1219,36 @@
           });
          // console.log(indicacoes);
         });
+    }
+   
 
-        
-    }, false);
     
+    //Habilitar pesquisa com a tecla enter
+    const pesquisaComEnter = document.getElementById('search');
+    pesquisaComEnter.addEventListener('keyup', function (e) {
+      var key = e.which || e.keyCode;
+      if (key == 13) { // codigo da tecla enter        
+        pesquisarFiltro();
+      }
+    });
+
+
+    //Função que obtem os dados do banco e carrega na tela.
+    document.addEventListener('DOMContentLoaded', () => {
+
+     const theme = window.localStorage.getItem("theme");
+     const checkbox = document.getElementById("switch");
+     checkbox.checked = theme === "marcado";
+
+     theme === "marcado" ? indicacoesSemClassificar() : classificarIndicacoes();
+
+    });
+       
 
     btn.addEventListener('click', addData);
     btnUpd.addEventListener('click', atualizarDados);
     btnSeacrh.addEventListener('click', pesquisarFiltro);
     btnLimpar.addEventListener('click', limparPesquisa);
-    btnTeste.addEventListener('click', classificarIndicacoes);
     
 </script>
 </body>
