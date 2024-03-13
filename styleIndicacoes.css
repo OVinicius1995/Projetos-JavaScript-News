@@ -138,6 +138,11 @@ a{
   text-decoration: underline;
 }
 
+#backtotop{
+  color: blue;
+  text-decoration: underline;
+}
+
 .menuFixo{
   position:fixed;
   top:0;
