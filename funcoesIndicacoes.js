@@ -18,21 +18,49 @@ function closeModalUpdate(){
   openModalUpdateNews.classList.remove('active');
 }
 
-const dataHora = new Date();
+//const dataHora = new Date();
 
 const zeroFill = n => {
   return ('0' + n).slice(-2);
 }
-/*
-// Cria intervalo
-const interval = setInterval(() => {
-  // Pega o horário atual
-  const now = new Date();
 
-  // Formata a data conforme dd/mm/aaaa hh:ii:ss
-  const dataHora = zeroFill(now.getUTCDate()) + '/' + zeroFill((now.getMonth() + 1)) + '/' + now.getFullYear() + ' ' + zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
+function loadingShow(){
+ 
+  const divLoading = document.createElement('div');
+     divLoading.classList.add("loading");
 
-  // Exibe na tela usando a div#data-hora
-  document.getElementById('dataHora').innerHTML = dataHora;
-}, 1000);
-*/
+  const labelLoading = document.createElement('label');
+     labelLoading.classList.add("loadingText");
+     labelLoading.innerText = "Carregando...";
+
+     document.getElementById('loading').appendChild(divLoading);
+     divLoading.appendChild(labelLoading); 
+          
+}
+
+
+function loadingHide(){
+    const loadings = document.getElementsByClassName("loading");
+   
+    if (loadings.length){
+      loadings[0].remove();
+    }
+}
+
+
+function onFilterChange(){
+      
+  const checkbox = document.getElementById("switch");  
+  const theme = checkbox.checked ? "marcado" : "desmarcado";
+  
+  if(theme === "marcado"){
+    
+    window.localStorage.setItem("theme", "marcado");
+    window.location.reload(true);
+  } else {
+      
+      window.localStorage.setItem("theme", "desmarcado");
+      window.location.reload(true);
+  }
+
+}

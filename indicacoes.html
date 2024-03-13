@@ -33,7 +33,7 @@
 
 <body>
 
-  <section class="container">
+  <section class="container" id="loading">
 
     <header class="header-content" id="top">
 
@@ -59,7 +59,7 @@
 
       <div class="itens item2">
 
-        <button class="addBtn" onclick="openModalNew(),closeModalUpdate()"><img src="./Assets/btnAdd32.png" alt=""
+        <button class="addBtn" onclick="openModalNew(),closeModalUpdate(),loadingHide()"><img src="./Assets/btnAdd32.png" alt=""
             srcset=""></button>
 
         <!-- Modal para adicionar as indicações [Inicio] -->
@@ -70,25 +70,51 @@
 
             <input id="data" type="date" name="data" placeholder="Informe a data">
 
-            <input id="nome" type="text" placeholder="Informe o nome da indicação">
+            <label for="nome">Informe o nome:</label>
+            <input id="nome" type="ext" placeholder="Informe o nome da indicação">
+            
+            <label for="telefone">Informe o telefone (DD)0000-0000:</label>
+            <input id="telefone" type="tel" placeholder="Informe o telefone da indicação">
 
+            <label for="conteudo">Informe uma descrição para indicação:</label>
             <textarea id="conteudo" name="story" rows="20" cols="40"
               placeholder="Informe uma breve descrição, os contatos, etc..."></textarea>
 
+            <select name="classificacao" id="classificacoes" class="categoriasCmb">
+
+              <option value="Escolha" selected>Escolha um classificação:</option>
+              <option value="1">1 Estrelinha</option>
+              <option value="2">2 Estrelinhas</option>
+              <option value="3">3 Estrelinhas</option>
+              <option value="4">4 Estrelinhas</option>
+              <option value="5">5 Estrelinhas</option>
+
+            </select>
+         
             <select name="categoria" id="categorias" class="categoriasCmb">
 
               <option value="Escolha" selected>Escolha um opção:</option>
 
+              <option value="Bombeiro">Bombeiro</option>
               <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
+              <option value="Consertos">Consertos em geral</option>
+              <option value="Confeiteiras">Confeiteiras</option>
               <option value="Diaristas">Diaristas</option>
+              <option value="Estofados">Estofados</option>
               <option value="Festas">Festas</option>
               <option value="Gesseiro">Gesseiro</option>
+              <option value="Jardinagem">Jardinagem</option>
               <option value="Pedreiro">Pedreiro</option>
               <option value="Pintor">Pintor</option>
               <option value="Marceneiro">Marceneiro</option>
+              <option value="Massagista">Massagista</option>
               <option value="Manicure">Manicure</option>
+              <option value="Montador">Montador de moveis</option>
               <option value="Mudança">Mudança</option>
+              <option value="Odonto">Odonto</option>
+              <option value="Reciclagem">Reciclagem</option>
+              <option value="Telas">Telas de proteção</option>
               <option value="Vidraceiro">Vidraceiro</option>
             </select>
 
@@ -107,21 +133,47 @@
 
             <input id="dataUpd" type="date">
 
+            <label for="nomeUpd">Informe o nome:</label>            
             <input id="nomeUpd" type="text" placeholder="Informe o título">
 
+            <label for="telefoneUpd">Informe o telefone (DD)0000-0000:</label>
+            <input id="telefoneUpd" type="ext" placeholder="Informe o telefone da indicação">
+
+            <label for="conteudo">Informe uma descrição para indicação:</label>
             <textarea id="conteudoUpd" name="story" rows="20" cols="40" placeholder="Informe o conteúdo."></textarea>
 
+            <select name="classificacao" id="classificacoesUpd" class="categoriasCmb">
+
+              <option value="Escolha">Escolha um classificação:</option>
+              <option value="1">1 Estrelinha</option>
+              <option value="2">2 Estrelinhas</option>
+              <option value="3">3 Estrelinhas</option>
+              <option value="4">4 Estrelinhas</option>
+              <option value="5">5 Estrelinhas</option>
+
+            </select>
+         
             <select name="categoria" id="categoriasUpd" class="categoriasCmb">
+              <option value="Bombeiro">Bombeiro</option>
               <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
+              <option value="Consertos">Consertos em geral</option>
+              <option value="Confeiteiras">Confeiteiras</option>
               <option value="Diaristas">Diaristas</option>
+              <option value="Estofados">Estofados</option>
               <option value="Festas">Festas</option>
               <option value="Gesseiro">Gesseiro</option>
+              <option value="Jardinagem">Jardinagem</option>
               <option value="Pedreiro">Pedreiro</option>
               <option value="Pintor">Pintor</option>
               <option value="Marceneiro">Marceneiro</option>
+              <option value="Massagista">Massagista</option>
               <option value="Manicure">Manicure</option>
+              <option value="Montador">Montador de moveis</option>
               <option value="Mudança">Mudança</option>
+              <option value="Odonto">Odonto</option>
+              <option value="Reciclagem">Reciclagem</option>
+              <option value="Telas">Telas de proteção</option>
               <option value="Vidraceiro">Vidraceiro</option>
             </select>
 
@@ -164,9 +216,20 @@
           </a>
 
         </div>
-        <div>
+
           <p id="limpar" class="limpar">Limpar pesquisa.</p>
         </div>
+        <div class="filter-selector">
+          
+          <input
+            type="checkbox"
+            id="switch"
+            onchange="onFilterChange()"
+            value="marcado"
+          />
+          <label for="switch" class="switch">Toggle</label>
+        </div>
+        <div>
       </div>
 
     </main>
@@ -174,9 +237,14 @@
     <footer class="footer-content">
 
       <div>
-        <p>Criado <span>voluntariamente</span> para reunir as informações em um único local.</p>
+        <p>Made with 
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#f64348" stroke="#f64348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg> 
+            by <a href="https://github.com/OVinicius1995/" id="devFooter" target="_blank">Vinícius Oliveira</a> &copy; 
+        </p>
       </div>
-      <div>Criado por Vinícius Oliveira &copy; ®.</div>
+      <div></div>
       <div><a href="#top"> Voltar ao topo <img src="./Assets/seta-para-cima.png" alt="Setinha para o topo" width="20" height="20"> </a> </div>
 
     </footer>
@@ -208,24 +276,35 @@
     const db = getDatabase();
 
     // Carrega as os compenentes nas variáveis
-    let data = document.getElementById("data");
-    let nome = document.getElementById('nome');
-    let conteudo = document.getElementById('conteudo');
-    let nomeUpd = document.getElementById('nomeUpd');
-    let conteudoUpd = document.getElementById('conteudoUpd');
-    let dataUpd = document.getElementById('dataUpd');
-    let btn = document.getElementById('AddBtn');
-    let btnUpd = document.getElementById('UpdateBtn');
-    let btnSeacrh = document.getElementById('searchBtn');
-    let btnLimpar = document.getElementById('limpar');
+    let telefoneUpd  = document.getElementById('telefoneUpd');
+    let telefone     = document.getElementById('telefone');
+    let classific    = document.getElementById('classificacoes');
+    let classificUpd = document.getElementById('classificacoesUpd');
+    let conteudoUpd  = document.getElementById('conteudoUpd');
+    let data         = document.getElementById("data");
+    let nome         = document.getElementById('nome');
+    let conteudo     = document.getElementById('conteudo');
+    let nomeUpd      = document.getElementById('nomeUpd');
+    let dataUpd      = document.getElementById('dataUpd');
+    let btn          = document.getElementById('AddBtn');
+    let btnUpd       = document.getElementById('UpdateBtn');
+    let btnSeacrh    = document.getElementById('searchBtn');
+    let btnLimpar    = document.getElementById('limpar');
 
     var idIndicacoesUpd;
     var idIndicacoesDel;
     var nomeAtual;
     var conteudoAtual;
     var categoriaAtual;
+    var telefoneAtual;
+    var classificAtual;
+    var avaliacaoAtual;
     var dataAtual;
     var lastId = 0;
+    let nomeAlteraClassific;
+    let justicativaAlteracao;
+    var filterclassificacoes = [];
+    let choice;
 
 
     //Função que grava os dados no banco.
@@ -233,7 +312,7 @@
 
       let incrementedId = parseInt(lastId) + parseInt(1);
 
-      if (data.value === "" || nome.value === "" || conteudo.value === "" || categorias.value === "Escolha") {
+      if (data.value === "" || nome.value === "" || conteudo.value === "" || categorias.value === "Escolha" || classific.value === "Escolha" || telefone ===""  ) {
         alert("Alguns dados não foram preenchidos, ou foram preenchido de forma errada, todos eles são obrigatórios verifique!");
       } else {
 
@@ -244,10 +323,12 @@
           data: dataFormatada,
           nomeIndica: nome.value,
           conteudo: conteudo.value,
-          categoria: categorias.value
+          categoria: categorias.value,
+          telefone: telefone.value,
+          classificacao: parseInt(classific.value)
 
         }).then(() => {
-          alert("indicação gravada com sucesso!");
+          alert("Indicação gravada com sucesso!");
           window.location.reload(true);
         }).catch(() => {
           alert("Não gravou! Verifique.");
@@ -259,8 +340,60 @@
 
       let dataFormatada = (new Date(dataUpd.value)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split('-').reverse().join('/');
 
-      if (nomeUpd.value === "" || conteudoUpd.value === "") {
-        alert("Vazio espertinho(a)!");
+      if (nomeUpd.value === "" || conteudoUpd.value === "") {      
+        alert("Nome a ser corrigido, ou o conteúdo ficou em branco verifique!");
+      } if (classificacoesUpd.value < classificAtual) {
+
+        const confirmacao = confirm("Você escolheu um valor menor, então se faz necessário uma justicativa para a alteração.");
+        
+        if (confirmacao) {
+          nomeAlteraClassific  = prompt("Por gentiliza identifique-se, seu Nome: ");
+          justicativaAlteracao = prompt("Informe o motivo de sua alteração.");  
+
+          update(ref(db, 'Indicacoes/' + idIndicacoesUpd), {
+
+          data: dataFormatada,
+          nomeIndica: nomeUpd.value,
+          conteudo: conteudoUpd.value,
+          categoria: categoriasUpd.value,
+          telefone: telefoneUpd.value,
+          classificacao: parseInt(classificacoesUpd.value)
+
+        }).then(() => {
+
+        if (dataAtual != dataUpd.value) {
+          alert("Data atualizada com sucesso!");
+        }
+
+        if (telefoneAtual != telefoneUpd.value) {
+          alert("Telefone atualizado com sucesso!");
+        }
+
+        if (classificAtual != classificUpd.value) {
+          alert("Classificação atualizada com sucesso!");
+        }
+
+        if (nomeAtual != nomeUpd.value) {
+          alert("Nome atualizado com sucesso!");
+        }
+
+        if (conteudoAtual != conteudoUpd.value) {
+          alert("Conteudo atualizado com sucesso!");
+        }
+
+        if (categoriaAtual != categoriasUpd.value) {
+          alert("Categoria atualizada com sucesso!");
+        }
+        // alert("Noticia atualizada com sucesso!");
+        window.location.reload(true);
+        }).catch(() => {
+        alert("Não gravou! Verifique.");
+        })
+
+        } else {
+          alert("Cancelando alteração...");
+        }
+                
       }
       else {
         update(ref(db, 'Indicacoes/' + idIndicacoesUpd), {
@@ -268,12 +401,22 @@
           data: dataFormatada,
           nomeIndica: nomeUpd.value,
           conteudo: conteudoUpd.value,
-          categoria: categoriasUpd.value
-
+          categoria: categoriasUpd.value,
+          telefone: telefoneUpd.value,
+          classificacao: parseInt(classificacoesUpd.value)
+          
         }).then(() => {
 
           if (dataAtual != dataUpd.value) {
             alert("Data atualizada com sucesso!");
+          }
+
+          if (telefoneAtual != telefoneUpd.value) {
+            alert("Telefone atualizado com sucesso!");
+          }
+
+          if (classificAtual != classificUpd.value) {
+            alert("Classificação atualizada com sucesso!");
           }
 
           if (nomeAtual != nomeUpd.value) {
@@ -307,14 +450,247 @@
 
     }
 
-    //Habilitar pesquisa com a tecla enter
-    const pesquisaComEnter = document.getElementById('search');
-    pesquisaComEnter.addEventListener('keyup', function (e) {
-      var key = e.which || e.keyCode;
-      if (key == 13) { // codigo da tecla enter        
-        pesquisarFiltro();
+    //Classifica do melhor avaliado para o pior avaliado.
+    function classificarIndicacoes(){
+    //  alert("Chamou!!!");//classificacao
+
+    loadingShow();      
+
+      var limpaConteudo = document.getElementById('contentPost');
+      while (limpaConteudo.firstChild) {
+        limpaConteudo.removeChild(limpaConteudo.firstChild);
       }
-    });
+
+      let inptSearch;
+      inptSearch = document.getElementById('search').value;
+
+      //Constantes que recebem o banco de dados.
+      const dbRef = ref(db);
+      const searchPostsRef = query(ref(db, 'Indicacoes/'));
+      get(searchPostsRef)
+        .then((snapshot) => {
+
+          //Crio um array que receberá os valores recebidos do banco.
+          var ids            = [];
+          var indicacoes     = [];
+          
+          
+          //Percorro o objeto recebido.
+          snapshot.forEach(childSnapshot => {
+            //Adiciono os dados no array.  
+          //  indicacoes.push(childSnapshot.val());
+            filterclassificacoes.push(childSnapshot.val());
+          //  ids.push(childSnapshot.val());
+          });
+
+                
+       filterclassificacoes.sort(function (a,b) {
+        return a.classificacao - b.classificacao;
+      });
+
+      console.log(filterclassificacoes);
+     // alert(reduceOfClassific);
+
+          if (filterclassificacoes.length > 0) {
+            loadingHide();
+          }
+
+          filterclassificacoes.forEach(recebeId => {
+            lastId = recebeId.id;
+          })
+
+          //Nessa parte eu inverto o array como se fosse um order by desc.
+          filterclassificacoes.reverse();
+          filterclassificacoes.forEach(element => {
+
+            /* Tratando data [Inicio]. */
+            let dataExt = element.data;
+            //Extraindo dia mês e ano da data  
+            let dia = dataExt.slice(0, 2);
+            let mes = dataExt.substr(3, 2);
+            let ano = dataExt.substr(6, 4);
+            let mesExtenso;
+
+            /*Telefone tratado*/
+            let telefoneTratado = element.telefone;
+             
+
+
+            //Passando os meses para extenso [Inicio]
+            if (mes === "01") { mesExtenso = "Janeiro" }
+            if (mes === "02") { mesExtenso = "Fevereiro" }
+            if (mes === "03") { mesExtenso = "Março" }
+            if (mes === "04") { mesExtenso = "Abril" }
+            if (mes === "05") { mesExtenso = "Maio" }
+            if (mes === "06") { mesExtenso = "Junho" }
+            if (mes === "07") { mesExtenso = "Julho" }
+            if (mes === "08") { mesExtenso = "Agosto" }
+            if (mes === "09") { mesExtenso = "Setembro" }
+            if (mes === "10") { mesExtenso = "Outubro" }
+            if (mes === "11") { mesExtenso = "Novembro" }
+            if (mes === "12") { mesExtenso = "Dezembro" }
+
+           
+            let dataTratada = dia + ' ' + 'de' + ' ' + mesExtenso + ' ' + 'de' + ' ' + ano;
+
+            //Trata os meses [Fim]
+
+            /* Criando arquitetura de exibição dos dados. [Inicio]*/
+            var divPostContainer = document.createElement('div');
+            divPostContainer.className = 'post-container';
+
+
+            //DIV Postagem
+            var divPost = document.createElement('div');
+            divPost.className = 'post';
+
+            var dateP = document.createElement('p');
+            dateP.className = 'date';
+            dateP.innerHTML = dataTratada;
+
+            var postBr = document.createElement('br');
+            var tituloPost = document.createElement('h1');
+            tituloPost.innerHTML = element.nomeIndica + " - " + element.telefone;
+
+
+            //div conteudo
+            var contentPost = document.createElement('div');
+            contentPost.className = 'post-content';
+            
+
+            var categoria = document.createElement('div');
+            categoria.className = 'categorias';
+            var nomeCategoria = document.createElement('p');
+            nomeCategoria.innerHTML = element.categoria;
+
+
+            function addStars(star){
+              switch(star){
+                case 1:
+                  return "⭐"
+                break
+                case 2:
+                  return "⭐⭐"
+                break
+                case 3:
+                  return "⭐⭐⭐"
+                break
+                case 4:
+                  return "⭐⭐⭐⭐"
+                break
+                case 5:
+                  return "⭐⭐⭐⭐⭐"
+                break
+                default:
+                return "Ainda não foi avaliado."
+                break
+              }
+            }
+            
+            var classificacaoStar = document.createElement('div');
+            classificacaoStar.className = 'conteudoAval';
+            classificacaoStar.innerText = "Esse prestador recebeu a avaliação de: "
+            + addStars(element.classificacao) + "(" + element.classificacao + ")"
+
+            
+            var conteudoSaltaLinha = document.createElement('br');
+            
+            var conteudoParagrafo = document.createElement('div');      
+            var conteudoUnderLine = document.createElement('hr');
+            var btnAtualiza = document.createElement('btn');
+            var btnDeleta = document.createElement('btn');
+
+
+            //DIV de ações [Inicio]
+            var contentAcoes = document.createElement('div');
+            contentAcoes.className = 'Acoes';
+            btnAtualiza.className = 'btnAcoesAtualiza';
+
+            //Associa o evento de click ao botão de atualização
+            btnAtualiza.addEventListener('click', function atualizar() {
+              closeModalNew();
+              openModalUpdate();
+
+              let dataExtTeste = element.data;
+              //Extraindo o dia da data  
+              let dia = dataExtTeste.slice(0, 2);
+              let mes = dataExtTeste.substr(3, 2);
+              let ano = dataExtTeste.substr(6, 4);
+
+              idIndicacoesUpd = element.id;
+
+              get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
+                if (snapshot.exists()) {
+                  //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
+                  document.getElementById('dataUpd').value             = ano + "-" + mes + "-" + dia; //snapshot.val().data;
+                  document.getElementById('nomeUpd').value             = snapshot.val().nomeIndica;
+                  document.getElementById('telefoneUpd').value         = snapshot.val().telefone;
+                  document.getElementById('classificacoesUpd').value   = snapshot.val().classificacao;
+                  document.getElementById('conteudoUpd').value         = snapshot.val().conteudo;
+                  document.getElementById('categoriasUpd').value       = snapshot.val().categoria;
+                  
+                  dataAtual      = ano + "-" + mes + "-" + dia;
+                  nomeAtual      = snapshot.val().nomeIndica;
+                  conteudoAtual  = snapshot.val().conteudo;
+                  categoriaAtual = snapshot.val().categoria;
+                  telefoneAtual  = snapshot.val().telefone;
+                  classificAtual = snapshot.val().classificacao;
+                  
+                } else {
+                  alert("Nenhum registro encontrado.");
+                }
+              }).catch((error) => {
+                alert("Sem sucesso!");
+                console.log(error);
+              })
+            });
+
+            //Associa o evento de click ao botão de deleção
+            btnDeleta.className = 'btnAcoesDeleta';
+            btnDeleta.addEventListener('click', function deletar() {
+              closeModalNew();
+              closeModalUpdate();
+              
+              idIndicacoesDel = element.id;
+
+              deletarDados();
+            });
+
+            //DIV de ações [Fim]
+
+            conteudoParagrafo.innerHTML = element.conteudo;
+            /* Criando arquitetura de exibição dos dados. [Fim]*/
+
+            /* Montando no DOM a estrutura criada [Inicio] */
+            document.getElementById('contentPost').appendChild(divPost);
+            divPost.appendChild(dateP);
+            divPost.appendChild(postBr);
+            divPost.appendChild(contentAcoes);
+            contentAcoes.appendChild(btnAtualiza);
+            contentAcoes.appendChild(btnDeleta);
+
+            divPost.appendChild(tituloPost);
+            divPost.appendChild(postBr);
+            divPost.appendChild(contentPost);
+            
+           
+            contentPost.appendChild(conteudoParagrafo);
+          
+
+            contentPost.appendChild(classificacaoStar);
+
+            contentPost.appendChild(categoria);            
+            categoria.appendChild(nomeCategoria);            
+            contentPost.appendChild(conteudoUnderLine);
+
+            /* Montando no DOM a estrutura criada [Fim] */
+
+          });
+         // console.log(indicacoes);
+        });
+
+    }
+    //Habilitar pesquisa com a tecla enter
 
     function pesquisarFiltro() {
       let inptSearch;
@@ -673,8 +1049,9 @@
         window.location.reload(true);
       }
     }
-    //Função que obtem os dados do banco e carrega na tela.
-    document.addEventListener('DOMContentLoaded', function RetData() {
+    
+    function indicacoesSemClassificar() {
+      loadingShow();      
 
       var limpaConteudo = document.getElementById('contentPost');
       while (limpaConteudo.firstChild) {
@@ -690,18 +1067,22 @@
       get(searchPostsRef)
         .then((snapshot) => {
 
-
           //Crio um array que receberá os valores recebidos do banco.
-          var indicacoes = [];
-          var ids = [];
-
+          var ids            = [];
+          var indicacoes     = [];
+          
+          
           //Percorro o objeto recebido.
           snapshot.forEach(childSnapshot => {
             //Adiciono os dados no array.  
             indicacoes.push(childSnapshot.val());
+            filterclassificacoes.push(childSnapshot.val());
             ids.push(childSnapshot.val());
           });
 
+          if (indicacoes.length > 0) {
+            loadingHide();
+          }
 
           indicacoes.forEach(recebeId => {
             lastId = recebeId.id;
@@ -742,6 +1123,8 @@
             var divPostContainer = document.createElement('div');
             divPostContainer.className = 'post-container';
 
+
+            //DIV Postagem
             var divPost = document.createElement('div');
             divPost.className = 'post';
 
@@ -751,16 +1134,45 @@
 
             var postBr = document.createElement('br');
             var tituloPost = document.createElement('h1');
-            tituloPost.innerHTML = element.nomeIndica;
+            tituloPost.innerHTML = element.nomeIndica + " - " + element.telefone;
 
+
+            //div conteudo
             var contentPost = document.createElement('div');
             contentPost.className = 'post-content';
+            
 
             var categoria = document.createElement('div');
             categoria.className = 'categorias';
             var nomeCategoria = document.createElement('p');
             nomeCategoria.innerHTML = element.categoria;
 
+
+            function addStars(star){
+              switch(star){
+                case 1:
+                  return "⭐"
+                break
+                case 2:
+                  return "⭐⭐"
+                break
+                case 3:
+                  return "⭐⭐⭐"
+                break
+                case 4:
+                  return "⭐⭐⭐⭐"
+                break
+                case 5:
+                  return "⭐⭐⭐⭐⭐"
+                break
+              }
+            }
+            
+            var classificacaoStar = document.createElement('div');
+            classificacaoStar.innerText = "Esse prestador recebeu a avaliação de: "
+            + element.classificacao + " estrelas " + addStars(element.classificacao)
+
+            
             var conteudoSaltaLinha = document.createElement('br');
             var conteudoParagrafo = document.createElement('p');
             var conteudoUnderLine = document.createElement('hr');
@@ -789,15 +1201,20 @@
               get(child(dbRef, 'Indicacoes/' + element.id)).then((snapshot) => {
                 if (snapshot.exists()) {
                   //  let dataFormatadaUpd = (new Date(snapshot.val().data)).toISOString().match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)[0].split("-").reverse().join('/');
-                  document.getElementById('dataUpd').value = ano + "-" + mes + "-" + dia; //snapshot.val().data;
-                  document.getElementById('nomeUpd').value = snapshot.val().nomeIndica;
-                  document.getElementById('conteudoUpd').value = snapshot.val().conteudo;
-                  document.getElementById('categoriasUpd').value = snapshot.val().categoria;
-                  dataAtual = ano + "-" + mes + "-" + dia;
-                  nomeAtual = snapshot.val().nomeIndica;
-                  conteudoAtual = snapshot.val().conteudo;
+                  document.getElementById('dataUpd').value             = ano + "-" + mes + "-" + dia; //snapshot.val().data;
+                  document.getElementById('nomeUpd').value             = snapshot.val().nomeIndica;
+                  document.getElementById('telefoneUpd').value         = snapshot.val().telefone;
+                  document.getElementById('classificacoesUpd').value   = snapshot.val().classificacao;
+                  document.getElementById('conteudoUpd').value         = snapshot.val().conteudo;
+                  document.getElementById('categoriasUpd').value       = snapshot.val().categoria;
+                  
+                  dataAtual      = ano + "-" + mes + "-" + dia;
+                  nomeAtual      = snapshot.val().nomeIndica;
+                  conteudoAtual  = snapshot.val().conteudo;
                   categoriaAtual = snapshot.val().categoria;
-
+                  telefoneAtual  = snapshot.val().telefone;
+                  classificAtual = snapshot.val().classificacao;
+                  
                 } else {
                   alert("Nenhum registro encontrado.");
                 }
@@ -830,25 +1247,54 @@
             divPost.appendChild(contentAcoes);
             contentAcoes.appendChild(btnAtualiza);
             contentAcoes.appendChild(btnDeleta);
+
             divPost.appendChild(tituloPost);
+            divPost.appendChild(postBr);
             divPost.appendChild(contentPost);
+            
             contentPost.appendChild(conteudoSaltaLinha);
             contentPost.appendChild(conteudoParagrafo);
             contentPost.appendChild(conteudoSaltaLinha);
-            contentPost.appendChild(categoria);
+            contentPost.appendChild(categoria);            
             categoria.appendChild(nomeCategoria);
+            contentPost.appendChild(classificacaoStar);
             contentPost.appendChild(conteudoUnderLine);
 
             /* Montando no DOM a estrutura criada [Fim] */
 
           });
+         // console.log(indicacoes);
         });
-    }, false);
+    }
+   
+    
+    //Habilitar pesquisa com a tecla enter
+    const pesquisaComEnter = document.getElementById('search');
+    pesquisaComEnter.addEventListener('keyup', function (e) {
+      var key = e.which || e.keyCode;
+      if (key == 13) { // codigo da tecla enter        
+        pesquisarFiltro();
+      }
+    });
+
+
+    //Função que obtem os dados do banco e carrega na tela.
+    document.addEventListener('DOMContentLoaded', () => {
+
+     const theme = window.localStorage.getItem("theme");
+     const checkbox = document.getElementById("switch");
+     checkbox.checked = theme === "marcado";
+
+     theme === "marcado" ? indicacoesSemClassificar() : classificarIndicacoes();
+
+    });
+       
 
     btn.addEventListener('click', addData);
     btnUpd.addEventListener('click', atualizarDados);
     btnSeacrh.addEventListener('click', pesquisarFiltro);
     btnLimpar.addEventListener('click', limparPesquisa);
+    
 </script>
 </body>
 
