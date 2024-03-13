@@ -237,9 +237,14 @@
     <footer class="footer-content">
 
       <div>
-        <p>Criado <span>voluntariamente</span> para reunir as informações em um único local.</p>
+        <p>Made with 
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#f64348" stroke="#f64348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg> 
+            by <a href="https://github.com/OVinicius1995/" id="devFooter" target="_blank">Vinícius Oliveira</a> &copy; 
+        </p>
       </div>
-      <div>Criado por Vinícius Oliveira &copy; ®.</div>
+      <div></div>
       <div><a href="#top"> Voltar ao topo <img src="./Assets/seta-para-cima.png" alt="Setinha para o topo" width="20" height="20"> </a> </div>
 
     </footer>
@@ -344,6 +349,47 @@
         if (confirmacao) {
           nomeAlteraClassific  = prompt("Por gentiliza identifique-se, seu Nome: ");
           justicativaAlteracao = prompt("Informe o motivo de sua alteração.");  
+
+          update(ref(db, 'Indicacoes/' + idIndicacoesUpd), {
+
+          data: dataFormatada,
+          nomeIndica: nomeUpd.value,
+          conteudo: conteudoUpd.value,
+          categoria: categoriasUpd.value,
+          telefone: telefoneUpd.value,
+          classificacao: parseInt(classificacoesUpd.value)
+
+        }).then(() => {
+
+        if (dataAtual != dataUpd.value) {
+          alert("Data atualizada com sucesso!");
+        }
+
+        if (telefoneAtual != telefoneUpd.value) {
+          alert("Telefone atualizado com sucesso!");
+        }
+
+        if (classificAtual != classificUpd.value) {
+          alert("Classificação atualizada com sucesso!");
+        }
+
+        if (nomeAtual != nomeUpd.value) {
+          alert("Nome atualizado com sucesso!");
+        }
+
+        if (conteudoAtual != conteudoUpd.value) {
+          alert("Conteudo atualizado com sucesso!");
+        }
+
+        if (categoriaAtual != categoriasUpd.value) {
+          alert("Categoria atualizada com sucesso!");
+        }
+        // alert("Noticia atualizada com sucesso!");
+        window.location.reload(true);
+        }).catch(() => {
+        alert("Não gravou! Verifique.");
+        })
+
         } else {
           alert("Cancelando alteração...");
         }
@@ -1221,7 +1267,6 @@
         });
     }
    
-
     
     //Habilitar pesquisa com a tecla enter
     const pesquisaComEnter = document.getElementById('search');
