@@ -6,14 +6,14 @@ const zeroFill = n => {
 
 /* Montando os objetos data atual e hora atual [Inicio] */
 
-const dia = dataHora.getDate().toString().padStart(2, '0');
-const mes = String(dataHora.getMonth() + 1).padStart(2, '0');
-const ano = dataHora.getFullYear();
-const hora = dataHora.getHours().toString().padStart(2, '0');
-const minu = dataHora.getMinutes().toString().padStart(2, '0');
-const sec = dataHora.getSeconds();
-const dataAtual = `${dia} / ${mes} / ${ano}`;
-const horaAtual = ` ${hora} : ${minu} `;
+// const dia = dataHora.getDate().toString().padStart(2, '0');
+// const mes = String(dataHora.getMonth() + 1).padStart(2, '0');
+// const ano = dataHora.getFullYear();
+// const hora = dataHora.getHours().toString().padStart(2, '0');
+// const minu = dataHora.getMinutes().toString().padStart(2, '0');
+// const sec = dataHora.getSeconds();
+// const dataAtual = `${dia} / ${mes} / ${ano}`;
+// const horaAtual = ` ${hora} : ${minu} `;
 /* Montando os objetos data atual e hora atual [Fim] */
 
 
@@ -22,8 +22,7 @@ const openModal           = document.getElementById('showModal');
 const openModalUpdateNews = document.getElementById('showModalCorrigir');
 
 function openModalNew(){
-  alert("Este?")
-  openModal.classList.toggle('active');
+   openModal.classList.toggle('active');
 }
 
 function closeModalNew(){
