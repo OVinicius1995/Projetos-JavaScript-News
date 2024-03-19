@@ -66,6 +66,8 @@
         <div class="modalContent" id="showModal">
           <div class="modalAddNews" id="modalAddNews">
 
+            <div class="btnClose" onclick="openModalNew()"><img src="./Assets/close.png" alt="" srcset=""></div>
+
             <h1>Inserir Indicações</h1>
 
             <input id="data" type="date" name="data" placeholder="Informe a data">
@@ -95,6 +97,7 @@
 
               <option value="Escolha" selected>Escolha um opção:</option>
 
+              <option value="Refrigeracao">Instalador de ar cond.</option>
               <option value="Bombeiro">Bombeiro</option>
               <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
@@ -129,6 +132,8 @@
         <div class="modalContent" id="showModalCorrigir">
           <div class="modalAddNews">
 
+            <div class="btnClose" onclick="openModalUpdate()"><img src="./Assets/close.png" alt="" srcset=""></div>
+
             <h1>Atualizar indicações</h1>
 
             <input id="dataUpd" type="date">
@@ -154,6 +159,7 @@
             </select>
          
             <select name="categoria" id="categoriasUpd" class="categoriasCmb">
+              <option value="Refrigeracao">Instalador de ar cond.</option>
               <option value="Bombeiro">Bombeiro</option>
               <option value="Chaveiro">Chaveiro</option>
               <option value="Costureira">Costureira</option>
@@ -196,16 +202,28 @@
 
           <input list="cat" class="inptSearch" name="search" id="search" type="search" placeholder="Pesquisar por categorias...">
           <datalist id="cat">
+            
+            <option value="Bombeiro">
             <option value="Chaveiro">
             <option value="Costureira">
+            <option value="Consertos em geral">
+            <option value="Confeiteiras">
             <option value="Diaristas">
+            <option value="Estofados">
             <option value="Festas">
             <option value="Gesseiro">
+            <option value="Jardinagem">
             <option value="Pedreiro">
             <option value="Pintor">
             <option value="Marceneiro">
             <option value="Manicure">
+            <option value="Massagista">
+            <option value="Montador de moveis">
             <option value="Mudança">
+            <option value="Odonto">
+            <option value="Reciclagem">
+            <option value="Refrigeracao">
+            <option value="Telas de proteção">
             <option value="Vidraceiro">
           </datalist>
 
